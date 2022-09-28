@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "VoiceMemos"
+rootProject.name = "WristRecorder"
 //include ':mobile'
 include ':wear'
