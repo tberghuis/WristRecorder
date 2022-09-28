@@ -146,3 +146,5 @@ delete confirm dialog, OK and cancel icons
 look at competitor apps on play store, search "voice memo" category watch apps
 
 add hardware button start/stop recording to marketing
+
+new exoplayer is now androidx.media3
