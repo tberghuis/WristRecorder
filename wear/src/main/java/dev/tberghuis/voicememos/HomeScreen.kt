@@ -1,18 +1,15 @@
 package dev.tberghuis.voicememos
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.material.HorizontalPageIndicator
 import androidx.wear.compose.material.PageIndicatorState
 import androidx.wear.compose.material.Scaffold
-import androidx.wear.compose.material.Text
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -68,9 +65,9 @@ fun HomeScreen(
   }
 }
 
-@Composable
-fun SettingsPage() {
-  Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-    Text("todo settings")
-  }
-}
+//@Composable
+//fun SettingsPage() {
+//  Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+//    Text("todo settings")
+//  }
+//}
