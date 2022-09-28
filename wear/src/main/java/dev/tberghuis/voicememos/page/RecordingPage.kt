@@ -17,12 +17,10 @@ import com.google.accompanist.permissions.shouldShowRationale
 import dev.tberghuis.voicememos.composables.RecordingUi
 import dev.tberghuis.voicememos.util.logd
 
-
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun RecordingPage(
   navigateRecordingDetail: (String) -> Unit
-
 ) {
   val recordPermissionState = rememberPermissionState(
     android.Manifest.permission.RECORD_AUDIO
@@ -31,9 +29,7 @@ fun RecordingPage(
     Modifier.fillMaxSize(),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
-
-    ) {
-
+  ) {
     when (recordPermissionState.status) {
       PermissionStatus.Granted -> {
         RecordingUi(navigateRecordingDetail)
@@ -59,5 +55,4 @@ fun RecordingPage(
       }
     }
   }
-
 }

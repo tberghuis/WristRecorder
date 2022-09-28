@@ -2,10 +2,8 @@ package dev.tberghuis.voicememos.presentation
 
 import android.content.Context
 import dev.tberghuis.voicememos.service.AudioConstants
-import dev.tberghuis.voicememos.service.AudioRecordService
 import java.io.File
 import kotlin.math.roundToInt
-
 
 fun calcDuration(context: Context, file: String): Int {
   val f = File(context.filesDir, file)

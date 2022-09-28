@@ -10,11 +10,9 @@ import dev.tberghuis.voicememos.service.AudioRecordService
 import dev.tberghuis.voicememos.service.AudioTrackService
 import javax.inject.Singleton
 
-
 @InstallIn(SingletonComponent::class)
 @Module
 class AudioModule {
-
 
   @Provides
   @Singleton
@@ -22,12 +20,9 @@ class AudioModule {
     return AudioRecordService(appContext)
   }
 
-
   @Provides
   @Singleton
   fun provideAudioTrackService(@ApplicationContext appContext: Context): AudioTrackService {
     return AudioTrackService(appContext)
   }
-
-
 }

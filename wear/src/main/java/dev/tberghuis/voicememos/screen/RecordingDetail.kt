@@ -16,7 +16,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.material.Button
@@ -26,7 +25,6 @@ import androidx.wear.compose.material.dialog.Alert
 import dev.tberghuis.voicememos.page.formatTimestampFromFilename
 import dev.tberghuis.voicememos.util.logd
 import kotlinx.coroutines.launch
-import java.io.File
 
 @Composable
 fun RecordingDetail(popBackStack: () -> Unit) {

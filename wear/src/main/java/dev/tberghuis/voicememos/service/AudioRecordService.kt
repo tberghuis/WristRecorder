@@ -2,30 +2,22 @@ package dev.tberghuis.voicememos.service
 
 import android.Manifest
 import android.content.Context
-import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioRecord
-import android.media.AudioTrack
 import android.media.MediaRecorder
 import androidx.annotation.RequiresPermission
 import dev.tberghuis.voicememos.service.AudioConstants.Companion.CHANNEL_IN
 import dev.tberghuis.voicememos.service.AudioConstants.Companion.RECORDING_RATE
 import dev.tberghuis.voicememos.util.logd
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
-import java.io.File
-import kotlin.math.roundToInt
-
 
 // depends on app context
 class AudioRecordService(val context: Context) {
-
   init {
     logd("AudioRecordService context $context")
   }
-
 
   @RequiresPermission(Manifest.permission.RECORD_AUDIO)
   suspend fun record(filenameCallback: (String) -> Unit) {
@@ -67,6 +59,4 @@ class AudioRecordService(val context: Context) {
 //      recordingFile.renameTo(File(context.filesDir,"voicememo_${timestamp}_$duration.pcm"))
     }
   }
-
-
 }

@@ -85,7 +85,6 @@ fun RecordingUi(
     null -> {
       Modifier
         .clickable {
-          logd("willitblend")
           record()
         }
         .onKeyEvent { keyEvent ->

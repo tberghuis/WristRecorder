@@ -10,16 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 
-
-
-// todo rewrite so i can play/pause
-
+// todo rewrite so i can play/pause androidx.media3 exoplayer
 class AudioTrackService(val context: Context) {
-
-
-  init {
-  }
-
   suspend fun play(filename: String) {
     val intSize = AudioTrack.getMinBufferSize(RECORDING_RATE, CHANNELS_OUT, AudioConstants.FORMAT)
 
@@ -49,5 +41,4 @@ class AudioTrackService(val context: Context) {
       audioTrack.release()
     }
   }
-
 }

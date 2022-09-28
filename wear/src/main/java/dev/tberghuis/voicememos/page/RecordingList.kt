@@ -40,7 +40,7 @@ fun RecordingList(
     return
   }
 
-  ScalingLazyColumn() {
+  ScalingLazyColumn {
     items(viewModel.recordingFiles.value.size) { i ->
       val file = viewModel.recordingFiles.value[i]
       val buttonText = remember(file, context) {
