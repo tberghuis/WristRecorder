@@ -19,4 +19,7 @@ playback show progress (5/25 seconds)
 
 compatible device list? check if watch has speaker and mic
 
+only allow one play button click at a time,
+  fix when migrate to media3
+
 ####################################
