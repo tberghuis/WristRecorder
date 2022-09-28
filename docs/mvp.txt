@@ -7,5 +7,3 @@ play store page marketing, copy from existing apps
 github readme
 
 post reddit wearosdev wearos androiddev-feedback-thread
-
-use permission WAKE_LOCK to keep screen on???

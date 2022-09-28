@@ -11,6 +11,7 @@ exoplayer / androidx.media3
 progressbar
 
 keep app from timing out when recording (keep screen / activity on / running)
+use permission WAKE_LOCK to keep screen on???
 
 when recording show an incrementing counting timer in UI
 
