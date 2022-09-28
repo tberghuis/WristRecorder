@@ -43,7 +43,7 @@ fun HomeScreen(
     )
   }) {
     HorizontalPager(
-      count = 3, state = pagerState
+      count = 2, state = pagerState
     ) { page ->
       when (page) {
         0 -> {
@@ -52,9 +52,9 @@ fun HomeScreen(
         1 -> {
           RecordingList(navigateRecordingDetail)
         }
-        2 -> {
-          SettingsPage()
-        }
+//        2 -> {
+//          SettingsPage()
+//        }
       }
     }
   }
