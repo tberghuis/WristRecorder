@@ -38,7 +38,7 @@ class AudioRecordService(val context: Context) {
       ).setBufferSizeInBytes(intSize * 3).build()
 
     val timestamp = System.currentTimeMillis()
-    val recordingFileName = "voicememo_$timestamp.pcm"
+    val recordingFileName = "wristrecorder_$timestamp.pcm"
 
     filenameCallback(recordingFileName)
 
