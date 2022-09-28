@@ -1,74 +1,13 @@
 read android / wearos official docs
 
-hardware button - start stop recording
-transcription api, google chrome extension websocket
-https://unix.stackexchange.com/questions/130774/creating-a-virtual-microphone
-puppeteer
-record timeout setting
-complication recording status
-
-
-generate fresh apps with and without phone companion apps
-  beyond compare diff
-
-delete phone app before generating aab for play store console
-
-
-###################
-button permission RECORD_AUDIO
-button start recording
-button stop recording
-...
-
-on activity start countdown 3.2.1.. starts recording
-
-list of recordings,
-doitwrong
-recording filename
-  recording_[timestamp].pcm
-
-compose wearos navigation
-show list of recordings
-
 read source code f-droid examples
-
-https://developer.android.com/reference/kotlin/android/media/AudioRecord
-https://stackoverflow.com/search?tab=newest&q=android%20audio%20answers%3a1..
-
-
-next task filename timestamp
-  filename voicememo_[timestamp]_[duration].pcm
-scaffold
-navigation
-list files in dir
-
-do it wrong... no navgiation or scaffold for now
-
-HorizontalPageIndicator
-https://developer.android.com/training/wearables/compose/navigation
-
-bug cannot use Modifier.align for Box child: 
-  cannot access 'BoxScopeInstance': it is internal in 'androidx.compose.foundation.layout'
-  does it happen for a phone app?
 
 https://issuetracker.google.com/issues/218663790
 https://issuetracker.google.com/issues/228336555
 
-
-read https://developer.android.com/guide/topics/data
-
-
-next task timestamp to formatted date + time
-
-transcription
-https://github.com/openai/whisper
+####################################
 
 
-start stop recording
-add duration to filename
-
-
-pay for a wearos recording app to copy from
 
 
 https://developer.android.com/training/wearables/user-input/physical-buttons
