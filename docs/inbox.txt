@@ -5,85 +5,17 @@ read source code f-droid examples
 https://issuetracker.google.com/issues/218663790
 https://issuetracker.google.com/issues/228336555
 
-####################################
-
-
-
-
-https://developer.android.com/training/wearables/user-input/physical-buttons
-
-mediarecorder docs https://developer.android.com/guide/topics/media/mediarecorder
-
-setting auto record delay
-  reverse countdown to record 3.2.1...
-
-physical button start/stop recording
-
-###############
-savedStateHandle.getstateflow mutablestateflow in viewmodel
-to save savedStateHandle[key] = 
-dependencies 
-  lifecycle-runtime-compose
-  lifecycle-viewmodel-compose
-
-recording details screen
-
-mvp.txt
-
-######################
-datetime heading
-play recording button
-delete recording button
 audiotrack timeline progress bar, copy recording app from f-droid
-...
 
-play trash icons
-
-app icon
-
-remember emulator setting "host audio input"
-
-empty recording list
-
-home screen scaffold position indicator...
-
-android audiotrack site:github.com
-
-future
-  replace AudioTrack with exoplayer so i get better api for progressbar
-
-
-https://stackoverflow.com/search?tab=newest&q=android%20AudioTrack%20answers%3a1..
+exoplayer / androidx.media3
+progressbar
 
 keep app from timing out when recording (keep screen / activity on / running)
 
-app is really laggy
-
 when recording show an incrementing counting timer in UI
-
-new siging key named voice-memos, delete wear-recorder
-  or rename app
-
-
-marketing reddit, wearosdev and wearos subs
 
 playback show progress (5/25 seconds)
 
-use exoplayer instead of audiotrack
-
-read all android wearos docs guides
-
-auto record delay setting,
-  show countdown on activity launch
-
-physical button start/stop recording
-
 compatible device list? check if watch has speaker and mic
 
-delete confirm dialog, OK and cancel icons
-
-look at competitor apps on play store, search "voice memo" category watch apps
-
-add hardware button start/stop recording to marketing
-
-new exoplayer is now androidx.media3
+####################################

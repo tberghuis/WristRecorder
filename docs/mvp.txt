@@ -1,3 +1,9 @@
 
-play store page marketing
+play store page marketing, compy from existing apps
+  (some watch support) start/stop recording with stem button 
 
+remove settings screen
+
+github readme
+
+post reddit wearosdev wearos androiddev-feedback-thread
