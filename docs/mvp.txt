@@ -1,6 +1,8 @@
 
-play store page marketing, compy from existing apps
+play store page marketing, copy from existing apps
   (some watch support) start/stop recording with stem button 
+  screenshots
+  video of actually using it
 
 github readme
 
