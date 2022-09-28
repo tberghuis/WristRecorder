@@ -1,0 +1,15 @@
+adb shell pm revoke dev.tberghuis.voicememos android.permission.RECORD_AUDIO
+
+adb shell pm revoke com.mobvoi.recorder.ai android.permission.RECORD_AUDIO
+
+
+adb shell "run-as dev.tberghuis.voicememos cat /data/data/dev.tberghuis.voicememos/files/voicememos.pcm" > /home/tom/Desktop/voicememos.pcm
+
+
+adb shell
+su
+cd /data/data/dev.tberghuis.voicememos/files
+
+
+cd wear/release
+adb install wear-release.apk
