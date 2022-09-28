@@ -5,3 +5,5 @@ play store page marketing, compy from existing apps
 github readme
 
 post reddit wearosdev wearos androiddev-feedback-thread
+
+clean code

@@ -1,9 +1,12 @@
 package dev.tberghuis.voicememos.page
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -23,15 +26,19 @@ import java.util.*
 fun RecordingList(
   onRecordingClick: (String) -> Unit
 ) {
-//  val scope = rememberCoroutineScope()
   val viewModel: HomeViewModel = hiltViewModel()
   val context = LocalContext.current
 
   if (viewModel.recordingFilesInitialised.value && viewModel.recordingFiles.value.isEmpty()) {
-    Text("No recordings")
+    Column(
+      Modifier.fillMaxSize(),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center
+    ) {
+      Text("No recordings")
+    }
     return
   }
-
 
   ScalingLazyColumn() {
     items(viewModel.recordingFiles.value.size) { i ->
@@ -39,16 +46,11 @@ fun RecordingList(
       val buttonText = remember(file, context) {
         "${formatTimestampFromFilename(file)} ${calcDuration(context, file)}s"
       }
-
-
-
-
       Button(modifier = Modifier,
         onClick = {
           logd("play $file")
           onRecordingClick(file)
         }
-
       ) {
         Text(buttonText, Modifier.padding(horizontal = 10.dp))
       }
@@ -64,10 +66,5 @@ fun formatTimestampFromFilename(file: String): String {
   )
 //  val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
   val formatter = DateTimeFormatter.ofPattern("EEE, d MMM HH:mm")
-
-
-
   return date.format(formatter)
 }
-
-
