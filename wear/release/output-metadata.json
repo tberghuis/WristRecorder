@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "dev.tberghuis.voicememos",
+  "applicationId": "dev.tberghuis.wristrecorder",
   "variantName": "release",
   "elements": [
     {
