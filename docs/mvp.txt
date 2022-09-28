@@ -8,6 +8,4 @@ github readme
 
 post reddit wearosdev wearos androiddev-feedback-thread
 
-clean code
-
 use permission WAKE_LOCK to keep screen on???
