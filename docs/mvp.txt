@@ -1,5 +1,7 @@
 
 github readme
 
+LICENSE
+
 post reddit wearosdev wearos androiddev-feedback-thread
   product hunt, sideproject, indiehackers
