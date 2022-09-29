@@ -19,6 +19,7 @@ class AudioRecordService(val context: Context) {
     logd("AudioRecordService context $context")
   }
 
+  // https://github.com/android/wear-os-samples/blob/main/WearSpeakerSample/wear/src/main/java/com/example/android/wearable/speaker/SoundRecorder.kt
   @RequiresPermission(Manifest.permission.RECORD_AUDIO)
   suspend fun record(filenameCallback: (String) -> Unit) {
     val intSize = AudioRecord.getMinBufferSize(RECORDING_RATE, CHANNEL_IN, AudioConstants.FORMAT)

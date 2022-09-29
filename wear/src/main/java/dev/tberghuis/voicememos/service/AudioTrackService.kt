@@ -12,6 +12,8 @@ import kotlinx.coroutines.withContext
 
 // todo rewrite so i can play/pause androidx.media3 exoplayer
 class AudioTrackService(val context: Context) {
+
+  // https://github.com/android/wear-os-samples/blob/main/WearSpeakerSample/wear/src/main/java/com/example/android/wearable/speaker/SoundRecorder.kt
   suspend fun play(filename: String) {
     val intSize = AudioTrack.getMinBufferSize(RECORDING_RATE, CHANNELS_OUT, AudioConstants.FORMAT)
 

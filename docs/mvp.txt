@@ -1,12 +1,5 @@
 
-play store page marketing, copy from existing apps
-  (some watch support) start/stop recording with stem button 
-  screenshots
-  video of actually using it
-
 github readme
-
-attribute code copied from WearSpeakerSample
 
 post reddit wearosdev wearos androiddev-feedback-thread
   product hunt, sideproject, indiehackers
