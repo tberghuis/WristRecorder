@@ -12,4 +12,6 @@ play store page marketing, copy from existing apps
 
 github readme
 
+attribute code copied from WearSpeakerSample
+
 post reddit wearosdev wearos androiddev-feedback-thread
