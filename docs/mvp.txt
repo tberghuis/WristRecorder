@@ -1,3 +1,4 @@
+wait for play store review/publish
 
 github readme
 
