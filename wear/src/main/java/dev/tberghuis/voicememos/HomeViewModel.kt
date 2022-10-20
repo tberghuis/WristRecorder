@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(
   var recordingFilesInitialised = mutableStateOf(false)
 
   fun getRecordings() {
-    val files = appContext.fileList().toList().filter { it.startsWith("wristrecorder_") }
+    val files = appContext.fileList().toList().filter { it.startsWith("wristrecorder_") }.sorted()
     recordingFiles.value = files
     recordingFilesInitialised.value = true
   }
