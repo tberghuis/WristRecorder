@@ -1,3 +1,10 @@
 update gradle dependencies
 
 top stem button navigate back
+
+update version
+
+upload
+
+git merge
+
