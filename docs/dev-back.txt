@@ -2,13 +2,11 @@ update gradle dependencies
 
 bottom stem button navigate home from recordingdetail
 
+############
 update version
-
+build signed
 upload
-
 play store internal testing
-
 promote to production
-
 git merge
 
