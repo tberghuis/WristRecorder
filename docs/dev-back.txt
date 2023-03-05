@@ -8,5 +8,7 @@ upload
 
 play store internal testing
 
+promote to production
+
 git merge
 
