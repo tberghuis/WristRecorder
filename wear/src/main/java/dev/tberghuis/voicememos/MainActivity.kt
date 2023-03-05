@@ -21,6 +21,8 @@ class MainActivity : ComponentActivity() {
   }
 }
 
+
+
 @Composable
 fun WearApp() {
   val navController = rememberSwipeDismissableNavController()

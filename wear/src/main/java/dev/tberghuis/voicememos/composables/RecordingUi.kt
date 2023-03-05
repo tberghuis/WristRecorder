@@ -72,14 +72,7 @@ fun RecordingUi(
     }
   }
 
-  val isHardwareButtonPress = { keyEvent: KeyEvent ->
-    if (keyEvent.nativeKeyEvent.action == ACTION_UP && keyEvent.nativeKeyEvent.keyCode == KEYCODE_STEM_1) {
-      logd("physical key")
-      true
-    } else {
-      false
-    }
-  }
+
 
   val modifier = when (recordingJob.value) {
     null -> {
