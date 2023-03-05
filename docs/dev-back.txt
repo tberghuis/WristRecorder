@@ -1,14 +1,12 @@
 update gradle dependencies
 
-top stem button navigate back
-
-MainActivity onkeypress onkeyup
-
-
+bottom stem button navigate home from recordingdetail
 
 update version
 
 upload
+
+play store internal testing
 
 git merge
 
