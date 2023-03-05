@@ -10,3 +10,4 @@ play store internal testing
 promote to production
 git merge
 
+git rm wear/release/wear-release.aab
