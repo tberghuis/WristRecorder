@@ -22,25 +22,28 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
 @Composable
 fun WearApp() {
   val navController = rememberSwipeDismissableNavController()
   MaterialTheme {
     SwipeDismissableNavHost(
-      navController = navController,
-      startDestination = "home"
+      navController = navController, startDestination = "home"
     ) {
       composable("home") {
-        HomeScreen(
-          navigateRecordingDetail = { file ->
-            navController.navigate("recording_detail/$file")
-          }
-        )
+        HomeScreen(navigateRecordingDetail = { file ->
+          navController.navigate("recording_detail/$file")
+        })
       }
       composable("recording_detail/{file}") {
         RecordingDetail(popBackStack = {
           navController.popBackStack()
+        }, popHomeRecording = {
+          // https://stackoverflow.com/questions/75131781/how-to-refresh-the-content-of-the-fragments-with-the-navigation-component-when-r
+          navController.popBackStack(
+            route = "home",
+            inclusive = true,
+          )
+          navController.navigate("home")
         })
       }
     }

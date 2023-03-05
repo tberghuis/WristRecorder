@@ -22,6 +22,7 @@ fun HomeScreen(
   navigateRecordingDetail: (String) -> Unit
 ) {
   val viewModel: HomeViewModel = hiltViewModel()
+  // todo hoist this viewmodel, home?pagerIndex=n
   val pagerState = rememberPagerState()
   val pageIndicatorState: PageIndicatorState = remember {
     object : PageIndicatorState {

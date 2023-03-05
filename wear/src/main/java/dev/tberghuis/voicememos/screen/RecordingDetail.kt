@@ -1,5 +1,6 @@
 package dev.tberghuis.voicememos.screen
 
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,32 +13,52 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Alert
+import dev.tberghuis.voicememos.composables.isHardwareButtonPress
 import dev.tberghuis.voicememos.page.formatTimestampFromFilename
 import dev.tberghuis.voicememos.util.logd
 import kotlinx.coroutines.launch
 
 @Composable
-fun RecordingDetail(popBackStack: () -> Unit) {
+fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
   val viewModel: RecordingDetailViewModel = hiltViewModel()
 
   // do i need key??? probably, should write a test???
   val formattedTime = remember { formatTimestampFromFilename(viewModel.file) }
 
+  val requester = remember { FocusRequester() }
+  LaunchedEffect(Unit) {
+    requester.requestFocus()
+  }
+
   Column(
-    Modifier.fillMaxSize(),
+    Modifier
+      .onKeyEvent { keyEvent ->
+        logd("keyEvent $keyEvent")
+        if (isHardwareButtonPress(keyEvent)) {
+          popHomeRecording()
+          return@onKeyEvent true
+        }
+        false
+      }
+      .focusRequester(requester)
+      .focusable()
+      .fillMaxSize(),
     horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center
-  ) {
+    verticalArrangement = Arrangement.Center) {
     Text(formattedTime)
     Text("${viewModel.duration} seconds")
     Row(Modifier.padding(top = 10.dp)) {
