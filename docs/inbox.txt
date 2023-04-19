@@ -23,3 +23,6 @@ only allow one play button click at a time,
   fix when migrate to media3
 
 ####################################
+
+
+https://www.reddit.com/r/tasker/comments/12r2nde/how_to_transcribe_text_with_openais_whisper/
