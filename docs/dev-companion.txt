@@ -1,0 +1,9 @@
+gradle dependencies update
+
+compose pager, remove accompanist
+
+show time home screen
+
+...
+
+companion sync, bcompare fresh projects
