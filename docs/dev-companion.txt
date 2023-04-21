@@ -1,6 +1,6 @@
-gradle dependencies update
+[x] gradle dependencies update
 
-compose pager, remove accompanist
+[x] compose pager, remove accompanist
 
 show time home screen
 
