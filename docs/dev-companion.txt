@@ -23,9 +23,10 @@ transcribe feature
 
 ongoing activity api when recording
 
+check wear-os samples gradle config compose
 
 ### sync companion poc ###
 button write txt file
 
 
-check wear-os samples gradle config compose
+
