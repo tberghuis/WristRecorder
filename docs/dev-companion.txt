@@ -26,3 +26,6 @@ ongoing activity api when recording
 
 ### sync companion poc ###
 button write txt file
+
+
+check wear-os samples gradle config compose
