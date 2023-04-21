@@ -28,5 +28,5 @@ check wear-os samples gradle config compose
 ### sync companion poc ###
 button write txt file
 
-
+read wearos sync data docs
 

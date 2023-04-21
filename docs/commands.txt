@@ -13,3 +13,9 @@ cd /data/data/dev.tberghuis.voicememos/files
 
 cd wear/release
 adb install wear-release.apk
+
+
+################################
+adb shell
+run-as dev.tberghuis.synccompanionpoc
+cd files
