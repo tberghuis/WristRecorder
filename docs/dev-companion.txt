@@ -14,3 +14,9 @@ merge
 companion sync, bcompare fresh projects
   FreshNoCompanion
   FreshCompanion
+  code proof of concept text files
+
+record from bound service
+  save file onDestroy
+
+transcribe feature
