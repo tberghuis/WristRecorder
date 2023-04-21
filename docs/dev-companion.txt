@@ -22,3 +22,7 @@ record from bound service
 transcribe feature
 
 ongoing activity api when recording
+
+
+### sync companion poc ###
+button write txt file
