@@ -20,3 +20,5 @@ record from bound service
   save file onDestroy
 
 transcribe feature
+
+ongoing activity api when recording
