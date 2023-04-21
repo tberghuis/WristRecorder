@@ -13,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.material.HorizontalPageIndicator
 import androidx.wear.compose.material.PageIndicatorState
 import androidx.wear.compose.material.Scaffold
+import androidx.wear.compose.material.TimeText
 import dev.tberghuis.voicememos.page.RecordingList
 import dev.tberghuis.voicememos.page.RecordingPage
 
@@ -35,11 +36,18 @@ fun HomeScreen(
     }
   }
 
-  Scaffold(modifier = Modifier.fillMaxSize(), pageIndicator = {
-    HorizontalPageIndicator(
-      pageIndicatorState = pageIndicatorState
-    )
-  }) {
+  Scaffold(
+    modifier = Modifier.fillMaxSize(),
+    pageIndicator = {
+      HorizontalPageIndicator(
+        pageIndicatorState = pageIndicatorState
+      )
+    },
+    timeText = {
+      TimeText()
+    },
+
+    ) {
     HorizontalPager(
       pageCount = 2, state = pagerState
     ) { page ->
@@ -47,6 +55,7 @@ fun HomeScreen(
         0 -> {
           RecordingPage(navigateRecordingDetail)
         }
+
         1 -> {
           RecordingList(navigateRecordingDetail)
         }
