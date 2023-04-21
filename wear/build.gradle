@@ -13,8 +13,8 @@ android {
         applicationId "dev.tberghuis.wristrecorder"
         minSdk 28
         targetSdk 33
-        versionCode 3
-        versionName "1.1.0"
+        versionCode 4
+        versionName "1.2.0"
     }
 
     buildTypes {
@@ -60,7 +60,6 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     implementation 'androidx.hilt:hilt-navigation-compose:1.1.0-alpha01'
 
-//    implementation "com.google.accompanist:accompanist-pager:0.28.0"
     implementation "com.google.accompanist:accompanist-permissions:0.25.1"
 
     implementation "androidx.wear:wear-input:1.1.0"

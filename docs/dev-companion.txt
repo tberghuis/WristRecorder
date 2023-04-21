@@ -12,3 +12,5 @@ merge
 ...
 
 companion sync, bcompare fresh projects
+  FreshNoCompanion
+  FreshCompanion
