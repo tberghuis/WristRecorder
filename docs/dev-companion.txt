@@ -2,7 +2,12 @@
 
 [x] compose pager, remove accompanist
 
-show time home screen
+[x] show time home screen
+
+version
+build
+release
+merge
 
 ...
 
