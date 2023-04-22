@@ -40,3 +40,6 @@ WearableListenerService
 DataClient.OnDataChangedListener
 
 https://developer.android.com/training/wearables/data/messages
+
+future.txt deal with multiple paired watches
+
