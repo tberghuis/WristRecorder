@@ -33,8 +33,10 @@ https://developer.android.com/training/wearables/data/data-layer
 CapabilityClient
 MessageClient
 * ChannelClient
-  Asset
+  * Asset
   DataItem
   DataClient
 WearableListenerService
 DataClient.OnDataChangedListener
+
+https://developer.android.com/training/wearables/data/messages
