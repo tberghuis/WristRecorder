@@ -45,4 +45,5 @@ future.txt deal with multiple paired watches
 
 does the mobile app need CapabilityClient
   assume no
+  not needed in DataClient example
 
