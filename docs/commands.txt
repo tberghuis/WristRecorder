@@ -16,6 +16,8 @@ adb install wear-release.apk
 
 
 ################################
-adb shell
+adb devices
+adb -s emulator-5556 shell
 run-as dev.tberghuis.synccompanionpoc
 cd files
+ls
