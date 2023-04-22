@@ -43,3 +43,6 @@ https://developer.android.com/training/wearables/data/messages
 
 future.txt deal with multiple paired watches
 
+does the mobile app need CapabilityClient
+  assume no
+
