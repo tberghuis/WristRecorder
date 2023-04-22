@@ -30,3 +30,11 @@ button write txt file
 
 https://developer.android.com/training/wearables/data/data-layer
 
+CapabilityClient
+MessageClient
+* ChannelClient
+  Asset
+  DataItem
+  DataClient
+WearableListenerService
+DataClient.OnDataChangedListener
