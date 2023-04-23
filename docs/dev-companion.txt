@@ -47,3 +47,4 @@ does the mobile app need CapabilityClient
   assume no
   not needed in DataClient example
 
+i should probably be using ChannelClient.... meh

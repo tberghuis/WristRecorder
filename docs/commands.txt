@@ -17,7 +17,8 @@ adb install wear-release.apk
 
 ################################
 adb devices
-adb -s emulator-5556 shell
+adb -s emulator-5554 shell
+adb -s poco shell
 run-as dev.tberghuis.synccompanionpoc
 cd files
 ls
