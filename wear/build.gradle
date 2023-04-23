@@ -63,4 +63,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-permissions:0.25.1"
 
     implementation "androidx.wear:wear-input:1.1.0"
+
+    // is this needed???? no
+    //    wearApp project(":wear")
 }
