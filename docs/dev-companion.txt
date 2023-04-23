@@ -48,3 +48,9 @@ does the mobile app need CapabilityClient
   not needed in DataClient example
 
 i should probably be using ChannelClient.... meh
+
+next task, bound service.
+mobile screen design
+show list of files
+
+figure out companion app diff fresh
