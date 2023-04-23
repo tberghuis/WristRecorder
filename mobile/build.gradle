@@ -63,6 +63,8 @@ dependencies {
 
     implementation 'androidx.activity:activity-compose:1.7.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
+    implementation 'com.google.android.gms:play-services-wearable:18.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
 
     // is this needed???? no
     //    wearApp project(":wear")
