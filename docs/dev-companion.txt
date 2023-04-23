@@ -61,4 +61,4 @@ next task write syncFinished  = +1 to shared prefs in service
   collect flow in VM
 
 icon
-xml
+strings xml
