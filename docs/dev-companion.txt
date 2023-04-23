@@ -53,4 +53,6 @@ next task, bound service.
 mobile screen design
 show list of files
 
+delete recordings on successful sync
+
 figure out companion app diff fresh
