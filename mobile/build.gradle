@@ -62,6 +62,7 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
     implementation 'androidx.activity:activity-compose:1.7.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
 
     // is this needed???? no
     //    wearApp project(":wear")
