@@ -15,12 +15,9 @@ import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
 import dev.tberghuis.voicememos.HomeViewModel
+import dev.tberghuis.voicememos.common.formatTimestampFromFilename
 import dev.tberghuis.voicememos.presentation.calcDuration
 import dev.tberghuis.voicememos.util.logd
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 @Composable
 fun RecordingList(
@@ -58,13 +55,3 @@ fun RecordingList(
   }
 }
 
-fun formatTimestampFromFilename(file: String): String {
-  // should learn regex
-  val timestamp = file.split("_")[1].split(".")[0].toLong()
-  val date = LocalDateTime.ofInstant(
-    Instant.ofEpochMilli(timestamp), TimeZone.getDefault().toZoneId()
-  )
-//  val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-  val formatter = DateTimeFormatter.ofPattern("EEE, d MMM HH:mm")
-  return date.format(formatter)
-}
