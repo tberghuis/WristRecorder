@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,11 +22,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.common.calcDuration
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
+import java.io.File
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,7 +56,7 @@ fun MobileScreen(
 fun ScreenContent(
   padding: PaddingValues, vm: MobileViewModel = viewModel()
 ) {
-  val context = LocalContext.current
+
   val files = vm.recordingFilesStateFlow.collectAsState()
 
   LazyColumn(
@@ -63,30 +67,55 @@ fun ScreenContent(
 
     items(files.value.size) { i ->
 
-      val recordingFile = files.value[i]
-      // doitwrong
-      // wrap in remember???
-      val formattedTime = formatTimestampFromFilename(recordingFile.name)
-
-      val durationSeconds = calcDuration(context, recordingFile.name)
-
-
-      Row() {
-        Text(formattedTime)
-        Text("${durationSeconds}s")
-        IconButton(onClick = {
-          vm.playRecording(recordingFile)
-        }) {
-          Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "")
-        }
-        IconButton(onClick = {
-
-        }) {
-          Icon(imageVector = Icons.Default.Delete, contentDescription = "")
-        }
-
-      }
-
+      RecordingCard(files.value[i])
     }
   }
 }
+
+
+@Composable
+fun RecordingCard(
+  recordingFile: File,
+  vm: MobileViewModel = viewModel()
+) {
+  val context = LocalContext.current
+
+//  val recordingFile = files.value[i]
+  // doitwrong
+  // wrap in remember???
+  val formattedTime = formatTimestampFromFilename(recordingFile.name)
+
+  val durationSeconds = calcDuration(context, recordingFile.name)
+
+
+  Card(
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(5.dp),
+  ) {
+    Row(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(5.dp),
+      horizontalArrangement = Arrangement.SpaceBetween,
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      Text(formattedTime)
+      Text("${durationSeconds}s")
+      IconButton(onClick = {
+        vm.playRecording(recordingFile)
+      }) {
+        Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "")
+      }
+      IconButton(onClick = {
+
+      }) {
+        Icon(imageVector = Icons.Default.Delete, contentDescription = "")
+      }
+
+    }
+
+  }
+
+}
+
