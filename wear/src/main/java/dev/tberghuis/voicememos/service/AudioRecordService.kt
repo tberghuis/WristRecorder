@@ -6,9 +6,9 @@ import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import androidx.annotation.RequiresPermission
+import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.service.AudioConstants.Companion.CHANNEL_IN
 import dev.tberghuis.voicememos.service.AudioConstants.Companion.RECORDING_RATE
-import dev.tberghuis.voicememos.util.logd
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext

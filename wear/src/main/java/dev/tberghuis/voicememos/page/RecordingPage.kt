@@ -14,8 +14,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
+import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.composables.RecordingUi
-import dev.tberghuis.voicememos.util.logd
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable

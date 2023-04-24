@@ -2,7 +2,7 @@ package dev.tberghuis.voicememos.service
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dev.tberghuis.voicememos.util.logd
+import dev.tberghuis.voicememos.common.logd
 import java.io.File
 import javax.inject.Inject
 

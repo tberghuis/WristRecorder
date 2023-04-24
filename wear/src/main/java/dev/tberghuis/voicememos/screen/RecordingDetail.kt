@@ -28,8 +28,8 @@ import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Alert
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
+import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.composables.isHardwareButtonPress
-import dev.tberghuis.voicememos.util.logd
 import kotlinx.coroutines.launch
 
 @Composable

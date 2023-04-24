@@ -3,7 +3,7 @@ package dev.tberghuis.voicememos.composables
 import android.view.KeyEvent.ACTION_UP
 import android.view.KeyEvent.KEYCODE_STEM_1
 import androidx.compose.ui.input.key.KeyEvent
-import dev.tberghuis.voicememos.util.logd
+import dev.tberghuis.voicememos.common.logd
 
 
 //  val isHardwareButtonPress = { keyEvent: KeyEvent ->

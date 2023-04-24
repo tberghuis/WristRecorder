@@ -31,7 +31,7 @@ import androidx.core.app.ActivityCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.material.Icon
 import dev.tberghuis.voicememos.HomeViewModel
-import dev.tberghuis.voicememos.util.logd
+import dev.tberghuis.voicememos.common.logd
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

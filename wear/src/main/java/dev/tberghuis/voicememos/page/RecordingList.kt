@@ -16,8 +16,8 @@ import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
 import dev.tberghuis.voicememos.HomeViewModel
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
+import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.presentation.calcDuration
-import dev.tberghuis.voicememos.util.logd
 
 @Composable
 fun RecordingList(

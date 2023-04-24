@@ -9,7 +9,7 @@ import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
 import com.google.android.gms.wearable.WearableListenerService
-import dev.tberghuis.voicememos.util.logd
+import dev.tberghuis.voicememos.common.logd
 import java.io.File
 import java.util.concurrent.ExecutionException
 
