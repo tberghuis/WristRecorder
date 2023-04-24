@@ -19,6 +19,7 @@ adb install wear-release.apk
 adb devices
 adb -s emulator-5554 shell
 adb -s poco shell
-run-as dev.tberghuis.synccompanionpoc
+adb -s ticwatch shell
+run-as dev.tberghuis.wristrecorder
 cd files
 ls
