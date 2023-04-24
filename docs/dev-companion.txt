@@ -64,3 +64,5 @@ icon
 strings xml
 
 next task - mobile view model, mutableStateFlow list file
+
+next task - click to play
