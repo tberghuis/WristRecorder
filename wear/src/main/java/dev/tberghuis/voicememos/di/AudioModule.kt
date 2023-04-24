@@ -6,8 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dev.tberghuis.voicememos.common.AudioController
 import dev.tberghuis.voicememos.service.AudioRecordService
-import dev.tberghuis.voicememos.service.AudioTrackService
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -22,7 +22,7 @@ class AudioModule {
 
   @Provides
   @Singleton
-  fun provideAudioTrackService(@ApplicationContext appContext: Context): AudioTrackService {
-    return AudioTrackService(appContext)
+  fun provideAudioController(@ApplicationContext appContext: Context): AudioController {
+    return AudioController(appContext)
   }
 }

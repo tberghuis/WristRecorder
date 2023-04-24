@@ -2,6 +2,7 @@ package dev.tberghuis.voicememos.service
 
 import android.media.AudioFormat
 
+// todo remove as now in common module
 class AudioConstants {
   companion object {
     const val RECORDING_RATE = 8000 // can go up to 44K, if needed

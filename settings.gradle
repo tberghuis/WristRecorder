@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "WristRecorder"
 include ':mobile'
 include ':wear'
+include ':common'

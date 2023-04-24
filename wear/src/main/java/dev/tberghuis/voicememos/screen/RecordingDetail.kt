@@ -103,7 +103,7 @@ fun PlayButton() {
   Button(onClick = {
     logd("play")
     scope.launch {
-      viewModel.audioTrackService.play(viewModel.file)
+      viewModel.audioController.play(viewModel.file)
     }
   }) {
     Icon(

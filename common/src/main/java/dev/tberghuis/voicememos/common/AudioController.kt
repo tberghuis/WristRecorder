@@ -1,28 +1,26 @@
-package dev.tberghuis.voicememos.service
+package dev.tberghuis.voicememos.common
 
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
-import dev.tberghuis.voicememos.service.AudioConstants.Companion.CHANNELS_OUT
-import dev.tberghuis.voicememos.service.AudioConstants.Companion.RECORDING_RATE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 
-// todo rewrite so i can play/pause androidx.media3 exoplayer
-class _AudioTrackService(val context: Context) {
+
+class AudioController(val context: Context) {
 
   // https://github.com/android/wear-os-samples/blob/main/WearSpeakerSample/wear/src/main/java/com/example/android/wearable/speaker/SoundRecorder.kt
   suspend fun play(filename: String) {
-    val intSize = AudioTrack.getMinBufferSize(RECORDING_RATE, CHANNELS_OUT, AudioConstants.FORMAT)
+    val intSize = AudioTrack.getMinBufferSize(RECORDING_RATE, CHANNELS_OUT, FORMAT)
 
     val audioTrack = AudioTrack.Builder().setAudioAttributes(
       AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
         .setUsage(AudioAttributes.USAGE_MEDIA).build()
     ).setBufferSizeInBytes(intSize).setAudioFormat(
       AudioFormat.Builder().setSampleRate(RECORDING_RATE).setChannelMask(CHANNELS_OUT)
-        .setEncoding(AudioConstants.FORMAT).build()
+        .setEncoding(FORMAT).build()
     ).setTransferMode(AudioTrack.MODE_STREAM).build()
 
     audioTrack.setVolume(AudioTrack.getMaxVolume())
@@ -43,4 +41,14 @@ class _AudioTrackService(val context: Context) {
       audioTrack.release()
     }
   }
+
+
+  companion object {
+    const val RECORDING_RATE = 8000 // can go up to 44K, if needed
+    const val CHANNEL_IN = AudioFormat.CHANNEL_IN_MONO
+    const val CHANNELS_OUT = AudioFormat.CHANNEL_OUT_MONO
+    const val FORMAT = AudioFormat.ENCODING_PCM_16BIT
+  }
+
+
 }
