@@ -19,6 +19,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.voicememos.common.formatTimestampFromFilename
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,10 +63,17 @@ fun ScreenContent(
 
     items(files.value.size) { i ->
 
+      val recordingFile = files.value[i]
+      // doitwrong
+      // wrap in remember???
+      val formattedTime = formatTimestampFromFilename(recordingFile.name)
+
+
+
       Row(modifier = Modifier.clickable {
-        vm.playRecording(files.value[i])
+        vm.playRecording(recordingFile)
       }) {
-        Text("filename: ${files.value[i].name}")
+        Text("$formattedTime Xs")
 
       }
 
