@@ -24,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.voicememos.common.calcDuration
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,7 +52,7 @@ fun MobileScreen(
 fun ScreenContent(
   padding: PaddingValues, vm: MobileViewModel = viewModel()
 ) {
-
+  val context = LocalContext.current
   val files = vm.recordingFilesStateFlow.collectAsState()
 
   LazyColumn(
@@ -67,11 +68,12 @@ fun ScreenContent(
       // wrap in remember???
       val formattedTime = formatTimestampFromFilename(recordingFile.name)
 
+      val durationSeconds = calcDuration(context, recordingFile.name)
 
 
       Row() {
         Text(formattedTime)
-        Text("Xs")
+        Text("${durationSeconds}s")
         IconButton(onClick = {
           vm.playRecording(recordingFile)
         }) {
