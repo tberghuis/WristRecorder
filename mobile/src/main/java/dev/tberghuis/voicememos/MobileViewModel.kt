@@ -31,7 +31,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   private fun refreshRecordingFiles() {
     val path = application.filesDir
-    val files = path.listFiles()
+    val files = path.listFiles() ?: return
     val recordingFiles = mutableListOf<File>()
     files.forEach {
       if (it.isFile && it.name.startsWith("wristrecorder_")) {
