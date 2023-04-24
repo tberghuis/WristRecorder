@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.AudioController
+import dev.tberghuis.voicememos.common.logd
 import java.io.File
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
