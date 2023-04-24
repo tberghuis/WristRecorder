@@ -70,3 +70,4 @@ next task - click to play
 rewrite AudioContoller
   https://github.com/android/wear-os-samples/blob/main/WearSpeakerSample/wear/src/main/java/com/example/android/wearable/speaker/SoundRecorder.kt
 
+test recording and playback watch emulator, with mic plugged into pc
