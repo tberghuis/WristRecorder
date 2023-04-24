@@ -14,6 +14,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -45,17 +46,21 @@ fun MobileScreen(
 }
 
 @Composable
-fun ScreenContent(padding: PaddingValues) {
+fun ScreenContent(
+  padding: PaddingValues,
+  vm: MobileViewModel = viewModel()
+) {
+
+  val files = vm.recordingFilesStateFlow.collectAsState()
+
   LazyColumn(
     modifier = Modifier
       .padding(padding)
       .fillMaxSize(),
   ) {
-    item {
-      Text("willitblend")
+
+    items(files.value.size) { i ->
+      Text("filename: ${files.value[i].name}")
     }
-//      items(txtFiles.value.size) { i ->
-//        Text("filename: ${txtFiles.value[i]}")
-//      }
   }
 }
