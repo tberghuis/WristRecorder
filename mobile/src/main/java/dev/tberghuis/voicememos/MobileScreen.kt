@@ -56,22 +56,17 @@ fun MobileScreen(
 fun ScreenContent(
   padding: PaddingValues, vm: MobileViewModel = viewModel()
 ) {
-
   val files = vm.recordingFilesStateFlow.collectAsState()
-
   LazyColumn(
     modifier = Modifier
       .padding(padding)
       .fillMaxSize(),
   ) {
-
     items(files.value.size) { i ->
-
       RecordingCard(files.value[i])
     }
   }
 }
-
 
 @Composable
 fun RecordingCard(
@@ -79,14 +74,10 @@ fun RecordingCard(
   vm: MobileViewModel = viewModel()
 ) {
   val context = LocalContext.current
-
-//  val recordingFile = files.value[i]
   // doitwrong
   // wrap in remember???
   val formattedTime = formatTimestampFromFilename(recordingFile.name)
-
   val durationSeconds = calcDuration(context, recordingFile.name)
-
 
   Card(
     modifier = Modifier
@@ -112,10 +103,6 @@ fun RecordingCard(
       }) {
         Icon(imageVector = Icons.Default.Delete, contentDescription = "")
       }
-
     }
-
   }
-
 }
-
