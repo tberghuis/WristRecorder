@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.Wearable
+import dev.tberghuis.voicememos.common.AudioController
 import java.io.File
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -15,6 +16,7 @@ import kotlinx.coroutines.tasks.await
 
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
   private val dataStoreRepository = DataStoreRepository(application.applicationContext.dataStore)
+  private val audioController = AudioController(application)
 
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
@@ -60,4 +62,13 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     }
 
   }
+
+  fun playRecording(file: File) {
+    viewModelScope.launch {
+      audioController.play(file.name)
+
+    }
+  }
+
+
 }

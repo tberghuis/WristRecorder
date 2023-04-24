@@ -1,6 +1,7 @@
 package dev.tberghuis.voicememos
 
 import android.app.Activity
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -60,7 +61,14 @@ fun ScreenContent(
   ) {
 
     items(files.value.size) { i ->
-      Text("filename: ${files.value[i].name}")
+
+      Row(modifier = Modifier.clickable {
+        vm.playRecording(files.value[i])
+      }) {
+        Text("filename: ${files.value[i].name}")
+
+      }
+
     }
   }
 }
