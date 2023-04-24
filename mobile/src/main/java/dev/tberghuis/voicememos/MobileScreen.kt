@@ -3,6 +3,7 @@ package dev.tberghuis.voicememos
 import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,8 +28,6 @@ fun MobileScreen(
   vm: MobileViewModel = viewModel()
 ) {
   val context = LocalContext.current
-
-
   Scaffold(
     bottomBar = {
       BottomAppBar() {
@@ -45,21 +44,26 @@ fun MobileScreen(
       }
     }
   ) { paddingValues ->
+    ScreenContent(paddingValues)
+  }
+}
 
-    LazyColumn(
-      modifier = Modifier
-        .padding(paddingValues)
-        .fillMaxSize(),
-    ) {
-      item {
-        Text("willitblend")
-      }
+@Composable
+fun ScreenContent(padding: PaddingValues) {
+  LazyColumn(
+    modifier = Modifier
+      .padding(padding)
+      .fillMaxSize(),
+  ) {
+    item {
+      Text("willitblend")
+    }
 //      items(txtFiles.value.size) { i ->
 //        Text("filename: ${txtFiles.value[i]}")
 //      }
-    }
   }
 }
+
 
 @Preview
 @OptIn(ExperimentalMaterial3Api::class)
