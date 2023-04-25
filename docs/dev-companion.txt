@@ -3,70 +3,10 @@ play store - description, companion app, can download recordings
           - screenshot companion app, home and list show time
 
 
-version
+[x] version
 build
 release
 merge
 
-...
+clean code
 
-companion sync, bcompare fresh projects
-  FreshNoCompanion
-  FreshCompanion
-  code proof of concept text files
-
-record from bound service
-  save file onDestroy
-
-transcribe feature
-
-ongoing activity api when recording
-
-check wear-os samples gradle config compose
-
-### sync companion poc ###
-button write txt file
-
-https://developer.android.com/training/wearables/data/data-layer
-
-CapabilityClient
-MessageClient
-* ChannelClient
-  * Asset
-  DataItem
-  DataClient
-WearableListenerService
-DataClient.OnDataChangedListener
-
-https://developer.android.com/training/wearables/data/messages
-
-future.txt deal with multiple paired watches
-
-does the mobile app need CapabilityClient
-  assume no
-  not needed in DataClient example
-
-i should probably be using ChannelClient.... meh
-
-next task, bound service.
-mobile screen design
-show list of files
-
-delete recordings on successful sync
-
-figure out companion app diff fresh
-
-next task write syncFinished  = +1 to shared prefs in service
-  collect flow in VM
-
-icon
-strings xml
-
-next task - mobile view model, mutableStateFlow list file
-
-next task - click to play
-
-rewrite AudioContoller
-  https://github.com/android/wear-os-samples/blob/main/WearSpeakerSample/wear/src/main/java/com/example/android/wearable/speaker/SoundRecorder.kt
-
-test recording and playback watch emulator, with mic plugged into pc
