@@ -40,4 +40,6 @@ ChannelClient to sync???
 
 rewrite AudioContoller
   https://github.com/android/wear-os-samples/blob/main/WearSpeakerSample/wear/src/main/java/com/example/android/wearable/speaker/SoundRecorder.kt
-  
+
+
+mobile: activity setTaskDescription for recents screen title and icon
