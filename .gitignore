@@ -14,5 +14,6 @@
 .cxx
 local.properties
 
-/wear/release
+/wear/release/
+/mobile/release/
 .idea/deploymentTargetDropDown.xml
