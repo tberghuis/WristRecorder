@@ -97,7 +97,6 @@ fun RecordingCard(
     ) {
       Text(formattedTime)
       Text("${durationSeconds}s")
-
       Row {
         IconButton(onClick = {
           vm.playRecording(recordingFile)
@@ -110,8 +109,6 @@ fun RecordingCard(
           Icon(imageVector = Icons.Default.Delete, contentDescription = "")
         }
       }
-
-
     }
   }
 }

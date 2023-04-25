@@ -16,10 +16,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class DataClientListenerService : WearableListenerService() {
-
   private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-
-  lateinit var dataStoreRepository: DataStoreRepository
+  private lateinit var dataStoreRepository: DataStoreRepository
 
   override fun onCreate() {
     super.onCreate()
@@ -54,18 +52,13 @@ class DataClientListenerService : WearableListenerService() {
     }
   }
 
-
   private suspend fun saveFile(name: String, asset: Asset) {
     val path = applicationContext.filesDir
     val file = File(path, name)
-
-
     val assetInputStream =
       Wearable.getDataClient(applicationContext).getFdForAsset(asset).await().inputStream
     assetInputStream.use { input ->
       Files.copy(input, file.toPath())
     }
-
-
   }
 }

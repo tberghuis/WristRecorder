@@ -19,12 +19,10 @@ import kotlinx.coroutines.tasks.await
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
   private val dataStoreRepository = DataStoreRepository(application.applicationContext.dataStore)
   private val audioController = AudioController(application)
-
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
   init {
     logd("MobileViewModel init")
-
     viewModelScope.launch {
       dataStoreRepository.syncRecordingsCompleteFlow.collect {
         logd("syncRecordingsCompleteFlow $it")
@@ -62,13 +60,11 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
       }.awaitAll()
       logd("message sent success")
     }
-
   }
 
   fun playRecording(file: File) {
     viewModelScope.launch {
       audioController.play(file.name)
-
     }
   }
 
@@ -76,5 +72,4 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     deleteFileCommon(application, file.name)
     refreshRecordingFiles()
   }
-
 }
