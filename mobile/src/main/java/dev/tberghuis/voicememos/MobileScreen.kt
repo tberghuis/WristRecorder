@@ -1,7 +1,6 @@
 package dev.tberghuis.voicememos
 
 import android.app.Activity
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -44,7 +43,7 @@ fun MobileScreen(
       TopAppBar(title = { Text(stringResource(R.string.app_name)) })
     },
     bottomBar = {
-      BottomAppBar() {
+      BottomAppBar {
         Row(
           modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
