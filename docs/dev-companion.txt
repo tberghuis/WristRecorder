@@ -1,8 +1,8 @@
-[x] gradle dependencies update
 
-[x] compose pager, remove accompanist
+play store - description, companion app, can download recordings
+          - screenshot companion app, home and list show time
 
-[x] show time home screen
+test playback and record emulator mic
 
 version
 build
