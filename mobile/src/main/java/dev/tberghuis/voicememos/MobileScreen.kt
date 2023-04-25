@@ -99,7 +99,7 @@ fun RecordingCard(
         Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "")
       }
       IconButton(onClick = {
-
+        vm.deleteRecording(recordingFile)
       }) {
         Icon(imageVector = Icons.Default.Delete, contentDescription = "")
       }
