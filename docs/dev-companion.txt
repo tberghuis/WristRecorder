@@ -7,6 +7,3 @@ play store - description, companion app, can download recordings
 build
 release
 merge
-
-clean code
-
