@@ -6,13 +6,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dev.tberghuis.voicememos.service.AudioRecordService
+import dev.tberghuis.voicememos.common.AudioController
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
   private val savedStateHandle: SavedStateHandle,
-  val audioRecordService: AudioRecordService,
+  val audioController: AudioController,
   // suppressLint does not remove warning
   @ApplicationContext val appContext: Context,
 ) : ViewModel() {

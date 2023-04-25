@@ -59,7 +59,7 @@ fun RecordingUi(
       return
     }
     recordingJob.value = scope.launch {
-      viewModel.audioRecordService.record { filename = it }
+      viewModel.audioController.record { filename = it }
     }
   }
 
