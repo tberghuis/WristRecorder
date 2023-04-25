@@ -12,3 +12,4 @@ generate fresh apps with and without phone companion apps
 transcription
 https://github.com/openai/whisper
 
+stealth record
