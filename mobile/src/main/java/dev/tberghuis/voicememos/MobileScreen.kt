@@ -93,16 +93,21 @@ fun RecordingCard(
     ) {
       Text(formattedTime)
       Text("${durationSeconds}s")
-      IconButton(onClick = {
-        vm.playRecording(recordingFile)
-      }) {
-        Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "")
+
+      Row {
+        IconButton(onClick = {
+          vm.playRecording(recordingFile)
+        }) {
+          Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "")
+        }
+        IconButton(onClick = {
+          vm.deleteRecording(recordingFile)
+        }) {
+          Icon(imageVector = Icons.Default.Delete, contentDescription = "")
+        }
       }
-      IconButton(onClick = {
-        vm.deleteRecording(recordingFile)
-      }) {
-        Icon(imageVector = Icons.Default.Delete, contentDescription = "")
-      }
+
+
     }
   }
 }
