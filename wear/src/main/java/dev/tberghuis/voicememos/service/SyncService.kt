@@ -13,31 +13,24 @@ import dev.tberghuis.voicememos.common.logd
 import java.io.File
 import java.util.concurrent.ExecutionException
 
-
 class SyncService : WearableListenerService() {
-
 
   override fun onMessageReceived(messageEvent: MessageEvent) {
     super.onMessageReceived(messageEvent)
     logd("onMessageReceived messageEvent $messageEvent")
-
-
     when (messageEvent.path) {
       "/msg-sync-recordings" -> {
         logd("/msg-sync-recordings")
         syncRecordings()
       }
     }
-
   }
-
 
   @SuppressLint("VisibleForTests")
   private fun syncRecordings() {
     logd("syncRecordings")
     val path = applicationContext.filesDir
-
-    val files = path.listFiles()
+    val files = path.listFiles() ?: return
     val recordings = mutableListOf<File>()
     // wristrecorder_1682309581196.pcm
     files.forEach {
@@ -45,14 +38,10 @@ class SyncService : WearableListenerService() {
         recordings.add(it)
       }
     }
-
     logd("recordings $recordings")
-
-
     val assets = recordings.map {
       Asset.createFromBytes(it.readBytes())
     }
-
     val request = PutDataMapRequest.create("/sync-recordings").apply {
       recordings.forEachIndexed { i, file ->
         dataMap.putAsset(file.name, assets[i])
@@ -76,13 +65,11 @@ class SyncService : WearableListenerService() {
 
   private fun deleteAllRecordings() {
     val path = applicationContext.filesDir
-    val files = path.listFiles()
+    val files = path.listFiles() ?: return
     files.forEach {
       if (it.isFile && it.name.startsWith("wristrecorder_")) {
         it.delete()
       }
     }
   }
-
-
 }
