@@ -20,11 +20,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.common.calcDuration
@@ -37,17 +39,21 @@ fun MobileScreen(
   vm: MobileViewModel = viewModel()
 ) {
   val context = LocalContext.current
-  Scaffold(bottomBar = {
-    BottomAppBar() {
-      Row(
-        modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
-      ) {
-        Button(modifier = Modifier, onClick = { vm.syncRecordings(context as Activity) }) {
-          Text("Download recordings and delete from watch")
+  Scaffold(
+    topBar = {
+      TopAppBar(title = { Text(stringResource(R.string.app_name)) })
+    },
+    bottomBar = {
+      BottomAppBar() {
+        Row(
+          modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
+        ) {
+          Button(modifier = Modifier, onClick = { vm.syncRecordings(context as Activity) }) {
+            Text("Download recordings and delete from watch")
+          }
         }
       }
-    }
-  }) { paddingValues ->
+    }) { paddingValues ->
     ScreenContent(paddingValues)
   }
 }
@@ -70,8 +76,7 @@ fun ScreenContent(
 
 @Composable
 fun RecordingCard(
-  recordingFile: File,
-  vm: MobileViewModel = viewModel()
+  recordingFile: File, vm: MobileViewModel = viewModel()
 ) {
   val context = LocalContext.current
   // doitwrong
