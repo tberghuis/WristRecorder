@@ -36,5 +36,3 @@ check code from that complicated health example repo
 
 try revert back to ZipOutputStream and receiveFile
   search stackoverflow ZipOutputStream newest for kotlin examples
-
-adb get free space on watch
