@@ -37,7 +37,6 @@ import java.io.File
 fun MobileScreen(
   vm: MobileViewModel = viewModel()
 ) {
-  val context = LocalContext.current
   Scaffold(
     topBar = {
       TopAppBar(title = { Text(stringResource(R.string.app_name)) })
@@ -47,14 +46,20 @@ fun MobileScreen(
         Row(
           modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
-          Button(modifier = Modifier, onClick = { vm.downloadRecordings() }) {
-            Text("download from watch")
-          }
-          Button(modifier = Modifier, onClick = { vm.deleteAllWatch() }) {
-            Text("delete from watch")
-          }
+//          Button(modifier = Modifier, onClick = { vm.downloadRecordings() }) {
+//            Text("download from watch")
+//          }
+//          Button(modifier = Modifier, onClick = { vm.deleteAllWatch() }) {
+//            Text("delete from watch")
+//          }
 
+
+          Button(modifier = Modifier, onClick = { vm.listRecordingsTMP() }) {
+            Text("list recordings tmp")
+          }
         }
+
+
       }
     }) { paddingValues ->
     ScreenContent(paddingValues)

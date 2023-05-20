@@ -10,10 +10,24 @@ import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
 import com.google.android.gms.wearable.WearableListenerService
 import dev.tberghuis.voicememos.common.logd
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
 import java.io.File
+import java.io.FileInputStream
 import java.util.concurrent.ExecutionException
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class SyncService : WearableListenerService() {
+
+  private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+  private val channelClient by lazy { Wearable.getChannelClient(applicationContext) }
 
   override fun onMessageReceived(messageEvent: MessageEvent) {
     super.onMessageReceived(messageEvent)
@@ -27,9 +41,51 @@ class SyncService : WearableListenerService() {
       "/upload-recordings" -> {
         val phoneNodeId = messageEvent.data.toString(Charsets.UTF_8)
         logd("/upload-recordings phoneNodeId $phoneNodeId")
+        uploadRecordings(phoneNodeId)
       }
+
+      "/list-recordings-tmp" -> {
+        listRecordingsTMP()
+      }
+
     }
   }
+
+  fun listRecordingsTMP() {
+    logd("listRecordingsTMP")
+  }
+
+
+  private fun uploadRecordings(phoneNodeId: String) {
+// open channel
+
+    // todo better channel path name
+    val channelTask = channelClient.openChannel(phoneNodeId, "/sendzip")
+    scope.launch {
+      val channel = channelTask.await()
+      val outputStreamTask = channelClient.getOutputStream(channel)
+      val os = outputStreamTask.await()
+      val bos = BufferedOutputStream(os)
+      val zos = ZipOutputStream(bos)
+
+      // todo fix, get real list of files
+      (0..2).forEach {
+        val filename = "zipentry-${it}.txt"
+        val file = File("${application.filesDir.absolutePath}/$filename")
+        val bis = BufferedInputStream(FileInputStream(file))
+
+        zos.putNextEntry(ZipEntry(filename))
+        bis.copyTo(zos)
+        zos.closeEntry()
+      }
+      withContext(Dispatchers.IO) {
+        zos.close()
+      }
+      channelClient.close(channel)
+      logd("zip sent")
+    }
+  }
+
 
   @SuppressLint("VisibleForTests")
   private fun syncRecordings() {

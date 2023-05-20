@@ -77,6 +77,11 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   }
 
 
+  fun listRecordingsTMP() {
+    sendMessageWatch("/list-recordings-tmp", byteArrayOf())
+  }
+
+
   fun downloadRecordings() {
     val nodeClient = Wearable.getNodeClient(application)
     val nodeTask = nodeClient.localNode
