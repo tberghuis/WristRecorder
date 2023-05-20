@@ -82,7 +82,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     val nodeTask = nodeClient.localNode
     viewModelScope.launch {
       val nodeId = nodeTask.await().id
-      sendMessageWatch("/upload-recordings", nodeId.toByteArray())
+      sendMessageWatch("/upload-recordings", nodeId.toByteArray(Charsets.UTF_8))
     }
   }
 

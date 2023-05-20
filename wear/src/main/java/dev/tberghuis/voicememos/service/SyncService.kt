@@ -25,8 +25,8 @@ class SyncService : WearableListenerService() {
       }
 
       "/upload-recordings" -> {
-        logd("/upload-recordings")
-        // todo get node id from byte array
+        val phoneNodeId = messageEvent.data.toString(Charsets.UTF_8)
+        logd("/upload-recordings phoneNodeId $phoneNodeId")
       }
     }
   }
