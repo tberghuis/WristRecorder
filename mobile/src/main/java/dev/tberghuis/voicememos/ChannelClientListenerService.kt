@@ -55,21 +55,19 @@ class ChannelClientListenerService : WearableListenerService() {
   }
 
   private fun processZip() {
-    unzip(application)
-    // todo delete zip
+    val recordingsZip = File("${application.filesDir.absolutePath}/recordings.zip")
+    unzip(recordingsZip, application)
     scope.launch {
       dataStoreRepository.syncRecordingsComplete()
     }
+    recordingsZip.delete()
   }
 }
 
 data class ZipIO(val entry: ZipEntry, val output: File)
 
-fun unzip(application: Application) {
-  val file = File("${application.filesDir.absolutePath}/recordings.zip")
-
-  val zip = ZipFile(file)
-
+fun unzip(zipFile: File, application: Application) {
+  val zip = ZipFile(zipFile)
   zip.entries().asSequence().map {
     val outputFile = File("${application.filesDir.absolutePath}/${it.name}")
     ZipIO(it, outputFile)
@@ -80,7 +78,6 @@ fun unzip(application: Application) {
       }
     }
   }
-
   logd("unzip finished")
 }
 
