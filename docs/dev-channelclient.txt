@@ -62,3 +62,7 @@ next task
   message /delete-all-watch
 
 clean code
+
+README.md
+  screenshot
+  description
