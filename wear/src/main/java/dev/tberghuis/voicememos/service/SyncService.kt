@@ -68,7 +68,7 @@ class SyncService : WearableListenerService() {
       ZipOutputStream(BufferedOutputStream(outputStream)).use { zos ->
         recordingsFileList.forEach { recordingFile ->
           FileInputStream(recordingFile).use { fis ->
-            BufferedInputStream(fis).use { bis ->
+            BufferedInputStream(fis).use {
               val entry = ZipEntry(recordingFile.name)
               zos.putNextEntry(entry)
               fis.copyTo(zos, 1024)
