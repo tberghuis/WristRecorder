@@ -23,6 +23,11 @@ class SyncService : WearableListenerService() {
         logd("/msg-sync-recordings")
         syncRecordings()
       }
+
+      "/upload-recordings" -> {
+        logd("/upload-recordings")
+        // todo get node id from byte array
+      }
     }
   }
 

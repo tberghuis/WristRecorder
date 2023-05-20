@@ -49,15 +49,12 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
     viewModelScope.launch {
       try {
-        val nodes = capabilityClient
-          .getCapability("wear", CapabilityClient.FILTER_REACHABLE)
-          .await()
-          .nodes
+        val nodes =
+          capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
         logd("nodes: $nodes")
         nodes.map { node ->
           async {
-            messageClient.sendMessage(node.id, "/msg-sync-recordings", byteArrayOf())
-              .await()
+            messageClient.sendMessage(node.id, "/msg-sync-recordings", byteArrayOf()).await()
           }
         }.awaitAll()
         logd("message sent success")
@@ -78,4 +75,43 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     deleteFileCommon(application, file.name)
     refreshRecordingFiles()
   }
+
+
+  fun downloadRecordings() {
+    val nodeClient = Wearable.getNodeClient(application)
+    val nodeTask = nodeClient.localNode
+    viewModelScope.launch {
+      val nodeId = nodeTask.await().id
+      sendMessageWatch("/upload-recordings", nodeId.toByteArray())
+    }
+  }
+
+  private fun sendMessageWatch(messagePath: String, byteArray: ByteArray) {
+    val capabilityClient = Wearable.getCapabilityClient(application)
+    val messageClient = Wearable.getMessageClient(application)
+
+    viewModelScope.launch {
+      try {
+        val nodes =
+          capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
+        logd("nodes: $nodes")
+        nodes.map { node ->
+          async {
+            messageClient.sendMessage(node.id, messagePath, byteArray).await()
+          }
+        }.awaitAll()
+        logd("message sent success")
+
+      } catch (e: Exception) {
+        logd("error: $e")
+      }
+    }
+
+  }
+
+  fun deleteAllWatch() {
+    // todo
+  }
+
+
 }

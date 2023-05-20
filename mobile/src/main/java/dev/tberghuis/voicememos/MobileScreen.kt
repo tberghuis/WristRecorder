@@ -47,9 +47,13 @@ fun MobileScreen(
         Row(
           modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
-          Button(modifier = Modifier, onClick = { vm.syncRecordings(context as Activity) }) {
-            Text("Download recordings and delete from watch")
+          Button(modifier = Modifier, onClick = { vm.downloadRecordings() }) {
+            Text("download from watch")
           }
+          Button(modifier = Modifier, onClick = { vm.deleteAllWatch() }) {
+            Text("delete from watch")
+          }
+
         }
       }
     }) { paddingValues ->
