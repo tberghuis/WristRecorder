@@ -44,20 +44,23 @@ class SyncService : WearableListenerService() {
         uploadRecordings(phoneNodeId)
       }
 
-      "/list-recordings-tmp" -> {
-        listRecordingsTMP()
-      }
+
 
     }
   }
 
-  fun listRecordingsTMP() {
-    logd("listRecordingsTMP")
-  }
-
-
   private fun uploadRecordings(phoneNodeId: String) {
-// open channel
+    val filesDirListFiles = filesDir.listFiles() ?: return
+    val recordings = mutableListOf<File>()
+    // wristrecorder_1682309581196.pcm
+    filesDirListFiles.forEach {
+      if (it.isFile && it.name.startsWith("wristrecorder_")) {
+        recordings.add(it)
+      }
+    }
+    if (recordings.isEmpty()) {
+      return
+    }
 
     // todo better channel path name
     val channelTask = channelClient.openChannel(phoneNodeId, "/sendzip")
@@ -68,13 +71,9 @@ class SyncService : WearableListenerService() {
       val bos = BufferedOutputStream(os)
       val zos = ZipOutputStream(bos)
 
-      // todo fix, get real list of files
-      (0..2).forEach {
-        val filename = "zipentry-${it}.txt"
-        val file = File("${application.filesDir.absolutePath}/$filename")
-        val bis = BufferedInputStream(FileInputStream(file))
-
-        zos.putNextEntry(ZipEntry(filename))
+      recordings.forEach { recordingFile ->
+        val bis = BufferedInputStream(FileInputStream(recordingFile))
+        zos.putNextEntry(ZipEntry(recordingFile.name))
         bis.copyTo(zos)
         zos.closeEntry()
       }
