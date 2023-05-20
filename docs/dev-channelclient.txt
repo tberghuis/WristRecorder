@@ -31,3 +31,5 @@ Tomorrow try
 
 
 when I rm recordings.zip on phone, extract zip worked next try
+
+check code from that complicated health example repo
