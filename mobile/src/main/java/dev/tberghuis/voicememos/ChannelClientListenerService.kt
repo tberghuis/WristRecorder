@@ -27,14 +27,12 @@ class ChannelClientListenerService : WearableListenerService() {
   // wearos samples uses Dispatchers.Main.immediate ???
   private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
   private val channelClient by lazy { Wearable.getChannelClient(applicationContext) }
-
   private val dataStoreRepository by lazy { DataStoreRepository(applicationContext.dataStore) }
 
   override fun onDestroy() {
     super.onDestroy()
     scope.cancel()
   }
-
 
   override fun onChannelOpened(channel: ChannelClient.Channel) {
     super.onChannelOpened(channel)
@@ -43,28 +41,6 @@ class ChannelClientListenerService : WearableListenerService() {
     // doitwrong
     val zipfile = File("${application.filesDir.absolutePath}/recordings.zip")
     val zipfileuri = Uri.fromFile(zipfile)
-
-
-//    val inputStreamTask = channelClient.getInputStream(channel)
-//
-//    scope.launch {
-//      val inputStream = inputStreamTask.await()
-//      val bis = BufferedInputStream(inputStream)
-//
-//      ZipInputStream(bis).use { zis ->
-//        generateSequence {
-//          zis.nextEntry
-//        }.map { zipEntry ->
-//          val recordingFile = File("${application.filesDir.absolutePath}/${zipEntry.name}")
-//          BufferedOutputStream(FileOutputStream(recordingFile)).use { bos ->
-//            zis.copyTo(bos, 1024)
-//          }
-//        }
-//      }
-//
-//      dataStoreRepository.syncRecordingsComplete()
-//    }
-
 
     val task = channelClient.receiveFile(channel, zipfileuri, false)
 
@@ -96,10 +72,9 @@ class ChannelClientListenerService : WearableListenerService() {
   private fun processZip() {
     val recordingsZip = File("${application.filesDir.absolutePath}/recordings.zip")
     scope.launch {
-//      delay(500L)
       unzip(recordingsZip, application)
       dataStoreRepository.syncRecordingsComplete()
-//      recordingsZip.delete()
+      recordingsZip.delete()
     }
   }
 }
@@ -128,7 +103,4 @@ fun unzip(zipFile: File, application: Application) {
   } catch (e: Exception) {
     logd("error $e")
   }
-
-
 }
-
