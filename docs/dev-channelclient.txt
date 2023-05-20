@@ -13,3 +13,5 @@ play store screenshot + description
 
 cull this
 git merge
+
+doitwrong
