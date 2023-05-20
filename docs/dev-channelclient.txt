@@ -28,3 +28,6 @@ README.md
 Tomorrow try 
   writing zip on watch then send file
   instead of receiveFile, ZipInputStream
+
+
+when I rm recordings.zip on phone, extract zip worked next try

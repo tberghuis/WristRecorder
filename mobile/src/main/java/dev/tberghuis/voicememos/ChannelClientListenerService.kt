@@ -6,11 +6,15 @@ import com.google.android.gms.wearable.ChannelClient
 import com.google.android.gms.wearable.Wearable
 import com.google.android.gms.wearable.WearableListenerService
 import dev.tberghuis.voicememos.common.logd
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
 import java.io.EOFException
 import java.io.File
+import java.io.FileOutputStream
 import java.lang.Exception
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
+import java.util.zip.ZipInputStream
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -39,6 +43,29 @@ class ChannelClientListenerService : WearableListenerService() {
     // doitwrong
     val zipfile = File("${application.filesDir.absolutePath}/recordings.zip")
     val zipfileuri = Uri.fromFile(zipfile)
+
+
+//    val inputStreamTask = channelClient.getInputStream(channel)
+//
+//    scope.launch {
+//      val inputStream = inputStreamTask.await()
+//      val bis = BufferedInputStream(inputStream)
+//
+//      ZipInputStream(bis).use { zis ->
+//        generateSequence {
+//          zis.nextEntry
+//        }.map { zipEntry ->
+//          val recordingFile = File("${application.filesDir.absolutePath}/${zipEntry.name}")
+//          BufferedOutputStream(FileOutputStream(recordingFile)).use { bos ->
+//            zis.copyTo(bos, 1024)
+//          }
+//        }
+//      }
+//
+//      dataStoreRepository.syncRecordingsComplete()
+//    }
+
+
     val task = channelClient.receiveFile(channel, zipfileuri, false)
 
     channelClient.registerChannelCallback(channel, object : ChannelClient.ChannelCallback() {
@@ -47,14 +74,16 @@ class ChannelClientListenerService : WearableListenerService() {
       ) {
         super.onInputClosed(channel, closeReason, appSpecificErrorCode)
         logd("onInputClosed closeReason $closeReason appSpecificErrorCode $appSpecificErrorCode")
-//        channelClient.unregisterChannelCallback(this)
-//        channelClient.close(channel)
+        channelClient.unregisterChannelCallback(channel, this)
+        channelClient.close(channel)
         processZip()
       }
     })
 
     scope.launch {
       task.await()
+//      channelClient.close(channel)
+//      processZip()
       logd("after task await")
     }
   }
@@ -62,7 +91,7 @@ class ChannelClientListenerService : WearableListenerService() {
   private fun processZip() {
     val recordingsZip = File("${application.filesDir.absolutePath}/recordings.zip")
     scope.launch {
-      delay(500L)
+//      delay(500L)
       unzip(recordingsZip, application)
       dataStoreRepository.syncRecordingsComplete()
 //      recordingsZip.delete()
