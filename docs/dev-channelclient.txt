@@ -56,3 +56,9 @@ comment wearos samples issue, no ChannelClient example, provide a link to my rep
 
 ##############
 step 1, change UI
+
+next task
+  delete recordings.zip
+  message /delete-all-watch
+
+clean code
