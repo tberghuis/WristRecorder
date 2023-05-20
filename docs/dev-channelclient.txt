@@ -15,3 +15,42 @@ cull this
 git merge
 
 doitwrong
+
+
+wristrecorder manifest.xml allow backup true
+
+
+
+
+write article on ktor autoreload
+  ./gradlew -t classes
+  watchPaths = ["classes"]
+  development = true
+  environment variable run time configuration
+
+  dataitem,
+  why did recordings disapear that time???
+
+
+sequence diagram
+#############################################################################
+[phone]                                       [watch]
+
+send message "get all recordings"
+  getLocalNode - node id of phone as param
+                                              use channelclient to send zipoutputstream
+  receiveFile
+    extract zip
+    delete zip
+    update refreshUiToggle user preference                            
+
+...... use case 2
+
+send message "delete all"
+                                              deletes all
+##############################################################################
+
+next task extract zip phone
+
+comment wearos samples issue, no ChannelClient example, provide a link to my repo
+
