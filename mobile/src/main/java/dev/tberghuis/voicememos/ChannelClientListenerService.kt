@@ -20,6 +20,8 @@ class ChannelClientListenerService : WearableListenerService() {
   private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
   private val channelClient by lazy { Wearable.getChannelClient(applicationContext) }
 
+  private val dataStoreRepository by lazy { DataStoreRepository(applicationContext.dataStore) }
+
   override fun onDestroy() {
     super.onDestroy()
     scope.cancel()
@@ -52,17 +54,14 @@ class ChannelClientListenerService : WearableListenerService() {
     }
   }
 
-
   private fun processZip() {
-    // todo call unzip
-    // todo delete zip
-    // todo toggle user pref refreshUi
-
     unzip(application)
+    // todo delete zip
+    scope.launch {
+      dataStoreRepository.syncRecordingsComplete()
+    }
   }
-
 }
-
 
 data class ZipIO(val entry: ZipEntry, val output: File)
 
