@@ -43,28 +43,6 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     recordingFilesStateFlow.value = recordingFiles
   }
 
-  fun syncRecordings(activity: Activity) {
-    val capabilityClient = Wearable.getCapabilityClient(activity)
-    val messageClient = Wearable.getMessageClient(activity)
-
-    viewModelScope.launch {
-      try {
-        val nodes =
-          capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
-        logd("nodes: $nodes")
-        nodes.map { node ->
-          async {
-            messageClient.sendMessage(node.id, "/msg-sync-recordings", byteArrayOf()).await()
-          }
-        }.awaitAll()
-        logd("message sent success")
-
-      } catch (e: Exception) {
-        logd("error: $e")
-      }
-    }
-  }
-
   fun playRecording(file: File) {
     viewModelScope.launch {
       audioController.play(file.name)
