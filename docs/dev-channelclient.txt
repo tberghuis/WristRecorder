@@ -6,38 +6,8 @@ play store screenshot + description
 cull this
 git merge
 
-
-
-write article on ktor autoreload
-  ./gradlew -t classes
-  watchPaths = ["classes"]
-  development = true
-  environment variable run time configuration
-
-
 comment wearos samples issue, no ChannelClient example, provide a link to my repo
-
-
-clean code
 
 README.md
   screenshot
   description
-
-
-Tomorrow try 
-  writing zip on watch then send file
-  instead of receiveFile, ZipInputStream
-
-
-when I rm recordings.zip on phone, extract zip worked next try
-
-check code from that complicated health example repo
-
-try revert back to ZipOutputStream and receiveFile
-  search stackoverflow ZipOutputStream newest for kotlin examples
-
-NEXT
-  test with watch emulator
-  stackoverflow ZipOutputStream newest
-
