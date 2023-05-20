@@ -44,10 +44,10 @@ fun MobileScreen(
         modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
       ) {
         Button(modifier = Modifier, onClick = { vm.downloadRecordings() }) {
-          Text("download from watch")
+          Text("Download")
         }
-        Button(modifier = Modifier, onClick = { vm.deleteAllWatch() }) {
-          Text("delete from watch")
+        Button(modifier = Modifier.padding(start = 10.dp), onClick = { vm.deleteAllWatch() }) {
+          Text("Delete All Watch")
         }
       }
     }
