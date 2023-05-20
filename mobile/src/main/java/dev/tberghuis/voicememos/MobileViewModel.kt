@@ -80,8 +80,12 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     val nodeClient = Wearable.getNodeClient(application)
     val nodeTask = nodeClient.localNode
     viewModelScope.launch {
-      val nodeId = nodeTask.await().id
-      sendMessageWatch("/upload-recordings", nodeId.toByteArray(Charsets.UTF_8))
+      try {
+        val nodeId = nodeTask.await().id
+        sendMessageWatch("/upload-recordings", nodeId.toByteArray(Charsets.UTF_8))
+      } catch (e: Exception) {
+        logd("error $e")
+      }
     }
   }
 
