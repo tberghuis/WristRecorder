@@ -11,8 +11,8 @@ android {
         applicationId "dev.tberghuis.wristrecorder"
         minSdk 28
         targetSdk 33
-        versionCode 10006
-        versionName "1.3.1"
+        versionCode 10007
+        versionName "1.4.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
