@@ -39,6 +39,8 @@ class ChannelClientListenerService : WearableListenerService() {
     logd("onChannelOpened")
 
     // doitwrong
+    // this won't work if using multiple watches
+    // should name recordings.zip to <watch node id>_recordings.zip
     val zipfile = File("${application.filesDir.absolutePath}/recordings.zip")
     val zipfileuri = Uri.fromFile(zipfile)
 
