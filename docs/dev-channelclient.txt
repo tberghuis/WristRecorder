@@ -66,3 +66,6 @@ clean code
 README.md
   screenshot
   description
+
+testing, no watch connected
+no wear os app installed on phone

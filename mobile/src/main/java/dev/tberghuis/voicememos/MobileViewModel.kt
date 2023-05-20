@@ -105,12 +105,9 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
         logd("error: $e")
       }
     }
-
   }
 
   fun deleteAllWatch() {
-    // todo
+    sendMessageWatch("/delete-all-watch", byteArrayOf())
   }
-
-
 }

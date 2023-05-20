@@ -42,6 +42,10 @@ class SyncService : WearableListenerService() {
         logd("/upload-recordings phoneNodeId $phoneNodeId")
         uploadRecordings(phoneNodeId)
       }
+      "/delete-all-watch" -> {
+        logd("/delete-all-watch")
+        deleteAllRecordings()
+      }
     }
   }
 

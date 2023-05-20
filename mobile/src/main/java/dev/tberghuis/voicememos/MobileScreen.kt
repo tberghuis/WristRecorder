@@ -1,6 +1,5 @@
 package dev.tberghuis.voicememos
 
-import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -50,11 +49,7 @@ fun MobileScreen(
         Button(modifier = Modifier, onClick = { vm.deleteAllWatch() }) {
           Text("delete from watch")
         }
-
-
       }
-
-
     }
   }) { paddingValues ->
     ScreenContent(paddingValues)
