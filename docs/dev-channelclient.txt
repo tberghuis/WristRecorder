@@ -23,3 +23,8 @@ clean code
 README.md
   screenshot
   description
+
+
+Tomorrow try 
+  writing zip on watch then send file
+  instead of receiveFile, ZipInputStream

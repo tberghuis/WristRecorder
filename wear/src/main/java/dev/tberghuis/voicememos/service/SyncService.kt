@@ -37,11 +37,13 @@ class SyncService : WearableListenerService() {
         logd("/msg-sync-recordings")
         syncRecordings()
       }
+
       "/upload-recordings" -> {
         val phoneNodeId = messageEvent.data.toString(Charsets.UTF_8)
         logd("/upload-recordings phoneNodeId $phoneNodeId")
         uploadRecordings(phoneNodeId)
       }
+
       "/delete-all-watch" -> {
         logd("/delete-all-watch")
         deleteAllRecordings()
@@ -72,17 +74,20 @@ class SyncService : WearableListenerService() {
       val zos = ZipOutputStream(bos)
 
       recordings.forEach { recordingFile ->
-        val bis = BufferedInputStream(FileInputStream(recordingFile))
-        zos.putNextEntry(ZipEntry(recordingFile.name))
-        bis.copyTo(zos)
-        zos.closeEntry()
+        BufferedInputStream(FileInputStream(recordingFile)).use { bis ->
+          zos.putNextEntry(ZipEntry(recordingFile.name))
+          bis.copyTo(zos, 1024)
+        }
+//        zos.closeEntry()
       }
-      // lint was whinging about thread starvation
-      withContext(Dispatchers.IO) {
-        zos.close()
-        channelClient.close(channel)
-        logd("zip sent")
-      }
+//      zos.flush()
+      zos.close()
+//      bos.flush()
+//      bos.close()
+//      os.flush()
+//      os.close()
+      channelClient.close(channel)
+      logd("zip sent")
     }
   }
 
