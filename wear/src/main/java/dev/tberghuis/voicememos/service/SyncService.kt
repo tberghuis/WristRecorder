@@ -42,7 +42,8 @@ class SyncService : WearableListenerService() {
       "/upload-recordings" -> {
         val phoneNodeId = messageEvent.data.toString(Charsets.UTF_8)
         logd("/upload-recordings phoneNodeId $phoneNodeId")
-        uploadRecordings(phoneNodeId)
+//        uploadRecordings(phoneNodeId)
+        uploadRecordingsZip(phoneNodeId)
       }
 
       "/delete-all-watch" -> {
@@ -50,6 +51,36 @@ class SyncService : WearableListenerService() {
         deleteAllRecordings()
       }
     }
+  }
+
+
+  private fun uploadRecordingsZip(phoneNodeId: String) {
+    val recordingsFileList = application.filesDir.listFiles()?.filter {
+      it.isFile && it.name.startsWith("wristrecorder_")
+    } ?: return
+
+    val channelTask = channelClient.openChannel(phoneNodeId, "/sendzip")
+
+    scope.launch {
+      val channel = channelTask.await()
+      val outputStream = channelClient.getOutputStream(channel).await()
+
+      ZipOutputStream(BufferedOutputStream(outputStream)).use { zos ->
+        recordingsFileList.forEach { recordingFile ->
+          FileInputStream(recordingFile).use { fis ->
+            BufferedInputStream(fis).use { bis ->
+              val entry = ZipEntry(recordingFile.name)
+              zos.putNextEntry(entry)
+              fis.copyTo(zos, 1024)
+            }
+          }
+        }
+      }
+
+
+      logd("uploadRecordingsZip sent")
+    }
+
   }
 
 
