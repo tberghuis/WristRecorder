@@ -28,3 +28,6 @@ ls
 
 # ls files poco
 adb -s poco shell "run-as dev.tberghuis.wristrecorder ls /data/user/0/dev.tberghuis.wristrecorder/files/"
+
+
+adb -s ticwatch uninstall dev.tberghuis.wristrecorder

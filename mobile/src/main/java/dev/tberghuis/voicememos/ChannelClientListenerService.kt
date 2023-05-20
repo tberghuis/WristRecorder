@@ -74,7 +74,12 @@ class ChannelClientListenerService : WearableListenerService() {
       ) {
         super.onInputClosed(channel, closeReason, appSpecificErrorCode)
         logd("onInputClosed closeReason $closeReason appSpecificErrorCode $appSpecificErrorCode")
+
         channelClient.unregisterChannelCallback(channel, this)
+
+        // could the problem be that i was trying to close channel from the sending side
+        // but closing too early???
+
         channelClient.close(channel)
         processZip()
       }
