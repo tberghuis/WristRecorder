@@ -1,12 +1,5 @@
-version increment
-
-release build
-
 
 play store screenshot + description
-
-cull this
-git merge
 
 comment wearos samples issue, no ChannelClient example, provide a link to my repo
 
