@@ -80,15 +80,11 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
       try {
         val nodes =
           capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
-        logd("nodes: $nodes")
-
         // no watches found
-        if(nodes.isEmpty()){
-          // snackbar
+        if (nodes.isEmpty()) {
           snackbarHostState.showSnackbar("No watch connected")
+          return@launch
         }
-
-
         nodes.map { node ->
           async {
             messageClient.sendMessage(node.id, messagePath, byteArray).await()
@@ -98,6 +94,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
       } catch (e: Exception) {
         logd("error: $e")
+        snackbarHostState.showSnackbar("error: $e")
       }
     }
   }
