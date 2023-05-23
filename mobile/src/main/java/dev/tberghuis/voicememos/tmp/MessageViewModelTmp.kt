@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos
+package dev.tberghuis.voicememos.tmp
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
