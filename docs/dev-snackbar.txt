@@ -11,7 +11,7 @@ clean code
 
 list of error and event cases to implement
   No recordings
-  no wear app installed
+  no wear app installed (fresh phone emulator)
   no wear device found (aeroplane mode)
   ...
 
