@@ -5,3 +5,7 @@ implement
 
 new bound service with messages
 first try MessageClient
+
+clean code
+  remove all tmp code
+
