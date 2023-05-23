@@ -17,6 +17,11 @@ class MessageViewModelTmp(private val application: Application) : AndroidViewMod
 
 //  todo showSnackbarSharedFlow: String
 
+  init {
+    initMessageListener()
+  }
+
+
   fun willitblend() {
     logd("willitblend")
 
@@ -29,5 +34,25 @@ class MessageViewModelTmp(private val application: Application) : AndroidViewMod
       logd("willitblend nodeId $nodeId result $result")
     }
 
+  }
+
+
+  fun initMessageListener() {
+    messageClient.addListener { messageEvent ->
+      logd("initMessageListener $messageEvent")
+
+      when (messageEvent.path) {
+        "/willitblend-activity" -> {
+          logd("todo emit to snackbar shared flow")
+        }
+      }
+
+    }
+  }
+
+  override fun onCleared() {
+    // todo messageClient.removeListener
+
+    super.onCleared()
   }
 }
