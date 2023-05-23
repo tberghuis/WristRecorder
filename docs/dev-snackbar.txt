@@ -12,7 +12,7 @@ clean code
 list of error and event cases to implement
   No recordings
   no wear app installed
-  no wear device found
+  no wear device found (aeroplane mode)
   ...
 
 make snackbar pretty
