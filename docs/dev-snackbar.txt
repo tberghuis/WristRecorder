@@ -1,10 +1,5 @@
-aint nothing to it but to do it...
 just look at each line of code for both buttons,
 write a manual test case
-implement
-
-new bound service with messages
-first try MessageClient
 
 clean code
   remove all tmp code
@@ -19,3 +14,5 @@ make snackbar pretty
   red for errors???
 
 delete button confirm dialog
+
+next task...
