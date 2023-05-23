@@ -16,3 +16,6 @@ make snackbar pretty
 delete button confirm dialog
 
 next task...
+
+
+delete datastore repository as I can receive message when download complete

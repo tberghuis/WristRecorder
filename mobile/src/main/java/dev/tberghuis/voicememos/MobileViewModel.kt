@@ -1,7 +1,7 @@
 package dev.tberghuis.voicememos
 
-import android.app.Activity
 import android.app.Application
+import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.wearable.CapabilityClient
@@ -21,15 +21,20 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   private val audioController = AudioController(application)
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
+  val snackbarHostState = SnackbarHostState()
+
   init {
     logd("MobileViewModel init")
     viewModelScope.launch {
+      // todo remove
+      // instead refresh invoked via message listener
       dataStoreRepository.syncRecordingsCompleteFlow.collect {
         logd("syncRecordingsCompleteFlow $it")
         refreshRecordingFiles()
       }
     }
   }
+
 
   private fun refreshRecordingFiles() {
     val path = application.filesDir
@@ -76,6 +81,14 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
         val nodes =
           capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
         logd("nodes: $nodes")
+
+        // no watches found
+        if(nodes.isEmpty()){
+          // snackbar
+          snackbarHostState.showSnackbar("No watch connected")
+        }
+
+
         nodes.map { node ->
           async {
             messageClient.sendMessage(node.id, messagePath, byteArray).await()
