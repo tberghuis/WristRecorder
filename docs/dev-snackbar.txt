@@ -16,5 +16,6 @@ list of error and event cases to implement
   ...
 
 make snackbar pretty
+  red for errors???
 
 delete button confirm dialog
