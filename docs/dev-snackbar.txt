@@ -10,6 +10,10 @@ clean code
   remove all tmp code
 
 list of error and event cases to implement
+  No recordings
+  no wear app installed
+  no wear device found
+  ...
 
 make snackbar pretty
 
