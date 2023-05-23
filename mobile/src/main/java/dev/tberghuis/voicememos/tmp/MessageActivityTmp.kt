@@ -9,6 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.voicememos.MessageViewModelTmp
 import dev.tberghuis.voicememos.ui.theme.FreshMobileTheme
 
 
@@ -27,6 +29,9 @@ class MessageActivityTmp : ComponentActivity() {
 }
 
 @Composable
-fun TmpScreen() {
+fun TmpScreen(
+    vm: MessageViewModelTmp = viewModel()
+
+) {
   Text("hello tmp screen")
 }
