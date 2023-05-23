@@ -3,6 +3,7 @@ package dev.tberghuis.voicememos.tmp
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.logd
 import kotlinx.coroutines.launch
@@ -16,6 +17,18 @@ class MessageViewModelTmp(private val application: Application) : AndroidViewMod
 
 
 //  todo showSnackbarSharedFlow: String
+
+
+  val messageListener = MessageClient.OnMessageReceivedListener { messageEvent ->
+    logd("initMessageListener $messageEvent")
+
+    when (messageEvent.path) {
+      "/willitblend-activity" -> {
+        logd("todo emit to snackbar shared flow")
+      }
+    }
+
+  }
 
   init {
     initMessageListener()
@@ -38,21 +51,12 @@ class MessageViewModelTmp(private val application: Application) : AndroidViewMod
 
 
   fun initMessageListener() {
-    messageClient.addListener { messageEvent ->
-      logd("initMessageListener $messageEvent")
-
-      when (messageEvent.path) {
-        "/willitblend-activity" -> {
-          logd("todo emit to snackbar shared flow")
-        }
-      }
-
-    }
+    messageClient.addListener(messageListener)
   }
 
   override fun onCleared() {
     // todo messageClient.removeListener
-
+    messageClient.removeListener(messageListener)
     super.onCleared()
   }
 }
