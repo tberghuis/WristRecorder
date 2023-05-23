@@ -49,7 +49,6 @@ class SyncService : WearableListenerService() {
     if (recordingsFileList.isNullOrEmpty()) {
       // send message doitwrong
       // /snackbar or /snackbar-error
-      messageClient
 
       scope.launch {
         val ba = "No recordings".toByteArray(Charsets.UTF_8)
