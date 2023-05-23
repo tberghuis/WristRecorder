@@ -32,9 +32,7 @@ class MessageServiceTmp : WearableListenerService() {
   private fun sendMessageToActivity() {
     scope.launch {
       val nodeId = nodeClient.localNode.await().id
-
       val result = messageClient.sendMessage(nodeId, "/willitblend-activity", byteArrayOf()).await()
-
       logd("sendMessageToActivity nodeId $nodeId result $result")
     }
   }
