@@ -15,6 +15,8 @@ class MessageViewModelTmp(private val application: Application) : AndroidViewMod
   val nodeClient = Wearable.getNodeClient(application)
 
 
+//  todo showSnackbarSharedFlow: String
+
   fun willitblend() {
     logd("willitblend")
 
