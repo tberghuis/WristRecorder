@@ -12,3 +12,5 @@ clean code
 list of error and event cases to implement
 
 make snackbar pretty
+
+delete button confirm dialog
