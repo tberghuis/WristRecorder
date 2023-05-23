@@ -22,6 +22,7 @@ class SyncService : WearableListenerService() {
 
   private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
   private val channelClient by lazy { Wearable.getChannelClient(applicationContext) }
+  private val messageClient by lazy { Wearable.getMessageClient(application) }
 
   override fun onMessageReceived(messageEvent: MessageEvent) {
     super.onMessageReceived(messageEvent)
@@ -32,6 +33,7 @@ class SyncService : WearableListenerService() {
         logd("/upload-recordings phoneNodeId $phoneNodeId")
         uploadRecordingsZip(phoneNodeId)
       }
+
       "/delete-all-watch" -> {
         logd("/delete-all-watch")
         deleteAllRecordings()
@@ -42,7 +44,21 @@ class SyncService : WearableListenerService() {
   private fun uploadRecordingsZip(phoneNodeId: String) {
     val recordingsFileList = application.filesDir.listFiles()?.filter {
       it.isFile && it.name.startsWith("wristrecorder_")
-    } ?: return
+    }
+
+    if (recordingsFileList.isNullOrEmpty()) {
+      // send message doitwrong
+      // /snackbar or /snackbar-error
+      messageClient
+
+      scope.launch {
+        val ba = "No recordings".toByteArray(Charsets.UTF_8)
+        messageClient.sendMessage(phoneNodeId, "/snackbar", ba).await()
+      }
+      return
+    }
+
+    logd("uploadRecordingsZip recordingsFileList $recordingsFileList")
 
     val channelTask = channelClient.openChannel(phoneNodeId, "/sendzip")
 

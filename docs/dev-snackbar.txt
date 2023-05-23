@@ -9,6 +9,8 @@ list of error and event cases to implement
   no wear app installed (fresh phone emulator)
   no wear device found (aeroplane mode)
   ...
+  errors that can happen sync service
+  errors that can happen phone capability client (line by line)
 
 make snackbar pretty
   red for errors???

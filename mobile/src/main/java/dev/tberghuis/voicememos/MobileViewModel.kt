@@ -5,6 +5,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.wearable.CapabilityClient
+import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.AudioController
 import dev.tberghuis.voicememos.common.deleteFileCommon
@@ -22,9 +23,22 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
   val snackbarHostState = SnackbarHostState()
+  private val messageClient = Wearable.getMessageClient(application)
+
+  private val messageListener = MessageClient.OnMessageReceivedListener { messageEvent ->
+    when (messageEvent.path) {
+      "/snackbar" -> {
+        viewModelScope.launch {
+          snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
+        }
+      }
+    }
+  }
 
   init {
     logd("MobileViewModel init")
+    messageClient.addListener(messageListener)
+
     viewModelScope.launch {
       // todo remove
       // instead refresh invoked via message listener
@@ -35,6 +49,10 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     }
   }
 
+  override fun onCleared() {
+    messageClient.removeListener(messageListener)
+    super.onCleared()
+  }
 
   private fun refreshRecordingFiles() {
     val path = application.filesDir
@@ -74,7 +92,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   private fun sendMessageWatch(messagePath: String, byteArray: ByteArray) {
     val capabilityClient = Wearable.getCapabilityClient(application)
-    val messageClient = Wearable.getMessageClient(application)
+
 
     viewModelScope.launch {
       try {
