@@ -9,3 +9,6 @@ first try MessageClient
 clean code
   remove all tmp code
 
+list of error and event cases to implement
+
+make snackbar pretty
