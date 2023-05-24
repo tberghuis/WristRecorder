@@ -27,16 +27,20 @@ class SyncService : WearableListenerService() {
   override fun onMessageReceived(messageEvent: MessageEvent) {
     super.onMessageReceived(messageEvent)
     logd("onMessageReceived messageEvent $messageEvent")
+
+
+    val phoneNodeId = messageEvent.data.toString(Charsets.UTF_8)
     when (messageEvent.path) {
+
       "/upload-recordings" -> {
-        val phoneNodeId = messageEvent.data.toString(Charsets.UTF_8)
+//        val phoneNodeId = messageEvent.data.toString(Charsets.UTF_8)
         logd("/upload-recordings phoneNodeId $phoneNodeId")
         uploadRecordingsZip(phoneNodeId)
       }
 
       "/delete-all-watch" -> {
         logd("/delete-all-watch")
-        deleteAllRecordings()
+        deleteAllRecordings(phoneNodeId)
       }
     }
   }
@@ -80,7 +84,7 @@ class SyncService : WearableListenerService() {
     }
   }
 
-  private fun deleteAllRecordings() {
+  private fun deleteAllRecordings(phoneNodeId: String) {
     val path = applicationContext.filesDir
     val files = path.listFiles() ?: return
     files.forEach {
@@ -88,5 +92,12 @@ class SyncService : WearableListenerService() {
         it.delete()
       }
     }
+
+    scope.launch {
+      val ba = "Delete complete".toByteArray(Charsets.UTF_8)
+      messageClient.sendMessage(phoneNodeId, "/snackbar", ba).await()
+    }
+
+
   }
 }

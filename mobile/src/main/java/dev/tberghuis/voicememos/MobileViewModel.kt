@@ -28,6 +28,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   val snackbarHostState = SnackbarHostState()
   private val messageClient = Wearable.getMessageClient(application)
+  private val nodeClient = Wearable.getNodeClient(application)
 
   private val messageListener = MessageClient.OnMessageReceivedListener { messageEvent ->
     when (messageEvent.path) {
@@ -81,11 +82,10 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   }
 
   fun downloadRecordings() {
-    val nodeClient = Wearable.getNodeClient(application)
-    val nodeTask = nodeClient.localNode
+
     viewModelScope.launch {
       try {
-        val nodeId = nodeTask.await().id
+        val nodeId = nodeClient.localNode.await().id
         sendMessageWatch("/upload-recordings", nodeId.toByteArray(Charsets.UTF_8))
       } catch (e: Exception) {
         logd("error $e")
@@ -121,6 +121,9 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   }
 
   fun deleteAllWatch() {
-    sendMessageWatch("/delete-all-watch", byteArrayOf())
+    viewModelScope.launch {
+      val nodeId = nodeClient.localNode.await().id
+      sendMessageWatch("/delete-all-watch", nodeId.toByteArray(Charsets.UTF_8))
+    }
   }
 }
