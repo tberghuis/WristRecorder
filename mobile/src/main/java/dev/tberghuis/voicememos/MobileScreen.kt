@@ -50,10 +50,9 @@ fun MobileScreen(
         Button(modifier = Modifier, onClick = { vm.downloadRecordings() }) {
           Text("Download")
         }
-        Button(modifier = Modifier.padding(start = 10.dp),
-          onClick = {
-            vm.confirmDeleteDialog = true
-          }) {
+        Button(modifier = Modifier.padding(start = 10.dp), onClick = {
+          vm.confirmDeleteDialog = true
+        }) {
           Text("Delete All Watch")
         }
       }
@@ -70,15 +69,22 @@ fun MobileScreen(
 
   if (vm.confirmDeleteDialog) {
     AlertDialog(
-      onDismissRequest = {},
+      onDismissRequest = {
+        vm.confirmDeleteDialog = false
+      },
       confirmButton = {
-        TextButton(
-          onClick = {
-            vm.deleteAllWatch()
-            vm.confirmDeleteDialog = false
-          }
-        ) {
-          Text("Confirm")
+        TextButton(onClick = {
+          vm.deleteAllWatch()
+          vm.confirmDeleteDialog = false
+        }) {
+          Text("OK")
+        }
+      },
+      dismissButton = {
+        TextButton(onClick = {
+          vm.confirmDeleteDialog = false
+        }) {
+          Text("Cancel")
         }
       },
       title = {
