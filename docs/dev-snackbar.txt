@@ -2,7 +2,6 @@
 clean code
 
 list of error and event cases to implement
-  no wear app installed (fresh phone emulator)
   no wear device found (aeroplane mode)
   ...
   errors that can happen sync service
