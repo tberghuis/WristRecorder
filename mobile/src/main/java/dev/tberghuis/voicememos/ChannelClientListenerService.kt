@@ -75,36 +75,34 @@ class ChannelClientListenerService : WearableListenerService() {
   private fun processZip() {
     val recordingsZip = File("${application.filesDir.absolutePath}/recordings.zip")
     scope.launch {
-      unzip(recordingsZip, application)
-      val nodeId = nodeClient.localNode.await().id
-      messageClient.sendMessage(nodeId, "/sync-finished", byteArrayOf()).await()
+      unzip(recordingsZip)
       recordingsZip.delete()
+    }
+  }
+
+  private suspend fun unzip(zipFile: File) {
+    val zip = ZipFile(zipFile)
+    val nodeId = nodeClient.localNode.await().id
+
+    try {
+      zip.entries().asSequence().map {
+        val outputFile = File("${application.filesDir.absolutePath}/${it.name}")
+        ZipIO(it, outputFile)
+      }.forEach { (entry, output) ->
+        zip.getInputStream(entry).use { input ->
+          output.outputStream().use { output ->
+            input.copyTo(output)
+          }
+        }
+      }
+      logd("unzip finished")
+      messageClient.sendMessage(nodeId, "/sync-finished", byteArrayOf()).await()
+    } catch (e: Exception) {
+      logd("error $e")
+      val ba = "error $e".toByteArray(Charsets.UTF_8)
+      messageClient.sendMessage(nodeId, "/snackbar", ba).await()
     }
   }
 }
 
 data class ZipIO(val entry: ZipEntry, val output: File)
-
-fun unzip(zipFile: File, application: Application) {
-  val zip = ZipFile(zipFile)
-
-  try {
-    zip.entries().asSequence().map {
-      val outputFile = File("${application.filesDir.absolutePath}/${it.name}")
-      ZipIO(it, outputFile)
-    }.forEach { (entry, output) ->
-      zip.getInputStream(entry).use { input ->
-        output.outputStream().use { output ->
-          try {
-            input.copyTo(output)
-          } catch (e: EOFException) {
-            logd("EOFException $e")
-          }
-        }
-      }
-    }
-    logd("unzip finished")
-  } catch (e: Exception) {
-    logd("error $e")
-  }
-}
