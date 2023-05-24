@@ -22,5 +22,5 @@ next task...
 
 delete datastore repository as I can receive message when download complete
 
-rename DataStoreRepository to DataStoreRepositoryTmp
+
 snackbar download complete
