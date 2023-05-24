@@ -2,6 +2,9 @@ package dev.tberghuis.voicememos
 
 import android.app.Application
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.wearable.CapabilityClient
@@ -20,6 +23,8 @@ import kotlinx.coroutines.tasks.await
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
   private val audioController = AudioController(application)
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
+
+  var confirmDeleteDialog by mutableStateOf(false)
 
   val snackbarHostState = SnackbarHostState()
   private val messageClient = Wearable.getMessageClient(application)
@@ -43,6 +48,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   init {
     logd("MobileViewModel init")
+    refreshRecordingFiles()
     messageClient.addListener(messageListener)
   }
 

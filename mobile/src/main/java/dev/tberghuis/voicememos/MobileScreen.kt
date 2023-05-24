@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -20,6 +21,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -48,7 +50,10 @@ fun MobileScreen(
         Button(modifier = Modifier, onClick = { vm.downloadRecordings() }) {
           Text("Download")
         }
-        Button(modifier = Modifier.padding(start = 10.dp), onClick = { vm.deleteAllWatch() }) {
+        Button(modifier = Modifier.padding(start = 10.dp),
+          onClick = {
+            vm.confirmDeleteDialog = true
+          }) {
           Text("Delete All Watch")
         }
       }
@@ -62,6 +67,27 @@ fun MobileScreen(
   }) { paddingValues ->
     ScreenContent(paddingValues)
   }
+
+  if (vm.confirmDeleteDialog) {
+    AlertDialog(
+      onDismissRequest = {},
+      confirmButton = {
+        TextButton(
+          onClick = {
+            vm.deleteAllWatch()
+            vm.confirmDeleteDialog = false
+          }
+        ) {
+          Text("Confirm")
+        }
+      },
+      title = {
+        Text(text = "Delete all from watch?")
+      },
+    )
+  }
+
+
 }
 
 @Composable
