@@ -1,25 +1,18 @@
 package dev.tberghuis.voicememos
 
-import android.app.Application
 import android.net.Uri
 import com.google.android.gms.wearable.ChannelClient
 import com.google.android.gms.wearable.Wearable
 import com.google.android.gms.wearable.WearableListenerService
 import dev.tberghuis.voicememos.common.logd
-import java.io.BufferedInputStream
-import java.io.BufferedOutputStream
-import java.io.EOFException
 import java.io.File
-import java.io.FileOutputStream
 import java.lang.Exception
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
-import java.util.zip.ZipInputStream
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 

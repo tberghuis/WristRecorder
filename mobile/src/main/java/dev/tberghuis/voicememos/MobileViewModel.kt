@@ -37,7 +37,6 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
           snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
         }
       }
-
       "/sync-finished" -> {
         viewModelScope.launch {
           refreshRecordingFiles()
@@ -82,7 +81,6 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   }
 
   fun downloadRecordings() {
-
     viewModelScope.launch {
       try {
         val nodeId = nodeClient.localNode.await().id
@@ -96,8 +94,6 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   private fun sendMessageWatch(messagePath: String, byteArray: ByteArray) {
     val capabilityClient = Wearable.getCapabilityClient(application)
-
-
     viewModelScope.launch {
       try {
         val nodes =
@@ -113,7 +109,6 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
           }
         }.awaitAll()
         logd("message sent success")
-
       } catch (e: Exception) {
         logd("error: $e")
         snackbarHostState.showSnackbar("error: $e")

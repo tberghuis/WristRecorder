@@ -92,8 +92,6 @@ fun MobileScreen(
       },
     )
   }
-
-
 }
 
 @Composable
