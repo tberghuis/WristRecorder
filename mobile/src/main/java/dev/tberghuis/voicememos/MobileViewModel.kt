@@ -89,6 +89,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
         sendMessageWatch("/upload-recordings", nodeId.toByteArray(Charsets.UTF_8))
       } catch (e: Exception) {
         logd("error $e")
+        snackbarHostState.showSnackbar("Error: $e")
       }
     }
   }
