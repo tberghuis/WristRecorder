@@ -27,7 +27,8 @@ class ChannelClientListenerService : WearableListenerService() {
   // wearos samples uses Dispatchers.Main.immediate ???
   private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
   private val channelClient by lazy { Wearable.getChannelClient(applicationContext) }
-  private val dataStoreRepository by lazy { DataStoreRepository(applicationContext.dataStore) }
+  private val messageClient by lazy { Wearable.getMessageClient(application) }
+  private val nodeClient by lazy { Wearable.getNodeClient(application) }
 
   override fun onDestroy() {
     super.onDestroy()
@@ -75,7 +76,8 @@ class ChannelClientListenerService : WearableListenerService() {
     val recordingsZip = File("${application.filesDir.absolutePath}/recordings.zip")
     scope.launch {
       unzip(recordingsZip, application)
-      dataStoreRepository.syncRecordingsComplete()
+      val nodeId = nodeClient.localNode.await().id
+      messageClient.sendMessage(nodeId, "/sync-finished", byteArrayOf()).await()
       recordingsZip.delete()
     }
   }

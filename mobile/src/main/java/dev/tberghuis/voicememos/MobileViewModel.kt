@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
-  private val dataStoreRepository = DataStoreRepository(application.applicationContext.dataStore)
   private val audioController = AudioController(application)
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
@@ -32,21 +31,19 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
           snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
         }
       }
+
+      "/sync-finished" -> {
+        viewModelScope.launch {
+          refreshRecordingFiles()
+          snackbarHostState.showSnackbar("Download complete")
+        }
+      }
     }
   }
 
   init {
     logd("MobileViewModel init")
     messageClient.addListener(messageListener)
-
-    viewModelScope.launch {
-      // todo remove
-      // instead refresh invoked via message listener
-      dataStoreRepository.syncRecordingsCompleteFlow.collect {
-        logd("syncRecordingsCompleteFlow $it")
-        refreshRecordingFiles()
-      }
-    }
   }
 
   override fun onCleared() {

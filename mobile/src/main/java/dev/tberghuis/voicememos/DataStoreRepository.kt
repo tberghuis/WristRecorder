@@ -13,7 +13,7 @@ val Context.dataStore by preferencesDataStore(
   name = "user_preferences",
 )
 
-class DataStoreRepository(private val dataStore: DataStore<Preferences>) {
+class DataStoreRepositoryTmp(private val dataStore: DataStore<Preferences>) {
 
   // doitwrong
   // refresh on int value changed
