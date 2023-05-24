@@ -37,6 +37,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
           snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
         }
       }
+
       "/sync-finished" -> {
         viewModelScope.launch {
           refreshRecordingFiles()
@@ -118,8 +119,14 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   fun deleteAllWatch() {
     viewModelScope.launch {
-      val nodeId = nodeClient.localNode.await().id
-      sendMessageWatch("/delete-all-watch", nodeId.toByteArray(Charsets.UTF_8))
+      try {
+        val nodeId = nodeClient.localNode.await().id
+        sendMessageWatch("/delete-all-watch", nodeId.toByteArray(Charsets.UTF_8))
+      } catch (e: Exception) {
+        logd("error $e")
+        snackbarHostState.showSnackbar("Error: $e")
+      }
+
     }
   }
 }
