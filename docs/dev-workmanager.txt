@@ -6,3 +6,6 @@ doitwrong
 
 read docs
 constraint run only one worker at a time
+
+test on ticwatch
+release
