@@ -1,6 +1,7 @@
 package dev.tberghuis.voicememos.service
 
 import androidx.work.Data
+import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
@@ -49,7 +50,17 @@ class SyncService : WearableListenerService() {
       .setInputData(data)
 //      .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
       .build()
-    WorkManager.getInstance(application).enqueue(worker)
+
+
+
+    WorkManager.getInstance(application).enqueueUniqueWork(
+      "UPLOAD_RECORDINGS",
+      ExistingWorkPolicy.KEEP,
+      worker
+    )
+
+
+//    WorkManager.getInstance(application).enqueue(worker)
   }
 
 
