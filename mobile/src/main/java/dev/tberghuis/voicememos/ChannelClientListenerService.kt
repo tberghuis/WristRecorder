@@ -1,6 +1,11 @@
 package dev.tberghuis.voicememos
 
 import android.net.Uri
+import androidx.work.Data
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.OutOfQuotaPolicy
+import androidx.work.WorkManager
 import com.google.android.gms.wearable.ChannelClient
 import com.google.android.gms.wearable.Wearable
 import com.google.android.gms.wearable.WearableListenerService
@@ -53,23 +58,36 @@ class ChannelClientListenerService : WearableListenerService() {
         // but closing too early???
 
         channelClient.close(channel)
-        processZip()
+        processZipWorker()
       }
     })
 
     scope.launch {
       task.await()
-//      channelClient.close(channel)
-//      processZip()
       logd("after task await")
     }
   }
 
+  private fun processZipWorker() {
+    val worker = OneTimeWorkRequestBuilder<ProcessZipWorker>()
+      .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+      .build()
+
+    WorkManager.getInstance(application).enqueueUniqueWork(
+      "PROCESS_ZIP",
+      ExistingWorkPolicy.KEEP,
+      worker
+    )
+  }
+
+
   private fun processZip() {
+    logd("processZip start")
     val recordingsZip = File("${application.filesDir.absolutePath}/recordings.zip")
     scope.launch {
       unzip(recordingsZip)
       recordingsZip.delete()
+      logd("processZip end")
     }
   }
 
@@ -98,4 +116,3 @@ class ChannelClientListenerService : WearableListenerService() {
   }
 }
 
-data class ZipIO(val entry: ZipEntry, val output: File)
