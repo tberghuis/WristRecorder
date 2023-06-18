@@ -1,5 +1,9 @@
 package dev.tberghuis.voicememos.service
 
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.OutOfQuotaPolicy
+import androidx.work.WorkManager
 import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.Wearable
 import com.google.android.gms.wearable.WearableListenerService
@@ -27,14 +31,27 @@ class SyncService : WearableListenerService() {
     when (messageEvent.path) {
       "/upload-recordings" -> {
         logd("/upload-recordings phoneNodeId $phoneNodeId")
-        uploadRecordingsZip(phoneNodeId)
+        uploadRecordingsZipWorker(phoneNodeId)
       }
+
       "/delete-all-watch" -> {
         logd("/delete-all-watch")
         deleteAllRecordings(phoneNodeId)
       }
     }
   }
+
+  private fun uploadRecordingsZipWorker(phoneNodeId: String) {
+    val data = Data.Builder()
+      .putString("PHONE_NODE_ID", phoneNodeId)
+      .build()
+    val worker = OneTimeWorkRequestBuilder<UploadRecordingsWorker>()
+      .setInputData(data)
+//      .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+      .build()
+    WorkManager.getInstance(application).enqueue(worker)
+  }
+
 
   private fun uploadRecordingsZip(phoneNodeId: String) {
     val recordingsFileList = application.filesDir.listFiles()?.filter {
