@@ -1,0 +1,6 @@
+update gradle
+
+doitwrong
+
+read docs
+constraint run only one worker at a time
