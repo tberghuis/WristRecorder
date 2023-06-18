@@ -1,3 +1,5 @@
+get dev builds running
+
 update gradle
 
 doitwrong
