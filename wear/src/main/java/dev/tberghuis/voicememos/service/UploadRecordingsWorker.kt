@@ -15,15 +15,12 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
-
 // todo move file to folder 'sync' (feature) instead of service
-
 
 class UploadRecordingsWorker(private val context: Context, params: WorkerParameters) :
   CoroutineWorker(context, params) {
-
-  private val messageClient = Wearable.getMessageClient(context)
-  private val channelClient = Wearable.getChannelClient(applicationContext)
+  private val channelClient by lazy { Wearable.getChannelClient(context) }
+  private val messageClient by lazy { Wearable.getMessageClient(context) }
 
   override suspend fun doWork(): Result {
     val phoneNodeId = inputData.getString("PHONE_NODE_ID") ?: return Result.failure()

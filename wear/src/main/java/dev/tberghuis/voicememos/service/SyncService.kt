@@ -48,53 +48,13 @@ class SyncService : WearableListenerService() {
       .build()
     val worker = OneTimeWorkRequestBuilder<UploadRecordingsWorker>()
       .setInputData(data)
-//      .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
       .build()
-
-
 
     WorkManager.getInstance(application).enqueueUniqueWork(
       "UPLOAD_RECORDINGS",
       ExistingWorkPolicy.KEEP,
       worker
     )
-
-
-//    WorkManager.getInstance(application).enqueue(worker)
-  }
-
-
-  private fun uploadRecordingsZip(phoneNodeId: String) {
-    val recordingsFileList = application.filesDir.listFiles()?.filter {
-      it.isFile && it.name.startsWith("wristrecorder_")
-    }
-    if (recordingsFileList.isNullOrEmpty()) {
-      // send message doitwrong
-      // /snackbar or /snackbar-error
-      scope.launch {
-        val ba = "No recordings".toByteArray(Charsets.UTF_8)
-        messageClient.sendMessage(phoneNodeId, "/snackbar", ba).await()
-      }
-      return
-    }
-    logd("uploadRecordingsZip recordingsFileList $recordingsFileList")
-    val channelTask = channelClient.openChannel(phoneNodeId, "/sendzip")
-    scope.launch {
-      val channel = channelTask.await()
-      val outputStream = channelClient.getOutputStream(channel).await()
-      ZipOutputStream(BufferedOutputStream(outputStream)).use { zos ->
-        recordingsFileList.forEach { recordingFile ->
-          FileInputStream(recordingFile).use { fis ->
-            BufferedInputStream(fis).use {
-              val entry = ZipEntry(recordingFile.name)
-              zos.putNextEntry(entry)
-              fis.copyTo(zos, 1024)
-            }
-          }
-        }
-      }
-      logd("uploadRecordingsZip sent")
-    }
   }
 
   private fun deleteAllRecordings(phoneNodeId: String) {
