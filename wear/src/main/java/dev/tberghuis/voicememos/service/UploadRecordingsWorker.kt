@@ -56,11 +56,4 @@ class UploadRecordingsWorker(private val context: Context, params: WorkerParamet
     }
     return Result.success()
   }
-
-
-//  override suspend fun getForegroundInfo(): ForegroundInfo {
-////    return super.getForegroundInfo()
-//
-////    return ForegroundInfo()
-//  }
 }
