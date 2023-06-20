@@ -32,5 +32,6 @@ adb -s poco shell "run-as dev.tberghuis.wristrecorder ls /data/user/0/dev.tbergh
 
 adb -s 720JX08050662 uninstall dev.tberghuis.wristrecorder
 adb -s emulator-5554 uninstall dev.tberghuis.wristrecorder
+adb -s poco uninstall dev.tberghuis.wristrecorder
 
 adb devices
