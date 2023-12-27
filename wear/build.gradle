@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'dev.tberghuis.voicememos'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "dev.tberghuis.wristrecorder"
@@ -40,15 +40,16 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
 
-    implementation "androidx.activity:activity-compose:1.7.2"
-    implementation "androidx.compose.ui:ui:1.4.3"
+    implementation "androidx.activity:activity-compose:1.8.2"
+    implementation "androidx.compose.ui:ui:1.5.4"
 //    implementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.4.3"
-    implementation "androidx.compose.foundation:foundation:1.4.3"
-    implementation "androidx.compose.material:material-icons-extended:1.4.3"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.5.4"
+    implementation "androidx.compose.foundation:foundation:1.5.4"
+    implementation "androidx.compose.material:material-icons-extended:1.5.4"
 
+       def wear_compose_version = '1.2.1'
     implementation "androidx.wear.compose:compose-material:$wear_compose_version"
     implementation "androidx.wear.compose:compose-foundation:$wear_compose_version"
     // If you are using Compose Navigation, use the Wear OS version (NOT the
@@ -60,18 +61,18 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation project(path: ':common')
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.1.0-alpha01'
+    implementation 'androidx.hilt:hilt-navigation-compose:1.1.0'
 
-    implementation "com.google.accompanist:accompanist-permissions:0.25.1"
+    implementation "com.google.accompanist:accompanist-permissions:0.32.0"
 
     implementation "androidx.wear:wear-input:1.1.0"
 
 
-    implementation 'com.google.android.gms:play-services-wearable:18.0.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
+    implementation 'com.google.android.gms:play-services-wearable:18.1.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3'
 
 
-    implementation "androidx.work:work-runtime-ktx:2.8.1"
+    implementation "androidx.work:work-runtime-ktx:2.9.0"
 
     // is this needed???? no
     //    wearApp project(":wear")

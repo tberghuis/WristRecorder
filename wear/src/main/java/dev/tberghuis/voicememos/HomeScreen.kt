@@ -24,7 +24,7 @@ fun HomeScreen(
 ) {
   val viewModel: HomeViewModel = hiltViewModel()
   // todo hoist this viewmodel, home?pagerIndex=n
-  val pagerState = rememberPagerState()
+  val pagerState = rememberPagerState(pageCount = { 2 })
   val pageIndicatorState: PageIndicatorState = remember {
     object : PageIndicatorState {
       override val pageOffset: Float
@@ -49,7 +49,7 @@ fun HomeScreen(
 
     ) {
     HorizontalPager(
-      pageCount = 2, state = pagerState
+      state = pagerState
     ) { page ->
       when (page) {
         0 -> {
