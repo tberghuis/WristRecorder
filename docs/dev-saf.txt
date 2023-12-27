@@ -1,0 +1,7 @@
+get running
+update gradle
+read official docs
+
+
+/data/data/dev.tberghuis.wristrecorder/files/wristrecorder_1703715785704.pcm
+
