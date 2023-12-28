@@ -8,3 +8,13 @@ read official docs
 cull xxx tmp
 ...
 release
+
+
+#############
+MediaStore API vs SAF
+try hello world both ways
+copy to folder on sdcard
+does PCM classify as media file
+can i play it with VLC?
+
+https://stackoverflow.com/questions/37281430/how-to-convert-pcm-file-to-wav-or-mp3
