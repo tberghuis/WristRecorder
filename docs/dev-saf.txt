@@ -5,3 +5,6 @@ read official docs
 
 /data/data/dev.tberghuis.wristrecorder/files/wristrecorder_1703715785704.pcm
 
+cull xxx tmp
+...
+release
