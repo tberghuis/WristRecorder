@@ -16,7 +16,7 @@ class TmpActivity : ComponentActivity() {
     setContent {
       FreshMobileTheme {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-          Text("hello tmp activity")
+          TmpScreen()
         }
       }
     }
