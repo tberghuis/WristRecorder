@@ -3,6 +3,7 @@ package dev.tberghuis.voicememos.page
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -11,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.material.Button
-import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
 import dev.tberghuis.voicememos.HomeViewModel
 import dev.tberghuis.voicememos.common.calcDuration
@@ -43,7 +44,7 @@ fun RecordingList(
       val buttonText = remember(file, context) {
         "${formatTimestampFromFilename(file)} ${calcDuration(context, file)}s"
       }
-      Button(modifier = Modifier,
+      Button(modifier = Modifier.fillMaxWidth(),
         onClick = {
           logd("play $file")
           onRecordingClick(file)
