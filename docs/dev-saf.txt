@@ -1,3 +1,10 @@
+https://github.com/android/wear-os-samples
+MediaRecorder instead of AudioRecorder
+
+noteboat SAF first
+
+MediaStore vs SAF try both
+
 get running
 update gradle
 read official docs
@@ -31,3 +38,4 @@ https://github.com/android/codelab-ongoing-activity
 https://developer.android.com/codelabs/ongoing-activity?hl=en#0
 
 https://developer.android.com/training/wearables/notifications
+
