@@ -10,8 +10,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Text
@@ -38,7 +40,12 @@ fun RecordingList(
     return
   }
 
-  ScalingLazyColumn {
+  ScalingLazyColumn(
+    modifier = Modifier.fillMaxSize(),
+    autoCentering = AutoCenteringParams(
+      itemIndex = 0,
+    ),
+  ) {
     items(viewModel.recordingFiles.value.size) { i ->
       val file = viewModel.recordingFiles.value[i]
       val buttonText = remember(file, context) {
@@ -50,9 +57,12 @@ fun RecordingList(
           onRecordingClick(file)
         }
       ) {
-        Text(buttonText, Modifier.padding(horizontal = 10.dp))
+        Text(
+          buttonText, Modifier.padding(horizontal = 10.dp),
+          overflow = TextOverflow.Ellipsis,
+          maxLines = 1,
+        )
       }
     }
   }
 }
-
