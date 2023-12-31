@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Text
 
 @Composable
@@ -18,7 +19,21 @@ fun TmpScreen(
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    Text("hello tmp ${vm.willitblend}")
-
+//    Text("hello tmp ${vm.willitblend}")
+    Button(onClick = {
+      vm.tmpStartRecording()
+    }) {
+      Text("start")
+    }
+    Button(onClick = {
+      vm.tmpGetCount()
+    }) {
+      Text("count")
+    }
+    Button(onClick = {
+      vm.tmpStopRecording()
+    }) {
+      Text("stop")
+    }
   }
 }
