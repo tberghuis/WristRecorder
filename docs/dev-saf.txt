@@ -41,3 +41,5 @@ https://developer.android.com/training/wearables/notifications
 
 #doitwrong
 recents entry, add (Recording) when recording
+
+RecordingServiceManager
