@@ -46,6 +46,12 @@
         </activity>
 
         <service
+            android:name=".tmp.TmpService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+        <service
             android:name=".service.SyncService"
             android:exported="true">
             <intent-filter>
