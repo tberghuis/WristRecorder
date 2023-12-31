@@ -56,11 +56,7 @@ dependencies {
     def wear_compose_version = '1.2.1'
     implementation "androidx.wear.compose:compose-material:$wear_compose_version"
     implementation "androidx.wear.compose:compose-foundation:$wear_compose_version"
-    // If you are using Compose Navigation, use the Wear OS version (NOT the
-    // androidx.navigation:navigation-compose version), that is, uncomment the line below.
     implementation "androidx.wear.compose:compose-navigation:$wear_compose_version"
-
-    // implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation project(path: ':common')
@@ -68,16 +64,10 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation-compose:1.1.0'
 
     implementation "com.google.accompanist:accompanist-permissions:0.32.0"
-
     implementation "androidx.wear:wear-input:1.1.0"
-
-
     implementation 'com.google.android.gms:play-services-wearable:18.1.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3'
-
-
     implementation "androidx.work:work-runtime-ktx:2.9.0"
 
-    // is this needed???? no
-    //    wearApp project(":wear")
+    implementation "androidx.wear:wear-ongoing:1.0.0"
 }

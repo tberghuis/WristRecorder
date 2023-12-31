@@ -43,3 +43,9 @@ https://developer.android.com/training/wearables/notifications
 recents entry, add (Recording) when recording
 
 RecordingServiceManager
+
+what happens if i start foreground service before activity onStop??
+will a notification flash?
+
+
+remove hilt dependency
