@@ -49,3 +49,8 @@ will a notification flash?
 
 
 remove hilt dependency
+
+
+floating timer, i can use lifecycleScope instead of my own scope???
+not sure as setContent { composable } might be on the wrong thread dispatcher???
+
