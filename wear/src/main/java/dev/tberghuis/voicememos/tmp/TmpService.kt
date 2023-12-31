@@ -9,7 +9,7 @@ import dev.tberghuis.voicememos.common.logd
 class TmpService : LifecycleService() {
 
   // todo val isForeground: MutableStateFlow = false
-  //  collect startForeground, stopForeground ...
+  //  lifecycleScope collect startForeground, stopForeground ...
 
   private val localBinder = LocalBinder()
 

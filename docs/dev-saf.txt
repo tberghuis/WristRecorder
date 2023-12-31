@@ -57,3 +57,5 @@ not sure as setContent { composable } might be on the wrong thread dispatcher???
 how to cancel workout from the ongoing notification? (codelab)
 
 does my service need to deal with configuration changes
+  say change font size in settings or something
+  onbind will be called a second time
