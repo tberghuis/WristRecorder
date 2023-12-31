@@ -2,10 +2,14 @@ package dev.tberghuis.voicememos.tmp
 
 import android.content.Intent
 import android.os.Binder
+import android.os.IBinder
 import androidx.lifecycle.LifecycleService
 import dev.tberghuis.voicememos.common.logd
 
 class TmpService : LifecycleService() {
+
+  // todo val isForeground: MutableStateFlow = false
+  //  collect startForeground, stopForeground ...
 
   private val localBinder = LocalBinder()
 
@@ -25,6 +29,13 @@ class TmpService : LifecycleService() {
     logd("TmpService onStartCommand")
 
     return START_NOT_STICKY
+  }
+
+
+  override fun onBind(intent: Intent): IBinder {
+    super.onBind(intent)
+    logd("TmpService onBind")
+    return localBinder
   }
 
 
