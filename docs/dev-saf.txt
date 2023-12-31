@@ -40,3 +40,4 @@ https://developer.android.com/codelabs/ongoing-activity?hl=en#0
 https://developer.android.com/training/wearables/notifications
 
 #doitwrong
+recents entry, add (Recording) when recording
