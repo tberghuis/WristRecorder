@@ -1,5 +1,6 @@
 package dev.tberghuis.voicememos.tmp
 
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Text
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 import dev.tberghuis.voicememos.common.logd
 
 @Composable
@@ -22,15 +25,16 @@ fun TmpScreen(
   vm: TmpVm = viewModel()
 ) {
 
-  ComposableLifecycle { _, event ->
-    when (event) {
-      Lifecycle.Event.ON_STOP -> {
-        logd("On Stop")
-        vm.unbind()
-      }
-      else -> {}
-    }
-  }
+//  ComposableLifecycle { _, event ->
+//    when (event) {
+//      Lifecycle.Event.ON_STOP -> {
+//        logd("On Stop")
+//        vm.unbind()
+//      }
+//
+//      else -> {}
+//    }
+//  }
 
 
 
@@ -63,9 +67,32 @@ fun TmpScreen(
       }) {
         Text("unbind")
       }
+
+      PermissionButton()
+
     }
 
 
+  }
+}
+
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun PermissionButton(
+  vm: TmpVm = viewModel()
+) {
+  val permissionState = if (Build.VERSION.SDK_INT >= 33) {
+    rememberPermissionState(
+      android.Manifest.permission.POST_NOTIFICATIONS
+    )
+  } else {
+    TODO("VERSION.SDK_INT < TIRAMISU")
+  }
+  Button(onClick = {
+    permissionState.launchPermissionRequest()
+  }) {
+    Text("permission")
   }
 }
 
