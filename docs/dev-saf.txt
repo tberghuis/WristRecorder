@@ -66,4 +66,16 @@ or do i do it another way???
 yes
 
 
+don't use unbind
+when recording starts
+  startForeground
+when recording stops
+  stopForground
+when vm oncleared
+  if ! recording
+    service.stopSelf
 
+prompt for notification permission on startup
+  launchedEffect, run every time
+  see if it passes play store console review
+  
