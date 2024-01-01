@@ -80,4 +80,7 @@ prompt for notification permission on startup
   see if it passes play store console review
 
   https://google.github.io/accompanist/permissions/
-  
+
+##########################
+multiple permissions
+...
