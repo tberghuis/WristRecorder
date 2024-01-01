@@ -61,7 +61,14 @@ class TmpService : LifecycleService() {
   }
 
   fun startTmpWork() {
-//    var count = 0
+
+    // todo test
+//    startService(Intent(applicationContext, TmpService::class.java))
+//    startForeground(NOTIFICATION_ID, notification)
+
+
+
+
     tmpJob = lifecycleScope.launch {
       while (true) {
         logd("doTmpWork $count")
@@ -74,6 +81,8 @@ class TmpService : LifecycleService() {
 
   fun stopTmpWork() {
     tmpJob?.cancel()
+//        stopForeground(STOP_FOREGROUND_REMOVE)
+
   }
 
 

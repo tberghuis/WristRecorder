@@ -36,6 +36,7 @@ class TmpServiceManager(private val application: Application) {
     // does using BIND_AUTO_CREATE matter?
     // run some tests
     application.bindService(serviceIntent, tmpServiceConnection, Context.BIND_AUTO_CREATE)
+//    application.bindService(serviceIntent, tmpServiceConnection)
   }
 
   suspend fun provideTmpService(): TmpService {

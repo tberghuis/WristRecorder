@@ -32,7 +32,7 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
   override fun onCleared() {
 
     // if not recording
-    // service stopSelf
+    // service.stopSelf
 
     super.onCleared()
   }
