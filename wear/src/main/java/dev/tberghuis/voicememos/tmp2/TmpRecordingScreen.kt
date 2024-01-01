@@ -22,11 +22,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import dev.tberghuis.voicememos.tmp.TmpVm
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun TmpRecordingScreen(
-  vm: TmpRecordingVm = viewModel()
+  vm: TmpVm = viewModel()
 ) {
 
   val context = LocalContext.current
@@ -86,7 +87,7 @@ fun TmpRecordingScreen(
           if (recordPermissionState.status is PermissionStatus.Denied) {
             recordPermissionState.launchPermissionRequest()
           } else {
-            vm.startRecording()
+            vm.tmpStartRecording()
           }
         }) {
           Text("start")
