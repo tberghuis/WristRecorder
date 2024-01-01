@@ -23,7 +23,7 @@ class TmpService : LifecycleService() {
   var tmpJob: Job? = null
   var count = 0
 
-  private lateinit var notificationManager: NotificationManager
+//  private lateinit var notificationManager: NotificationManager
 
   init {
     logd("TmpService init $this")
@@ -43,7 +43,7 @@ class TmpService : LifecycleService() {
   override fun onCreate() {
     super.onCreate()
     logd("TmpService onCreate")
-    notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -112,6 +112,10 @@ class TmpService : LifecycleService() {
       titleText,
       NotificationManager.IMPORTANCE_DEFAULT,
     )
+
+    // todo createNotificationChannel in MainApplication
+    val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
     notificationManager.createNotificationChannel(notificationChannel)
 
     val bigTextStyle = NotificationCompat.BigTextStyle()

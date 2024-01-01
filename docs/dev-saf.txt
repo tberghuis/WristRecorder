@@ -85,3 +85,8 @@ Dialog button "cancel" width, or just use icon???
 next task
   ongoing activity notification icon
 
+remove hilt
+migrate code to real app
+  if too different use tmp xxx classes
+
+cull todo
