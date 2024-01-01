@@ -63,6 +63,14 @@ class TmpService : LifecycleService() {
 
   override fun onUnbind(intent: Intent): Boolean {
     logd("TmpService onUnbind $this")
+
+    val notification =
+      generateNotification("main text?")
+    startService(Intent(applicationContext, TmpService::class.java))
+    startForeground(NOTIFICATION_ID, notification)
+
+
+
     return true
   }
 
@@ -72,7 +80,7 @@ class TmpService : LifecycleService() {
   }
 
   fun startTmpWork() {
-
+    logd("TmpService startTmpWork $this")
     // todo test
 
     val notification =
@@ -80,15 +88,16 @@ class TmpService : LifecycleService() {
 
     startService(Intent(applicationContext, TmpService::class.java))
     startForeground(NOTIFICATION_ID, notification)
+    notificationManager.notify(NOTIFICATION_ID, notification)
 
 
-    tmpJob = lifecycleScope.launch {
-      while (true) {
-        logd("doTmpWork $count")
-        count++
-        delay(1000)
-      }
-    }
+//    tmpJob = lifecycleScope.launch {
+//      while (true) {
+//        logd("doTmpWork $count")
+//        count++
+//        delay(1000)
+//      }
+//    }
   }
 
 
