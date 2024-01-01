@@ -18,7 +18,10 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import android.provider.Settings
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -53,33 +56,47 @@ fun TmpRecordingScreen(
     it.permission == android.Manifest.permission.RECORD_AUDIO
   }!!
 
-  Column(
+  Box(
     modifier = Modifier.fillMaxSize(),
-    verticalArrangement = Arrangement.Center,
-    horizontalAlignment = Alignment.CenterHorizontally,
+    contentAlignment = Alignment.Center,
   ) {
-    Text("tmp recording screen")
-    if (recordPermissionState.status == PermissionStatus.Denied(false)) {
-      // doitwrong
-      // this is also displayed if user dismisses permission prompt on app start
-      Text("please enable Microphone permission in system settings")
-      Button(onClick = {
-        launchPermissionsSettings(context)
-      }) {
-        Text("system settings")
-      }
-    } else { // microphone permission granted || shouldShowRationale == true
-      Button(onClick = {
-        if (recordPermissionState.status is PermissionStatus.Denied) {
-          recordPermissionState.launchPermissionRequest()
-        } else {
-          vm.startRecording()
+    Column(
+      modifier = Modifier.fillMaxSize(0.8f),
+      verticalArrangement = Arrangement.SpaceAround,
+      horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+//    Text("tmp recording screen")
+      if (recordPermissionState.status == PermissionStatus.Denied(false)) {
+        // doitwrong
+        // this is also displayed if user dismisses permission prompt on app start
+        Text(
+          "Please enable Microphone permission in settings",
+          textAlign = TextAlign.Center,
+        )
+        Button(
+          onClick = {
+            launchPermissionsSettings(context)
+          },
+          modifier = Modifier.fillMaxWidth(),
+        ) {
+          Text("Show Settings")
         }
-      }) {
-        Text("start")
+      } else { // microphone permission granted || shouldShowRationale == true
+        Button(onClick = {
+          if (recordPermissionState.status is PermissionStatus.Denied) {
+            recordPermissionState.launchPermissionRequest()
+          } else {
+            vm.startRecording()
+          }
+        }) {
+          Text("start")
+        }
       }
     }
+
   }
+
+
 }
 
 
