@@ -25,19 +25,6 @@ fun TmpScreen(
   vm: TmpVm = viewModel()
 ) {
 
-//  ComposableLifecycle { _, event ->
-//    when (event) {
-//      Lifecycle.Event.ON_STOP -> {
-//        logd("On Stop")
-//        vm.unbind()
-//      }
-//
-//      else -> {}
-//    }
-//  }
-
-
-
 
   Column(
     modifier = Modifier.fillMaxSize(),
@@ -62,11 +49,6 @@ fun TmpScreen(
       }
     }
     Row {
-      Button(onClick = {
-        vm.unbind()
-      }) {
-        Text("unbind")
-      }
 
       PermissionButton()
 
@@ -95,25 +77,3 @@ fun PermissionButton(
     Text("permission")
   }
 }
-
-
-@Composable
-fun ComposableLifecycle(
-  lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
-  onEvent: (LifecycleOwner, Lifecycle.Event) -> Unit
-) {
-
-  DisposableEffect(lifecycleOwner) {
-    val observer = LifecycleEventObserver { source, event ->
-      onEvent(source, event)
-    }
-    lifecycleOwner.lifecycle.addObserver(observer)
-
-    onDispose {
-      lifecycleOwner.lifecycle.removeObserver(observer)
-    }
-  }
-}
-
-
-

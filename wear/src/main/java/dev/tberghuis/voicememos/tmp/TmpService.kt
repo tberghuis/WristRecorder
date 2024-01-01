@@ -85,23 +85,21 @@ class TmpService : LifecycleService() {
 
     startService(Intent(applicationContext, TmpService::class.java))
     startForeground(NOTIFICATION_ID, notification)
-//    notificationManager.notify(NOTIFICATION_ID, notification)
 
 
-//    tmpJob = lifecycleScope.launch {
-//      while (true) {
-//        logd("doTmpWork $count")
-//        count++
-//        delay(1000)
-//      }
-//    }
+    tmpJob = lifecycleScope.launch {
+      while (true) {
+        logd("doTmpWork $count")
+        count++
+        delay(1000)
+      }
+    }
   }
 
 
   fun stopTmpWork() {
     tmpJob?.cancel()
-//        stopForeground(STOP_FOREGROUND_REMOVE)
-
+    stopForeground(STOP_FOREGROUND_REMOVE)
   }
 
 
@@ -165,11 +163,6 @@ class TmpService : LifecycleService() {
 
 
   companion object {
-    private const val TAG = "ForegroundOnlyService"
-    private const val THREE_SECONDS_MILLISECONDS = 3000L
-    private const val PACKAGE_NAME = "com.android.example.wear.ongoingactivity"
-    private const val EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION =
-      "$PACKAGE_NAME.extra.CANCEL_SUBSCRIPTION_FROM_NOTIFICATION"
     private const val NOTIFICATION_ID = 12345678
     private const val NOTIFICATION_CHANNEL_ID = "walking_workout_channel_01"
   }
