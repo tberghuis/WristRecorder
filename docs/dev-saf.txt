@@ -5,8 +5,6 @@ noteboat SAF first
 
 MediaStore vs SAF try both
 
-get running
-update gradle
 read official docs
   https://developer.android.com/guide/topics/data
 
@@ -29,14 +27,8 @@ https://stackoverflow.com/questions/37281430/how-to-convert-pcm-file-to-wav-or-m
 #####################
 
 gradle build flavor tmpDebug
-merge manifest.xml
-...
-ServiceManager...
-...
 
 https://github.com/android/codelab-ongoing-activity
-https://developer.android.com/codelabs/ongoing-activity?hl=en#0
-
 https://developer.android.com/training/wearables/notifications
 
 #doitwrong
@@ -87,4 +79,9 @@ write some tests.txt
 ...
 
 Dialog button "cancel" width, or just use icon???
+
+##################
+
+next task
+  ongoing activity notification icon
 
