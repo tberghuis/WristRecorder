@@ -12,18 +12,18 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 
 class TmpServiceManager(private val application: Application) {
-  private var tmpService: MutableStateFlow<TmpService?> = MutableStateFlow(null)
+  private var tmpServiceFlow: MutableStateFlow<TmpService?> = MutableStateFlow(null)
 
   private val tmpServiceConnection = object : ServiceConnection {
     override fun onServiceConnected(name: ComponentName, service: IBinder) {
-      logd("onServiceConnected")
       val binder = service as TmpService.LocalBinder
-      tmpService.value = binder.tmpService
+      tmpServiceFlow.value = binder.tmpService
+      logd("onServiceConnected tmpService ${tmpServiceFlow.value}")
     }
 
     override fun onServiceDisconnected(name: ComponentName) {
       logd("onServiceDisconnected")
-      tmpService.value = null
+      tmpServiceFlow.value = null
     }
   }
 
@@ -39,14 +39,8 @@ class TmpServiceManager(private val application: Application) {
 //    application.bindService(serviceIntent, tmpServiceConnection)
   }
 
-
-  fun unbind() {
-    application.unbindService(tmpServiceConnection)
-  }
-
-
   suspend fun provideTmpService(): TmpService {
-    return tmpService.filterNotNull().first()
+    return tmpServiceFlow.filterNotNull().first()
   }
 
 

@@ -64,6 +64,7 @@ fun TmpScreen(
 fun PermissionButton(
   vm: TmpVm = viewModel()
 ) {
+  // 33 = android 13
   val permissionState = if (Build.VERSION.SDK_INT >= 33) {
     rememberPermissionState(
       android.Manifest.permission.POST_NOTIFICATIONS
