@@ -29,6 +29,12 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
     }
   }
 
+  fun unbind() {
+    tmpServiceManager.unbind()
+
+  }
+
+
   override fun onCleared() {
 
     // if not recording

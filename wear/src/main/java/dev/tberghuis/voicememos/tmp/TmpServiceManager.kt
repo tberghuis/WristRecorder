@@ -39,6 +39,12 @@ class TmpServiceManager(private val application: Application) {
 //    application.bindService(serviceIntent, tmpServiceConnection)
   }
 
+
+  fun unbind() {
+    application.unbindService(tmpServiceConnection)
+  }
+
+
   suspend fun provideTmpService(): TmpService {
     return tmpService.filterNotNull().first()
   }

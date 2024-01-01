@@ -2,6 +2,7 @@ package dev.tberghuis.voicememos.tmp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,21 +20,31 @@ fun TmpScreen(
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-//    Text("hello tmp ${vm.willitblend}")
-    Button(onClick = {
-      vm.tmpStartRecording()
-    }) {
-      Text("start")
+    Row {
+      Button(onClick = {
+        vm.tmpStartRecording()
+      }) {
+        Text("start")
+      }
+      Button(onClick = {
+        vm.tmpGetCount()
+      }) {
+        Text("count")
+      }
+      Button(onClick = {
+        vm.tmpStopRecording()
+      }) {
+        Text("stop")
+      }
     }
-    Button(onClick = {
-      vm.tmpGetCount()
-    }) {
-      Text("count")
+    Row {
+      Button(onClick = {
+        vm.unbind()
+      }) {
+        Text("unbind")
+      }
     }
-    Button(onClick = {
-      vm.tmpStopRecording()
-    }) {
-      Text("stop")
-    }
+
+
   }
 }
