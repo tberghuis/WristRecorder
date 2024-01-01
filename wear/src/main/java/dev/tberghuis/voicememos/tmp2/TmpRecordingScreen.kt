@@ -92,6 +92,12 @@ fun TmpRecordingScreen(
         }) {
           Text("start")
         }
+
+        // todo merge into record button
+        Button(onClick = { vm.tmpStopRecording() }) {
+          Text("stop")
+        }
+
       }
     }
 
