@@ -12,6 +12,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Text
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -41,7 +42,9 @@ fun TmpRecordingScreen(
     }
   }
 
-
+  val recordPermissionState = multiplePermissionsState.permissions.find {
+    it.permission == android.Manifest.permission.RECORD_AUDIO
+  }!!
 
   Column(
     modifier = Modifier.fillMaxSize(),
@@ -49,7 +52,27 @@ fun TmpRecordingScreen(
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     Text("tmp recording screen")
-    Button(onClick = { vm.startRecording() }) {
+
+    if (recordPermissionState.status == PermissionStatus.Denied(false)) {
+      // doitwrong
+      // this is also displayed if user dismisses permission prompt
+      Text("please enable recording permission in system settings")
+
+      // todo button to system settings
+
+      return
+    }
+
+
+    Button(onClick = {
+      if (recordPermissionState.status is PermissionStatus.Denied) {
+        recordPermissionState.launchPermissionRequest()
+      } else {
+        vm.startRecording()
+      }
+
+
+    }) {
       Text("start")
     }
   }
