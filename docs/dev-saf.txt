@@ -85,3 +85,6 @@ prompt for notification permission on startup
 multiple permissions
 write some tests.txt
 ...
+
+Dialog button "cancel" width, or just use icon???
+
