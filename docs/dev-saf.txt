@@ -78,4 +78,6 @@ when vm oncleared
 prompt for notification permission on startup
   launchedEffect, run every time
   see if it passes play store console review
+
+  https://google.github.io/accompanist/permissions/
   
