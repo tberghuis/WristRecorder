@@ -35,3 +35,7 @@ adb -s emulator-5554 uninstall dev.tberghuis.wristrecorder
 adb -s poco uninstall dev.tberghuis.wristrecorder
 
 adb devices
+
+########
+
+adb uninstall dev.tberghuis.wristrecorder

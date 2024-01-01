@@ -84,3 +84,5 @@ prompt for notification permission on startup
 ##########################
 multiple permissions
 ...
+
+adb command uninstall
