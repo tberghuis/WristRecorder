@@ -66,46 +66,42 @@ fun TmpRecordingScreen(
       verticalArrangement = Arrangement.SpaceAround,
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-//    Text("tmp recording screen")
-      if (recordPermissionState.status == PermissionStatus.Denied(false)) {
-        // doitwrong
-        // this is also displayed if user dismisses permission prompt on app start
-        Text(
-          "Please enable Microphone permission in settings",
-          textAlign = TextAlign.Center,
-        )
-        Button(
-          onClick = {
-            launchPermissionsSettings(context)
-          },
-          modifier = Modifier.fillMaxWidth(),
-        ) {
-          Text("Show Settings")
-        }
-      } else { // microphone permission granted || shouldShowRationale == true
-        Button(onClick = {
-          if (recordPermissionState.status is PermissionStatus.Denied) {
-            recordPermissionState.launchPermissionRequest()
-          } else {
-            vm.tmpStartRecording()
+      when (recordPermissionState.status) {
+        // user denied twice or 0 times
+        PermissionStatus.Denied(false) -> {
+          Text(
+            "Please enable Microphone permission in settings",
+            textAlign = TextAlign.Center,
+          )
+          Button(
+            onClick = {
+              launchPermissionsSettings(context)
+            },
+            modifier = Modifier.fillMaxWidth(),
+          ) {
+            Text("Show Settings")
           }
-        }) {
-          Text("start")
         }
-
-        // todo merge into record button
-        Button(onClick = { vm.tmpStopRecording() }) {
-          Text("stop")
+        // microphone granted || shouldShowRationale == true
+        else -> {
+          Button(onClick = {
+            if (recordPermissionState.status is PermissionStatus.Denied) {
+              recordPermissionState.launchPermissionRequest()
+            } else {
+              vm.tmpStartRecording()
+            }
+          }) {
+            Text("start")
+          }
+          // todo merge into record button
+          Button(onClick = { vm.tmpStopRecording() }) {
+            Text("stop")
+          }
         }
-
       }
     }
-
   }
-
-
 }
-
 
 private fun launchPermissionsSettings(context: Context) {
   val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -113,5 +109,3 @@ private fun launchPermissionsSettings(context: Context) {
   intent.setData(uri)
   context.startActivity(intent)
 }
-
-
