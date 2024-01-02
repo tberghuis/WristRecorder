@@ -1,11 +1,7 @@
 buildscript {
     ext {
-
-        // https://dagger.dev/hilt/gradle-setup.html
-//        hilt_version = '2.50'
     }
     dependencies {
-//        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     }
 }
 
