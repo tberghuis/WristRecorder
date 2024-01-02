@@ -12,6 +12,7 @@ class HomeViewModel(
 ) : AndroidViewModel(application) {
   val recordingFiles = mutableStateOf(listOf<String>())
   var recordingFilesInitialised = mutableStateOf(false)
+  
   val audioController = AudioController(application)
 
   fun getRecordings() {
