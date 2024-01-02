@@ -2,7 +2,6 @@ package dev.tberghuis.voicememos.service
 
 import android.content.Context
 import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.logd

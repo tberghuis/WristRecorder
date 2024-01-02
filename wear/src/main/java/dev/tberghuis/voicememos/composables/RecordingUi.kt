@@ -3,8 +3,6 @@ package dev.tberghuis.voicememos.composables
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.view.KeyEvent.ACTION_UP
-import android.view.KeyEvent.KEYCODE_STEM_1
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
@@ -23,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp

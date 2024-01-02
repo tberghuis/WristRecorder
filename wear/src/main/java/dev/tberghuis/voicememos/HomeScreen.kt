@@ -59,9 +59,6 @@ fun HomeScreen(
         1 -> {
           RecordingList(navigateRecordingDetail)
         }
-//        2 -> {
-//          SettingsPage()
-//        }
       }
     }
   }
@@ -74,10 +71,3 @@ fun HomeScreen(
     }
   }
 }
-
-//@Composable
-//fun SettingsPage() {
-//  Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-//    Text("todo settings")
-//  }
-//}

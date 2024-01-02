@@ -5,17 +5,6 @@ import android.view.KeyEvent.KEYCODE_STEM_1
 import androidx.compose.ui.input.key.KeyEvent
 import dev.tberghuis.voicememos.common.logd
 
-
-//  val isHardwareButtonPress = { keyEvent: KeyEvent ->
-//    if (keyEvent.nativeKeyEvent.action == ACTION_UP && keyEvent.nativeKeyEvent.keyCode == KEYCODE_STEM_1) {
-//      logd("physical key")
-//      true
-//    } else {
-//      false
-//    }
-//  }
-
-
 fun isHardwareButtonPress(keyEvent: KeyEvent): Boolean {
   if (keyEvent.nativeKeyEvent.action == ACTION_UP && keyEvent.nativeKeyEvent.keyCode == KEYCODE_STEM_1) {
     logd("physical key")
@@ -23,7 +12,3 @@ fun isHardwareButtonPress(keyEvent: KeyEvent): Boolean {
   }
   return false
 }
-
-
-
-

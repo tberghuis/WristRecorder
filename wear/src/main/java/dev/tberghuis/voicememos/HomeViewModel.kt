@@ -1,13 +1,10 @@
 package dev.tberghuis.voicememos
 
 import android.app.Application
-import android.content.Context
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import dev.tberghuis.voicememos.common.AudioController
-
 
 class HomeViewModel(
   private val application: Application,
@@ -15,8 +12,6 @@ class HomeViewModel(
 ) : AndroidViewModel(application) {
   val recordingFiles = mutableStateOf(listOf<String>())
   var recordingFilesInitialised = mutableStateOf(false)
-
-
   val audioController = AudioController(application)
 
   fun getRecordings() {
@@ -24,5 +19,4 @@ class HomeViewModel(
     recordingFiles.value = files
     recordingFilesInitialised.value = true
   }
-
 }
