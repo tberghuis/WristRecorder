@@ -18,6 +18,10 @@ import kotlinx.coroutines.launch
 class TmpVm(private val application: Application) : AndroidViewModel(application) {
   private val tmpServiceManager = TmpServiceManager(application)
 
+  private val tmpService: TmpService?
+    get() = tmpServiceManager.tmpServiceFlow.value
+
+
   var isRecording by mutableStateOf(false)
     private set
 
@@ -52,9 +56,8 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
   }
 
   override fun onCleared() {
-    viewModelScope.launch {
-      // todo if not recording
-      tmpServiceManager.provideTmpService().stopSelf()
+    if (!isRecording) {
+      tmpService?.stopSelf()
     }
     super.onCleared()
   }
