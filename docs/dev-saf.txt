@@ -92,3 +92,5 @@ migrate code to real app
 cull todo
 
 reference platform-samples permissions
+
+merge manifest remove MainActivity
