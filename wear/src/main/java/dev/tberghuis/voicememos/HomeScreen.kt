@@ -15,7 +15,7 @@ import androidx.wear.compose.material.PageIndicatorState
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.TimeText
 import dev.tberghuis.voicememos.page.RecordingList
-import dev.tberghuis.voicememos.page.RecordingPage
+import dev.tberghuis.voicememos.tmp2.TmpRecordingPage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -53,7 +53,7 @@ fun HomeScreen(
     ) { page ->
       when (page) {
         0 -> {
-          RecordingPage(navigateRecordingDetail)
+          TmpRecordingPage(navigateRecordingDetail)
         }
 
         1 -> {

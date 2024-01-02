@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos.page
+package dev.tberghuis.voicememos.tmp2
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,7 +19,7 @@ import dev.tberghuis.voicememos.composables.RecordingUi
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun XxxRecordingPage(
+fun TmpRecordingPage(
   navigateRecordingDetail: (String) -> Unit
 ) {
   val recordPermissionState = rememberPermissionState(
