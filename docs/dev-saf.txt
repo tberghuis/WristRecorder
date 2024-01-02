@@ -95,3 +95,5 @@ reference platform-samples permissions
 
 reference floating timer, 
   notification channel in application oncreate
+
+https://developer.android.com/training/wearables/notifications
