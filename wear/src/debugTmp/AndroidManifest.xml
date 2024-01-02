@@ -33,6 +33,9 @@
         <activity
             android:name=".tmp.TmpActivity"
             android:exported="true"
+
+            android:launchMode="singleTop"
+
             android:taskAffinity=".main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
