@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import androidx.lifecycle.LifecycleService
+import dev.tberghuis.voicememos.common.logd
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class TmpRecordingService : LifecycleService() {
@@ -27,7 +28,12 @@ class TmpRecordingService : LifecycleService() {
     return START_NOT_STICKY
   }
 
+  fun startRecording() {
+    logd("startRecording")
+  }
 
-
+  fun stopRecording() {
+    logd("stopRecording")
+  }
 
 }
