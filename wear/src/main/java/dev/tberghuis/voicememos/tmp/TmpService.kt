@@ -28,9 +28,6 @@ class TmpService : LifecycleService() {
 
   val isRecordingFlow = MutableStateFlow(false)
 
-
-  // todo create notification channel in application
-
   init {
     logd("TmpService init $this")
   }
@@ -101,17 +98,17 @@ class TmpService : LifecycleService() {
 
     val notificationBuilder =
       NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
-        .setContentTitle("Recording")
+        .setContentTitle(getString(R.string.recording))
         .setSmallIcon(R.mipmap.ic_launcher)
         .setOngoing(true)
         .addAction(
           R.drawable.ic_recording,
-          "open Wrist Recorder",
+          getString(R.string.open_wrist_recorder),
           activityPendingIntent,
         )
 
     val ongoingActivityStatus = Status.Builder()
-      .addTemplate("recents text")
+      .addTemplate(getString(R.string.recording))
       .build()
 
     val ongoingActivity =

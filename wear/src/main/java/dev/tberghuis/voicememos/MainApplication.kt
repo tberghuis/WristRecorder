@@ -14,12 +14,10 @@ class MainApplication : Application() {
   private fun createNotificationChannel() {
     val notificationChannel = NotificationChannel(
       NOTIFICATION_CHANNEL_ID,
-      // todo use stringResource
-      "Recording",
+      getString(R.string.recording),
       NotificationManager.IMPORTANCE_DEFAULT,
     )
     val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     notificationManager.createNotificationChannel(notificationChannel)
   }
-
 }
