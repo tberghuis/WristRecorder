@@ -92,3 +92,6 @@ migrate code to real app
 cull todo
 
 reference platform-samples permissions
+
+reference floating timer, 
+  notification channel in application oncreate
