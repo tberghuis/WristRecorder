@@ -103,7 +103,7 @@ fun TmpRecordingScreen(
   }
 }
 
-private fun launchPermissionsSettings(context: Context) {
+fun launchPermissionsSettings(context: Context) {
   val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
   val uri = Uri.fromParts("package", context.packageName, null)
   intent.setData(uri)
