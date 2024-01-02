@@ -66,34 +66,33 @@ fun TmpRecordingPage(
       verticalArrangement = Arrangement.Center,
     ) {
       when (recordPermissionState.status) {
-        is PermissionStatus.Denied -> {
-          when (recordPermissionState.status.shouldShowRationale) {
-            true -> {
-              RecordingUi(navigateRecordingDetail) {
-                recordPermissionState.launchPermissionRequest()
-              }
-            }
-            // user denied 0 or 2 times (prompt dialog dismissed when 0)
-            false -> {
-              Text(
-                "Please enable Microphone permission in settings",
-                textAlign = TextAlign.Center,
-              )
-              Button(
-                onClick = {
-                  launchPermissionsSettings(context)
-                },
-                modifier = Modifier.fillMaxWidth(),
-              ) {
-                Text("Show Settings")
-              }
-            }
+        // user denied 0 or 2 times (prompt dialog dismissed when 0)
+        PermissionStatus.Denied(false) -> {
+          Text(
+            "Please enable Microphone permission in settings",
+            textAlign = TextAlign.Center,
+          )
+          Button(
+            onClick = {
+              launchPermissionsSettings(context)
+            },
+            modifier = Modifier.fillMaxWidth(),
+          ) {
+            Text("Show Settings")
+          }
+        }
+
+        PermissionStatus.Denied(true) -> {
+          RecordingUi(navigateRecordingDetail) {
+            recordPermissionState.launchPermissionRequest()
           }
         }
 
         PermissionStatus.Granted -> {
           RecordingUi(navigateRecordingDetail)
         }
+        // redundant
+        else -> {}
       }
     }
   }
