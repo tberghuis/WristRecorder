@@ -24,7 +24,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Icon
-import dev.tberghuis.voicememos.HomeViewModel
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.composables.isHardwareButtonPress
 import kotlinx.coroutines.Job
@@ -34,11 +33,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun TmpRecordingUi(
   navigateRecordingDetail: (String) -> Unit,
+  vm: TmpHomeViewModel = viewModel(),
   permissionPrompt: (() -> Unit)? = null
 ) {
   val scope = rememberCoroutineScope()
-  val viewModel: HomeViewModel = viewModel()
-  val context = LocalContext.current
   val recordingJob = remember { mutableStateOf<Job?>(null) }
   var filename by remember { mutableStateOf<String?>(null) }
   val requester = remember { FocusRequester() }
@@ -52,14 +50,8 @@ fun TmpRecordingUi(
       it.invoke()
       return
     }
-//    if (ActivityCompat.checkSelfPermission(
-//        context, Manifest.permission.RECORD_AUDIO
-//      ) != PackageManager.PERMISSION_GRANTED
-//    ) {
-//      return
-//    }
     recordingJob.value = scope.launch {
-      viewModel.audioController.record { filename = it }
+      vm.audioController.record { filename = it }
     }
     logd("after recordingJob launch")
   }
@@ -72,7 +64,6 @@ fun TmpRecordingUi(
       navigateRecordingDetail(it)
     }
   }
-
 
   val modifier = when (recordingJob.value) {
     null -> {
