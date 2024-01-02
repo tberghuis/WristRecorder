@@ -16,22 +16,23 @@ import dev.tberghuis.voicememos.R
 import dev.tberghuis.voicememos.common.logd
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class TmpService : LifecycleService() {
 
+  // use lifecycleScope to run recording job
   var tmpJob: Job? = null
   var count = 0
 
-//  private lateinit var notificationManager: NotificationManager
+  val isRecordingFlow = MutableStateFlow(false)
+
+
+  // todo create notification channel in application
 
   init {
     logd("TmpService init $this")
   }
-
-
-  // todo val isForeground: MutableStateFlow = false
-  //  lifecycleScope collect startForeground, stopForeground ...
 
   private val localBinder = LocalBinder()
 
@@ -61,28 +62,12 @@ class TmpService : LifecycleService() {
     return localBinder
   }
 
-//  override fun onUnbind(intent: Intent): Boolean {
-//    logd("TmpService onUnbind $this")
-//    val notification =
-//      generateNotification("main text?")
-//    startService(Intent(applicationContext, TmpService::class.java))
-//    startForeground(NOTIFICATION_ID, notification)
-//    notificationManager.notify(NOTIFICATION_ID, notification)
-//    return true
-//  }
-
-//  override fun onRebind(intent: Intent?) {
-//    super.onRebind(intent)
-//    logd("TmpService onRebind $this")
-//  }
-
   fun startTmpWork() {
     logd("TmpService startTmpWork $this")
-    // todo test
 
-    val notification =
-      generateNotification("main text?")
+    isRecordingFlow.value = true
 
+    val notification = generateNotification("main text?")
     startService(Intent(applicationContext, TmpService::class.java))
     startForeground(NOTIFICATION_ID, notification)
 
@@ -99,6 +84,7 @@ class TmpService : LifecycleService() {
 
   fun stopTmpWork() {
     tmpJob?.cancel()
+    isRecordingFlow.value = false
     stopForeground(STOP_FOREGROUND_REMOVE)
   }
 
