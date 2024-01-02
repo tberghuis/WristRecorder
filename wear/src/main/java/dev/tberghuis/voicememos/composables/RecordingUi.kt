@@ -28,7 +28,7 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Icon
 import dev.tberghuis.voicememos.HomeViewModel
 import dev.tberghuis.voicememos.common.logd
@@ -41,7 +41,7 @@ fun RecordingUi(
   navigateRecordingDetail: (String) -> Unit
 ) {
   val scope = rememberCoroutineScope()
-  val viewModel: HomeViewModel = hiltViewModel()
+  val viewModel: HomeViewModel = viewModel()
   val context = LocalContext.current
   val recordingJob = remember { mutableStateOf<Job?>(null) }
   var filename by remember { mutableStateOf<String?>(null) }

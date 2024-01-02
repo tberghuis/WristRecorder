@@ -1,30 +1,41 @@
 package dev.tberghuis.voicememos.screen
 
+import android.app.Application
 import android.content.Context
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.tberghuis.voicememos.common.AudioController
 import dev.tberghuis.voicememos.common.calcDuration
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.service.DeleteFileService
-import javax.inject.Inject
 
-@HiltViewModel
-class RecordingDetailViewModel @Inject constructor(
+
+class RecordingDetailViewModel(
+  private val application: Application,
   savedStateHandle: SavedStateHandle,
-  val audioController: AudioController,
-  @ApplicationContext val appContext: Context,
-  val deleteFileService: DeleteFileService
-) : ViewModel() {
+
+  ) : AndroidViewModel(application) {
+  val audioController = AudioController(application)
+  val deleteFileService = DeleteFileService(application)
+
 
   // file is navigation argument
   val file = savedStateHandle.get<String>("file")!!
   val showDeleteConfirm = mutableStateOf(false)
-  val duration = calcDuration(appContext, file)
+  val duration = calcDuration(application, file)
+
   init {
     logd("savedStateHandle $savedStateHandle")
   }
 }
+
+
+
+
+
+
+
+
+

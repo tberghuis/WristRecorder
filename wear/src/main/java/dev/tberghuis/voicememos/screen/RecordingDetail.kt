@@ -22,7 +22,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
-  val viewModel: RecordingDetailViewModel = hiltViewModel()
+  val viewModel: RecordingDetailViewModel = viewModel()
 
   // do i need key??? probably, should write a test???
   val formattedTime = remember { formatTimestampFromFilename(viewModel.file) }
@@ -72,7 +72,7 @@ fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
 
 @Composable
 fun DeleteConfirmAlert(popBackStack: () -> Unit) {
-  val viewModel: RecordingDetailViewModel = hiltViewModel()
+  val viewModel: RecordingDetailViewModel = viewModel()
   if (viewModel.showDeleteConfirm.value) {
     Alert(title = {
       Text("Confirm Delete?")
@@ -97,7 +97,7 @@ fun DeleteConfirmAlert(popBackStack: () -> Unit) {
 
 @Composable
 fun PlayButton() {
-  val viewModel: RecordingDetailViewModel = hiltViewModel()
+  val viewModel: RecordingDetailViewModel = viewModel()
   val scope = rememberCoroutineScope()
 
   Button(onClick = {
@@ -116,7 +116,7 @@ fun PlayButton() {
 
 @Composable
 fun DeleteButton() {
-  val viewModel: RecordingDetailViewModel = hiltViewModel()
+  val viewModel: RecordingDetailViewModel = viewModel()
   Button(onClick = {
     logd("delete")
     viewModel.showDeleteConfirm.value = true

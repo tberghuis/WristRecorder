@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.material.Button
@@ -26,7 +26,7 @@ import dev.tberghuis.voicememos.common.logd
 fun RecordingList(
   onRecordingClick: (String) -> Unit
 ) {
-  val viewModel: HomeViewModel = hiltViewModel()
+  val viewModel: HomeViewModel = viewModel()
   val context = LocalContext.current
 
   if (viewModel.recordingFilesInitialised.value && viewModel.recordingFiles.value.isEmpty()) {

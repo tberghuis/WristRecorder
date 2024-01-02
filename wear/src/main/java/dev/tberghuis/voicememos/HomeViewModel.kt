@@ -1,27 +1,28 @@
 package dev.tberghuis.voicememos
 
+import android.app.Application
 import android.content.Context
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.tberghuis.voicememos.common.AudioController
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
+
+class HomeViewModel(
+  private val application: Application,
   private val savedStateHandle: SavedStateHandle,
-  val audioController: AudioController,
-  // suppressLint does not remove warning
-  @ApplicationContext val appContext: Context,
-) : ViewModel() {
+) : AndroidViewModel(application) {
   val recordingFiles = mutableStateOf(listOf<String>())
   var recordingFilesInitialised = mutableStateOf(false)
 
+
+  val audioController = AudioController(application)
+
   fun getRecordings() {
-    val files = appContext.fileList().toList().filter { it.startsWith("wristrecorder_") }.sorted()
+    val files = application.fileList().toList().filter { it.startsWith("wristrecorder_") }.sorted()
     recordingFiles.value = files
     recordingFilesInitialised.value = true
   }
+
 }

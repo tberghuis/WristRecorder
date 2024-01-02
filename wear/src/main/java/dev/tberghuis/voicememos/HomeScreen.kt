@@ -9,7 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.HorizontalPageIndicator
 import androidx.wear.compose.material.PageIndicatorState
 import androidx.wear.compose.material.Scaffold
@@ -22,7 +22,7 @@ import dev.tberghuis.voicememos.page.RecordingPage
 fun HomeScreen(
   navigateRecordingDetail: (String) -> Unit
 ) {
-  val viewModel: HomeViewModel = hiltViewModel()
+  val viewModel: HomeViewModel = viewModel()
   // todo hoist this viewmodel, home?pagerIndex=n
   val pagerState = rememberPagerState(pageCount = { 2 })
   val pageIndicatorState: PageIndicatorState = remember {
