@@ -35,7 +35,8 @@ import kotlinx.coroutines.launch
 @SuppressLint("MissingPermission")
 @Composable
 fun RecordingUi(
-  navigateRecordingDetail: (String) -> Unit
+  navigateRecordingDetail: (String) -> Unit,
+  permissionPrompt: (() -> Unit)? = null
 ) {
   val scope = rememberCoroutineScope()
   val viewModel: HomeViewModel = viewModel()
@@ -49,15 +50,20 @@ fun RecordingUi(
 
   val record = fun() {
     logd("record")
-    if (ActivityCompat.checkSelfPermission(
-        context, Manifest.permission.RECORD_AUDIO
-      ) != PackageManager.PERMISSION_GRANTED
-    ) {
+    permissionPrompt?.let {
+      it.invoke()
       return
     }
+//    if (ActivityCompat.checkSelfPermission(
+//        context, Manifest.permission.RECORD_AUDIO
+//      ) != PackageManager.PERMISSION_GRANTED
+//    ) {
+//      return
+//    }
     recordingJob.value = scope.launch {
       viewModel.audioController.record { filename = it }
     }
+    logd("after recordingJob launch")
   }
 
   val endRecord = {
@@ -68,7 +74,6 @@ fun RecordingUi(
       navigateRecordingDetail(it)
     }
   }
-
 
 
   val modifier = when (recordingJob.value) {
@@ -86,6 +91,7 @@ fun RecordingUi(
           false
         }
     }
+
     else -> {
       Modifier
         .clickable {

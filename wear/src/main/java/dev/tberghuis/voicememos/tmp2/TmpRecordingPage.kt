@@ -2,7 +2,9 @@ package dev.tberghuis.voicememos.tmp2
 
 import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
@@ -51,38 +53,47 @@ fun TmpRecordingPage(
     it.permission == android.Manifest.permission.RECORD_AUDIO
   }!!
 
-  Column(
-    Modifier.fillMaxSize(),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center,
+  Box(
+    modifier = Modifier.fillMaxSize(),
+    contentAlignment = Alignment.Center,
   ) {
-    when (recordPermissionState.status) {
-      is PermissionStatus.Denied -> {
-        when (recordPermissionState.status.shouldShowRationale) {
-          true -> {
-            RecordingUi(navigateRecordingDetail)
-            // todo permissionRequest trailing lambda
-          }
-          // user denied 0 or 2 times (prompt dialog dismissed when 0)
-          false -> {
-            Text(
-              "Please enable Microphone permission in settings",
-              textAlign = TextAlign.Center,
-            )
-            Button(
-              onClick = {
-                launchPermissionsSettings(context)
-              },
-              modifier = Modifier.fillMaxWidth(),
-            ) {
-              Text("Show Settings")
+    Column(
+      Modifier
+//      .fillMaxSize(0.8f),
+        .fillMaxWidth(0.8f)
+        .fillMaxHeight(),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center,
+    ) {
+      when (recordPermissionState.status) {
+        is PermissionStatus.Denied -> {
+          when (recordPermissionState.status.shouldShowRationale) {
+            true -> {
+              RecordingUi(navigateRecordingDetail) {
+                recordPermissionState.launchPermissionRequest()
+              }
+            }
+            // user denied 0 or 2 times (prompt dialog dismissed when 0)
+            false -> {
+              Text(
+                "Please enable Microphone permission in settings",
+                textAlign = TextAlign.Center,
+              )
+              Button(
+                onClick = {
+                  launchPermissionsSettings(context)
+                },
+                modifier = Modifier.fillMaxWidth(),
+              ) {
+                Text("Show Settings")
+              }
             }
           }
         }
-      }
 
-      PermissionStatus.Granted -> {
-        RecordingUi(navigateRecordingDetail)
+        PermissionStatus.Granted -> {
+          RecordingUi(navigateRecordingDetail)
+        }
       }
     }
   }
