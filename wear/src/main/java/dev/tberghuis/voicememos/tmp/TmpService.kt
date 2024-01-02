@@ -1,8 +1,6 @@
 package dev.tberghuis.voicememos.tmp
 
 import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Binder
@@ -12,6 +10,8 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import androidx.wear.ongoing.OngoingActivity
 import androidx.wear.ongoing.Status
+import dev.tberghuis.voicememos.Constants
+import dev.tberghuis.voicememos.Constants.NOTIFICATION_ID
 import dev.tberghuis.voicememos.R
 import dev.tberghuis.voicememos.common.logd
 import kotlinx.coroutines.Job
@@ -67,7 +67,7 @@ class TmpService : LifecycleService() {
 
     isRecordingFlow.value = true
 
-    val notification = generateNotification("main text?")
+    val notification = generateNotification()
     startService(Intent(applicationContext, TmpService::class.java))
     startForeground(NOTIFICATION_ID, notification)
 
@@ -89,24 +89,17 @@ class TmpService : LifecycleService() {
   }
 
 
-  private fun generateNotification(mainText: String): Notification {
+  private fun generateNotification(): Notification {
     logd("generateNotification")
 
-    val titleText = "Walking Workout"
-    val notificationChannel = NotificationChannel(
-      NOTIFICATION_CHANNEL_ID,
-      titleText,
-      NotificationManager.IMPORTANCE_DEFAULT,
-    )
 
-    // todo createNotificationChannel in MainApplication
-    val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
-    notificationManager.createNotificationChannel(notificationChannel)
 
-    val bigTextStyle = NotificationCompat.BigTextStyle()
-      .bigText(mainText)
-      .setBigContentTitle(titleText)
+
+//
+//    val bigTextStyle = NotificationCompat.BigTextStyle()
+//      .bigText(mainText)
+//      .setBigContentTitle(titleText)
 
     val launchActivityIntent = Intent(this, TmpActivity::class.java)
 
@@ -118,31 +111,31 @@ class TmpService : LifecycleService() {
     )
 
     val notificationCompatBuilder =
-      NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
+      NotificationCompat.Builder(applicationContext, Constants.NOTIFICATION_CHANNEL_ID)
 
     val notificationBuilder = notificationCompatBuilder
-      .setStyle(bigTextStyle)
-      .setContentTitle(titleText)
-      .setContentText(mainText)
+//      .setStyle(bigTextStyle)
+      .setContentTitle("Recording")
+//      .setContentText("content text")
       .setSmallIcon(R.mipmap.ic_launcher)
-      .setDefaults(NotificationCompat.DEFAULT_ALL)
+//      .setDefaults(NotificationCompat.DEFAULT_ALL)
       .setOngoing(true)
-      .setCategory(NotificationCompat.CATEGORY_WORKOUT)
-      .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+//      .setCategory(NotificationCompat.CATEGORY_SERVICE)
+//      .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
       .addAction(
-        R.drawable.ic_launcher_foreground,
-        "Launch activity",
+        R.drawable.ic_recording,
+        "open Wrist Recorder",
         activityPendingIntent,
       )
 
     val ongoingActivityStatus = Status.Builder()
-      .addTemplate(mainText)
+      .addTemplate("recents text")
       .build()
 
     val ongoingActivity =
       OngoingActivity.Builder(applicationContext, NOTIFICATION_ID, notificationBuilder)
 //        .setAnimatedIcon(R.drawable.animated_walk)
-        .setStaticIcon(R.drawable.ic_launcher_foreground)
+        .setStaticIcon(R.drawable.ic_recording)
         .setTouchIntent(activityPendingIntent)
         .setStatus(ongoingActivityStatus)
         .build()
@@ -151,11 +144,6 @@ class TmpService : LifecycleService() {
     return notificationBuilder.build()
   }
 
-
-  companion object {
-    private const val NOTIFICATION_ID = 12345678
-    private const val NOTIFICATION_CHANNEL_ID = "walking_workout_channel_01"
-  }
 
 
 }
