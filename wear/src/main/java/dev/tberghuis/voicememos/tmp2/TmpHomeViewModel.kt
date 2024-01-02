@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos
+package dev.tberghuis.voicememos.tmp2
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import dev.tberghuis.voicememos.common.AudioController
 
-class HomeViewModel(
+class TmpHomeViewModel(
   private val application: Application,
   private val savedStateHandle: SavedStateHandle,
 ) : AndroidViewModel(application) {
