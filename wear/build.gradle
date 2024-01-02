@@ -66,5 +66,4 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:2.9.0"
 
     implementation "androidx.wear:wear-ongoing:1.0.0"
-    implementation "com.google.accompanist:accompanist-permissions:0.32.0"
 }
