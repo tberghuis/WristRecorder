@@ -90,3 +90,5 @@ migrate code to real app
   if too different use tmp xxx classes
 
 cull todo
+
+reference platform-samples permissions
