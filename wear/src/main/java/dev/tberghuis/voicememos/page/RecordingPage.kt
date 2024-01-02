@@ -1,5 +1,8 @@
 package dev.tberghuis.voicememos.page
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,7 +22,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import dev.tberghuis.voicememos.composables.RecordingUi
-import dev.tberghuis.voicememos.tmp2.launchPermissionsSettings
+import android.provider.Settings
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -94,4 +97,11 @@ fun RecordingPage(
       }
     }
   }
+}
+
+fun launchPermissionsSettings(context: Context) {
+  val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+  val uri = Uri.fromParts("package", context.packageName, null)
+  intent.setData(uri)
+  context.startActivity(intent)
 }
