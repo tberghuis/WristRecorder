@@ -23,6 +23,7 @@ import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import dev.tberghuis.voicememos.composables.RecordingUi
 import android.provider.Settings
+import dev.tberghuis.voicememos.tmp2.TmpRecordingUi
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -90,7 +91,7 @@ fun RecordingPage(
         }
 
         PermissionStatus.Granted -> {
-          RecordingUi(navigateRecordingDetail)
+          TmpRecordingUi(navigateRecordingDetail)
         }
         // redundant
         else -> {}
