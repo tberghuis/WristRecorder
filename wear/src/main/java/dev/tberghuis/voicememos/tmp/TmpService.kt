@@ -10,8 +10,9 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import androidx.wear.ongoing.OngoingActivity
 import androidx.wear.ongoing.Status
-import dev.tberghuis.voicememos.Constants
+import dev.tberghuis.voicememos.Constants.NOTIFICATION_CHANNEL_ID
 import dev.tberghuis.voicememos.Constants.NOTIFICATION_ID
+import dev.tberghuis.voicememos.Constants.REQUEST_CODE_LAUNCH_MAIN_ACTIVITY
 import dev.tberghuis.voicememos.R
 import dev.tberghuis.voicememos.common.logd
 import kotlinx.coroutines.Job
@@ -55,7 +56,6 @@ class TmpService : LifecycleService() {
     return START_NOT_STICKY
   }
 
-
   override fun onBind(intent: Intent): IBinder {
     super.onBind(intent)
     logd("TmpService onBind $this")
@@ -81,52 +81,34 @@ class TmpService : LifecycleService() {
     }
   }
 
-
   fun stopTmpWork() {
     tmpJob?.cancel()
     isRecordingFlow.value = false
     stopForeground(STOP_FOREGROUND_REMOVE)
   }
 
-
   private fun generateNotification(): Notification {
     logd("generateNotification")
-
-
-
-
-
-//
-//    val bigTextStyle = NotificationCompat.BigTextStyle()
-//      .bigText(mainText)
-//      .setBigContentTitle(titleText)
 
     val launchActivityIntent = Intent(this, TmpActivity::class.java)
 
     val activityPendingIntent = PendingIntent.getActivity(
       this,
-      0,
+      REQUEST_CODE_LAUNCH_MAIN_ACTIVITY,
       launchActivityIntent,
       PendingIntent.FLAG_IMMUTABLE,
     )
 
-    val notificationCompatBuilder =
-      NotificationCompat.Builder(applicationContext, Constants.NOTIFICATION_CHANNEL_ID)
-
-    val notificationBuilder = notificationCompatBuilder
-//      .setStyle(bigTextStyle)
-      .setContentTitle("Recording")
-//      .setContentText("content text")
-      .setSmallIcon(R.mipmap.ic_launcher)
-//      .setDefaults(NotificationCompat.DEFAULT_ALL)
-      .setOngoing(true)
-//      .setCategory(NotificationCompat.CATEGORY_SERVICE)
-//      .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-      .addAction(
-        R.drawable.ic_recording,
-        "open Wrist Recorder",
-        activityPendingIntent,
-      )
+    val notificationBuilder =
+      NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
+        .setContentTitle("Recording")
+        .setSmallIcon(R.mipmap.ic_launcher)
+        .setOngoing(true)
+        .addAction(
+          R.drawable.ic_recording,
+          "open Wrist Recorder",
+          activityPendingIntent,
+        )
 
     val ongoingActivityStatus = Status.Builder()
       .addTemplate("recents text")
@@ -134,7 +116,6 @@ class TmpService : LifecycleService() {
 
     val ongoingActivity =
       OngoingActivity.Builder(applicationContext, NOTIFICATION_ID, notificationBuilder)
-//        .setAnimatedIcon(R.drawable.animated_walk)
         .setStaticIcon(R.drawable.ic_recording)
         .setTouchIntent(activityPendingIntent)
         .setStatus(ongoingActivityStatus)
@@ -143,7 +124,4 @@ class TmpService : LifecycleService() {
     ongoingActivity.apply(applicationContext)
     return notificationBuilder.build()
   }
-
-
-
 }
