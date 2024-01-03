@@ -34,3 +34,9 @@ check manifest.xml
 build.gradle
 
 test release APK watch
+
+######################
+hardware input scroll
+scroll bar
+look up lazycolumn in samples
+emulator scoll input - how to test
