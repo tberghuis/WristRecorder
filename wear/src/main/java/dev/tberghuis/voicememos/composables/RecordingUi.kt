@@ -20,13 +20,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Icon
 import dev.tberghuis.voicememos.common.logd
-import dev.tberghuis.voicememos.tmp2.TmpRecordingUiViewModel
+import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 
 @SuppressLint("MissingPermission")
 @Composable
 fun RecordingUi(
   navigateRecordingDetail: (String) -> Unit,
-  vm: TmpRecordingUiViewModel = viewModel(),
+  vm: RecordingUiViewModel = viewModel(),
   permissionPrompt: (() -> Unit)? = null
 ) {
   val requester = remember { FocusRequester() }
