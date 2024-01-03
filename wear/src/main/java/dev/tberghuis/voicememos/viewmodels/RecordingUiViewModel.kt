@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import dev.tberghuis.voicememos.tmp2.TmpRecordingService
+import dev.tberghuis.voicememos.service.RecordingService
 import dev.tberghuis.voicememos.tmp2.TmpRecordingServiceManager
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -16,7 +16,7 @@ class RecordingUiViewModel(
 ) : AndroidViewModel(application) {
   private val recordingServiceManager = TmpRecordingServiceManager(application)
 
-  private val recordingService: TmpRecordingService?
+  private val recordingService: RecordingService?
     get() = recordingServiceManager.recordingServiceFlow.value
 
   var isRecording by mutableStateOf(false)
