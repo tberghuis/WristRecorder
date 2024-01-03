@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun TmpRecordingUi(
   navigateRecordingDetail: (String) -> Unit,
-  vm: TmpHomeViewModel = viewModel(),
+  vm: TmpRecordingUiViewModel = viewModel(),
   permissionPrompt: (() -> Unit)? = null
 ) {
   val scope = rememberCoroutineScope()
@@ -50,17 +50,24 @@ fun TmpRecordingUi(
       it.invoke()
       return
     }
-    recordingJob.value = scope.launch {
-      vm.audioController.record { filename = it }
-    }
-    logd("after recordingJob launch")
+    vm.startRecording()
+//    recordingJob.value = scope.launch {
+//      vm.audioController.record { filename = it }
+//    }
   }
 
+
+//  val endRecord = {
+//    logd("end record")
+//    recordingJob.value?.cancel()
+//    recordingJob.value = null
+//    filename?.let {
+//      navigateRecordingDetail(it)
+//    }
+//  }
+
   val endRecord = {
-    logd("end record")
-    recordingJob.value?.cancel()
-    recordingJob.value = null
-    filename?.let {
+    vm.stopRecording()?.let {
       navigateRecordingDetail(it)
     }
   }

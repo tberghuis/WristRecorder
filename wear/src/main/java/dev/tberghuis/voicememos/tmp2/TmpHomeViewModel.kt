@@ -1,23 +1,48 @@
 package dev.tberghuis.voicememos.tmp2
 
 import android.app.Application
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.SavedStateHandle
-import dev.tberghuis.voicememos.common.AudioController
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 
-class TmpHomeViewModel(
-  private val application: Application,
-  private val savedStateHandle: SavedStateHandle,
+class TmpRecordingUiViewModel(
+  application: Application,
 ) : AndroidViewModel(application) {
-  val recordingFiles = mutableStateOf(listOf<String>())
-  var recordingFilesInitialised = mutableStateOf(false)
+  private val recordingServiceManager = TmpRecordingServiceManager(application)
 
-  val audioController = AudioController(application)
+  private val recordingService: TmpRecordingService?
+    get() = recordingServiceManager.recordingServiceFlow.value
 
-  fun getRecordings() {
-    val files = application.fileList().toList().filter { it.startsWith("wristrecorder_") }.sorted()
-    recordingFiles.value = files
-    recordingFilesInitialised.value = true
+  var isRecording by mutableStateOf(false)
+    private set
+
+  init {
+    viewModelScope.launch {
+      recordingServiceManager.recordingServiceFlow.filterNotNull().collect { service ->
+        service.isRecordingFlow.collect {
+          isRecording = it
+        }
+      }
+    }
+  }
+
+  fun startRecording() {
+    // doitwrong
+    recordingService?.startRecording()
+  }
+
+  fun stopRecording(): String? {
+    return recordingService?.stopRecording()
+  }
+
+  override fun onCleared() {
+    if (!isRecording) {
+      recordingService?.stopSelf()
+    }
+    super.onCleared()
   }
 }

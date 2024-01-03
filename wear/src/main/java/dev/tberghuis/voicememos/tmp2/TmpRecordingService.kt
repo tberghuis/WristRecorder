@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class TmpRecordingService : LifecycleService() {
 
   val isRecordingFlow = MutableStateFlow(false)
+  var filename: String? = null
 
   private val localBinder = LocalBinder()
 
@@ -28,12 +29,15 @@ class TmpRecordingService : LifecycleService() {
     return START_NOT_STICKY
   }
 
+  // doitwrong
   fun startRecording() {
     logd("startRecording")
+    // todo set filename in callback
   }
 
-  fun stopRecording() {
+  fun stopRecording(): String? {
     logd("stopRecording")
+    return filename
   }
 
 }
