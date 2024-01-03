@@ -69,8 +69,9 @@ class TmpRecordingService : LifecycleService() {
 
   fun stopRecording(): String? {
     logd("stopRecording")
-    isRecordingFlow.value = false
     recordingJob?.cancel()
+    stopForeground(STOP_FOREGROUND_REMOVE)
+    isRecordingFlow.value = false
     return filename
   }
 
