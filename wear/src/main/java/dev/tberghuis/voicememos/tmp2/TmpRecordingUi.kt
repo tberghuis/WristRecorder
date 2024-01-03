@@ -41,20 +41,7 @@ fun TmpRecordingUi(
       return
     }
     vm.startRecording()
-//    recordingJob.value = scope.launch {
-//      vm.audioController.record { filename = it }
-//    }
   }
-
-
-//  val endRecord = {
-//    logd("end record")
-//    recordingJob.value?.cancel()
-//    recordingJob.value = null
-//    filename?.let {
-//      navigateRecordingDetail(it)
-//    }
-//  }
 
   val endRecord = {
     vm.stopRecording()?.let {
