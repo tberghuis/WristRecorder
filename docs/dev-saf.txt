@@ -40,3 +40,8 @@ hardware input scroll
 scroll bar
 look up lazycolumn in samples
 emulator scoll input - how to test
+
+####################
+splashscreen
+doitwrong, copy from ComposeAdvanced
+reads docs
