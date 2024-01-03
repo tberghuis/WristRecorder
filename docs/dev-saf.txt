@@ -89,7 +89,8 @@ remove hilt
 migrate code to real app
   if too different use tmp xxx classes
 
-cull todo
+cull todo tmp xxx
+check manifest.xml
 
 reference platform-samples permissions
 
