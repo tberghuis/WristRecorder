@@ -11,8 +11,8 @@ android {
         applicationId "dev.tberghuis.wristrecorder"
         minSdk 28
         targetSdk 33
-        versionCode 14
-        versionName "1.7.2"
+        versionCode 15
+        versionName "1.7.3"
     }
 
     buildTypes {
@@ -68,7 +68,4 @@ dependencies {
     implementation "androidx.wear:wear-ongoing:1.0.0"
 
     implementation "com.google.android.horologist:horologist-compose-layout:0.5.17"
-
-
-
 }
