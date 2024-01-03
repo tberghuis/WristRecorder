@@ -2,18 +2,13 @@ https://github.com/android/wear-os-samples
 MediaRecorder instead of AudioRecorder
 
 noteboat SAF first
-
 MediaStore vs SAF try both
-
 read official docs
   https://developer.android.com/guide/topics/data
-
 /data/data/dev.tberghuis.wristrecorder/files/wristrecorder_1703715785704.pcm
 
-cull xxx tmp
-...
-release
 
+release
 
 #############
 MediaStore API vs SAF
@@ -26,77 +21,16 @@ https://stackoverflow.com/questions/37281430/how-to-convert-pcm-file-to-wav-or-m
 
 #####################
 
-gradle build flavor tmpDebug
-
-https://github.com/android/codelab-ongoing-activity
-https://developer.android.com/training/wearables/notifications
-
-#doitwrong
-recents entry, add (Recording) when recording
-
-RecordingServiceManager
-
-what happens if i start foreground service before activity onStop??
-will a notification flash?
-
-
-remove hilt dependency
-
-
 floating timer, i can use lifecycleScope instead of my own scope???
 not sure as setContent { composable } might be on the wrong thread dispatcher???
 
-how to cancel workout from the ongoing notification? (codelab)
-
-does my service need to deal with configuration changes
-  say change font size in settings or something
-  onbind will be called a second time
-
-
-do i just copy the codelab way of doing things....
-or do i do it another way???
-yes
-
-
-don't use unbind
-when recording starts
-  startForeground
-when recording stops
-  stopForground
-when vm oncleared
-  if ! recording
-    service.stopSelf
-
-prompt for notification permission on startup
-  launchedEffect, run every time
-  see if it passes play store console review
-
-  https://google.github.io/accompanist/permissions/
-
 ##########################
-multiple permissions
-write some tests.txt
-...
 
 Dialog button "cancel" width, or just use icon???
 
 ##################
 
-next task
-  ongoing activity notification icon
-
-remove hilt
-migrate code to real app
-  if too different use tmp xxx classes
-
-cull todo tmp xxx
 check manifest.xml
-
-reference platform-samples permissions
-
-reference floating timer, 
-  notification channel in application oncreate
-
-https://developer.android.com/training/wearables/notifications
+build.gradle
 
 test release APK watch
