@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    https://developer.android.com/training/wearables/apps/splash-screen-->
 
     <style name="Theme.App" parent="@android:style/Theme.DeviceDefault" />
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@android:color/black</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen</item>
-<!--        <item name="windowSplashScreenIconBackgroundColor">@android:color/white</item>-->
+        <!--        <item name="windowSplashScreenIconBackgroundColor">@android:color/white</item>-->
         <item name="postSplashScreenTheme">@style/Theme.App</item>
     </style>
 </resources>
