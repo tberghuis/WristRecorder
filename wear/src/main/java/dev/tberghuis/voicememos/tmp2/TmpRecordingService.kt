@@ -10,10 +10,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class TmpRecordingService : LifecycleService() {
-  private lateinit var audioController: AudioController
-  var recordingJob: Job? = null
   val isRecordingFlow = MutableStateFlow(false)
-  var filename: String? = null
+
+  private lateinit var audioController: AudioController
+  private var recordingJob: Job? = null
+  private var filename: String? = null
 
   private val localBinder = LocalBinder()
 
