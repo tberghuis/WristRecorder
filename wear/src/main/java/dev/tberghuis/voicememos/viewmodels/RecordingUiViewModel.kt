@@ -7,14 +7,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.tberghuis.voicememos.service.RecordingService
-import dev.tberghuis.voicememos.tmp2.TmpRecordingServiceManager
+import dev.tberghuis.voicememos.service.RecordingServiceManager
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 class RecordingUiViewModel(
   application: Application,
 ) : AndroidViewModel(application) {
-  private val recordingServiceManager = TmpRecordingServiceManager(application)
+  private val recordingServiceManager = RecordingServiceManager(application)
 
   private val recordingService: RecordingService?
     get() = recordingServiceManager.recordingServiceFlow.value

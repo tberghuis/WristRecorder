@@ -41,7 +41,7 @@
         </activity>
 
         <service
-            android:name=".tmp2.TmpRecordingService"
+            android:name=".service.RecordingService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="microphone" />
