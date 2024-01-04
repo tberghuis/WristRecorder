@@ -1,9 +1,12 @@
 package dev.tberghuis.voicememos.page
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -50,38 +53,50 @@ fun RecordingList(
   val columnState = rememberColumnState(responsive())
 
   ScreenScaffold(scrollState = columnState) {
-    ScalingLazyColumn(
-      columnState = columnState,
-      modifier = Modifier.fillMaxSize(),
-    ) {
-      // this is to ensure i pass play store review:
-      // Fits within the physical display area.
-      // No text or controls are cut off by the screen edges.
-      item {
-        Spacer(Modifier.height(5.dp))
-      }
-      items(viewModel.recordingFiles.value.size) { i ->
-        val file = viewModel.recordingFiles.value[i]
-        val buttonText = remember(file, context) {
-          "${formatTimestampFromFilename(file)} ${calcDuration(context, file)}s"
-        }
 
-        Chip(
-          label = {
-            Text(
-              buttonText, Modifier.padding(horizontal = 5.dp),
-              fontSize = 12.sp,
-              overflow = TextOverflow.Ellipsis,
-              maxLines = 1,
-            )
-          },
-          onClick = {
-            logd("play $file")
-            onRecordingClick(file)
-          },
-          contentPadding = ChipDefaults.CompactChipTapTargetPadding,
-        )
+    Box(
+      modifier = Modifier
+        .fillMaxSize(),
+      contentAlignment = Alignment.TopCenter,
+    ) {
+      ScalingLazyColumn(
+        columnState = columnState,
+        modifier = Modifier
+          .fillMaxHeight()
+          .fillMaxWidth(0.9f),
+      ) {
+        // this is to ensure i pass play store review:
+        // Fits within the physical display area.
+        // No text or controls are cut off by the screen edges.
+//      item {
+//        Spacer(Modifier.height(5.dp))
+//      }
+        items(viewModel.recordingFiles.value.size) { i ->
+          val file = viewModel.recordingFiles.value[i]
+          val buttonText = remember(file, context) {
+            "${formatTimestampFromFilename(file)} ${calcDuration(context, file)}s"
+          }
+
+          Chip(
+            label = {
+              Text(
+                buttonText, Modifier.padding(horizontal = 5.dp),
+                fontSize = 12.sp,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
+              )
+            },
+            onClick = {
+              logd("play $file")
+              onRecordingClick(file)
+            },
+            contentPadding = ChipDefaults.CompactChipTapTargetPadding,
+          )
+        }
       }
+
     }
+
+
   }
 }
