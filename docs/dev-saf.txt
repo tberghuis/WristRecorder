@@ -45,3 +45,8 @@ emulator scoll input - how to test
 splashscreen
 doitwrong, copy from ComposeAdvanced
 reads docs
+
+######################
+padding for recording list
+read quality guidelines, does it explicity list 0.7xxf
+android studio compose tools, inspector, widget sizes
