@@ -3,11 +3,9 @@ package dev.tberghuis.voicememos.page
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -53,7 +51,6 @@ fun RecordingList(
   val columnState = rememberColumnState(responsive())
 
   ScreenScaffold(scrollState = columnState) {
-
     Box(
       modifier = Modifier
         .fillMaxSize(),
@@ -63,14 +60,11 @@ fun RecordingList(
         columnState = columnState,
         modifier = Modifier
           .fillMaxHeight()
+          // this is to ensure i pass play store review:
+          // Fits within the physical display area.
+          // No text or controls are cut off by the screen edges.
           .fillMaxWidth(0.9f),
       ) {
-        // this is to ensure i pass play store review:
-        // Fits within the physical display area.
-        // No text or controls are cut off by the screen edges.
-//      item {
-//        Spacer(Modifier.height(5.dp))
-//      }
         items(viewModel.recordingFiles.value.size) { i ->
           val file = viewModel.recordingFiles.value[i]
           val buttonText = remember(file, context) {
@@ -94,9 +88,6 @@ fun RecordingList(
           )
         }
       }
-
     }
-
-
   }
 }
