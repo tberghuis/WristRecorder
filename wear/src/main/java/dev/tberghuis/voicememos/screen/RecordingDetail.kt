@@ -30,6 +30,7 @@ import androidx.wear.compose.material.dialog.Alert
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.composables.isHardwareButtonPress
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -41,11 +42,17 @@ fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
 
   val requester = remember { FocusRequester() }
   LaunchedEffect(Unit) {
+    logd("RecordingDetail LaunchedEffect before delay")
+    // doitwrong
+    delay(1)
+    logd("RecordingDetail LaunchedEffect after delay")
     requester.requestFocus()
   }
 
   Column(
     Modifier
+      .focusRequester(requester)
+      .focusable()
       .onKeyEvent { keyEvent ->
         logd("keyEvent $keyEvent")
         if (isHardwareButtonPress(keyEvent)) {
@@ -54,8 +61,6 @@ fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
         }
         false
       }
-      .focusRequester(requester)
-      .focusable()
       .fillMaxSize(),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center) {

@@ -21,6 +21,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Icon
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
+import kotlinx.coroutines.delay
 
 @SuppressLint("MissingPermission")
 @Composable
@@ -31,6 +32,11 @@ fun RecordingUi(
 ) {
   val requester = remember { FocusRequester() }
   LaunchedEffect(Unit) {
+    logd("RecordingUi LaunchedEffect before delay")
+    // should i create a bug or just live with it
+    // meh
+    delay(500)
+    logd("RecordingUi LaunchedEffect after delay")
     requester.requestFocus()
   }
 
