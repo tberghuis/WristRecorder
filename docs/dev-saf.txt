@@ -50,3 +50,10 @@ reads docs
 padding for recording list
 read quality guidelines, does it explicity list 0.7xxf
 android studio compose tools, inspector, widget sizes
+
+
+##################
+
+fix stem press not navigating....
+  debug
+  ....
