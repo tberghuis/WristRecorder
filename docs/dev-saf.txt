@@ -56,4 +56,7 @@ android studio compose tools, inspector, widget sizes
 
 fix stem press not navigating....
   debug
+  reproduce in api 33 emulator?
   ....
+
+cull/organise docs *.txt
