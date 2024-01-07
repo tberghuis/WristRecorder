@@ -62,20 +62,24 @@ fun RecordingUi(
         }
       }
   ) {
-    if (vm.isRecording) {
-      Icon(
-        imageVector = Icons.Filled.Stop,
-        contentDescription = "stop recording",
-        tint = Color.White,
-        modifier = Modifier.size(80.dp)
-      )
-    } else {
-      Icon(
-        imageVector = Icons.Filled.Circle,
-        contentDescription = "start recording",
-        tint = Color.Red,
-        modifier = Modifier.size(80.dp)
-      )
+    when (vm.isRecording) {
+      true -> {
+        Icon(
+          imageVector = Icons.Filled.Stop,
+          contentDescription = "stop recording",
+          tint = Color.White,
+          modifier = Modifier.size(80.dp)
+        )
+      }
+
+      false -> {
+        Icon(
+          imageVector = Icons.Filled.Circle,
+          contentDescription = "start recording",
+          tint = Color.Red,
+          modifier = Modifier.size(80.dp)
+        )
+      }
     }
   }
 }
