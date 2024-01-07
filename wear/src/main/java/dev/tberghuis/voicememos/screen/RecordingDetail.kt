@@ -1,6 +1,5 @@
 package dev.tberghuis.voicememos.screen
 
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,9 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -31,8 +27,6 @@ import androidx.wear.compose.material.dialog.Alert
 import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
 import dev.tberghuis.voicememos.common.logd
-import dev.tberghuis.voicememos.composables.isHardwareButtonPress
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -42,37 +36,15 @@ fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
   // do i need key??? probably, should write a test???
   val formattedTime = remember { formatTimestampFromFilename(viewModel.file) }
 
-//  val requester = remember { FocusRequester() }
-//  LaunchedEffect(Unit) {
-//    logd("RecordingDetail LaunchedEffect before delay")
-//    // doitwrong
-//    delay(1)
-//    logd("RecordingDetail LaunchedEffect after delay")
-//    requester.requestFocus()
-//  }
-
   val context = LocalContext.current
-
   LaunchedEffect(context) {
     (context as MainActivity).stemKeyUpSharedFlow.collect {
       popHomeRecording()
     }
   }
 
-
   Column(
-    Modifier
-//      .focusRequester(requester)
-//      .focusable()
-//      .onKeyEvent { keyEvent ->
-//        logd("keyEvent $keyEvent")
-//        if (isHardwareButtonPress(keyEvent)) {
-//          popHomeRecording()
-//          return@onKeyEvent true
-//        }
-//        false
-//      }
-      .fillMaxSize(),
+    Modifier.fillMaxSize(),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center
   ) {

@@ -18,25 +18,18 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-
-  val stemKeyUpSharedFlow = MutableSharedFlow<Unit>(replay = 0)
+  val stemKeyUpSharedFlow = MutableSharedFlow<Unit>()
 
   override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
     logd("MainActivity onKeyUp keyCode $keyCode event $event")
-
     if (keyCode == KEYCODE_STEM_1) {
       lifecycleScope.launch {
         stemKeyUpSharedFlow.emit(Unit)
       }
       return true
     }
-
-
-    val result = super.onKeyUp(keyCode, event)
-    logd("super.onKeyUp $result")
-    return result
+    return super.onKeyUp(keyCode, event)
   }
-
 
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()
@@ -46,7 +39,6 @@ class MainActivity : ComponentActivity() {
     }
   }
 }
-
 
 @Composable
 fun WearApp() {
