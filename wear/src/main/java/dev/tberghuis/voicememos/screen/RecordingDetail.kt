@@ -21,12 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Alert
+import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.composables.isHardwareButtonPress
@@ -40,30 +42,40 @@ fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
   // do i need key??? probably, should write a test???
   val formattedTime = remember { formatTimestampFromFilename(viewModel.file) }
 
-  val requester = remember { FocusRequester() }
-  LaunchedEffect(Unit) {
-    logd("RecordingDetail LaunchedEffect before delay")
-    // doitwrong
-    delay(1)
-    logd("RecordingDetail LaunchedEffect after delay")
-    requester.requestFocus()
+//  val requester = remember { FocusRequester() }
+//  LaunchedEffect(Unit) {
+//    logd("RecordingDetail LaunchedEffect before delay")
+//    // doitwrong
+//    delay(1)
+//    logd("RecordingDetail LaunchedEffect after delay")
+//    requester.requestFocus()
+//  }
+
+  val context = LocalContext.current
+
+  LaunchedEffect(context) {
+    (context as MainActivity).stemKeyUpSharedFlow.collect {
+      popHomeRecording()
+    }
   }
+
 
   Column(
     Modifier
-      .focusRequester(requester)
-      .focusable()
-      .onKeyEvent { keyEvent ->
-        logd("keyEvent $keyEvent")
-        if (isHardwareButtonPress(keyEvent)) {
-          popHomeRecording()
-          return@onKeyEvent true
-        }
-        false
-      }
+//      .focusRequester(requester)
+//      .focusable()
+//      .onKeyEvent { keyEvent ->
+//        logd("keyEvent $keyEvent")
+//        if (isHardwareButtonPress(keyEvent)) {
+//          popHomeRecording()
+//          return@onKeyEvent true
+//        }
+//        false
+//      }
       .fillMaxSize(),
     horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center) {
+    verticalArrangement = Arrangement.Center
+  ) {
     Text(formattedTime)
     Text("${viewModel.duration} seconds")
     Row(Modifier.padding(top = 10.dp)) {

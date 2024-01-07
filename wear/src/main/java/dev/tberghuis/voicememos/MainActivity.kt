@@ -1,17 +1,43 @@
 package dev.tberghuis.voicememos
 
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_STEM_1
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
+import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.screen.RecordingDetail
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+
+  val stemKeyUpSharedFlow = MutableSharedFlow<Unit>(replay = 0)
+
+  override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+    logd("MainActivity onKeyUp keyCode $keyCode event $event")
+
+    if (keyCode == KEYCODE_STEM_1) {
+      lifecycleScope.launch {
+        stemKeyUpSharedFlow.emit(Unit)
+      }
+      return true
+    }
+
+
+    val result = super.onKeyUp(keyCode, event)
+    logd("super.onKeyUp $result")
+    return result
+  }
+
+
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()
     super.onCreate(savedInstanceState)
