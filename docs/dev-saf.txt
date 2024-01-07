@@ -60,3 +60,7 @@ fix stem press not navigating....
   ....
 
 cull/organise docs *.txt
+
+######################
+activity shared flow stem press
+lauchedeffect collect
