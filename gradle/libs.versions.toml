@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.0"
+agp = "8.7.1"
 appcompat = "1.6.1"
 coreKtx = "1.12.0"
 espressoCore = "3.5.1"
