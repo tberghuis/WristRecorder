@@ -42,15 +42,15 @@ android {
 }
 
 dependencies {
-  implementation("androidx.core:core-ktx:1.12.0")
-  implementation("androidx.activity:activity-compose:1.8.2")
-  implementation("androidx.compose.ui:ui:1.5.4")
-  implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
-  implementation("androidx.compose.foundation:foundation:1.5.4")
-  implementation("androidx.compose.material:material-icons-extended:1.5.4")
-  implementation("androidx.lifecycle:lifecycle-service:2.6.2")
+  implementation("androidx.core:core-ktx:1.13.1")
+  implementation("androidx.activity:activity-compose:1.9.2")
+  implementation("androidx.compose.ui:ui:1.7.3")
+  implementation("androidx.compose.ui:ui-tooling-preview:1.7.3")
+  implementation("androidx.compose.foundation:foundation:1.7.3")
+  implementation("androidx.compose.material:material-icons-extended:1.7.3")
+  implementation("androidx.lifecycle:lifecycle-service:2.8.6")
 
-  val wear_compose_version = "1.2.1"
+  val wear_compose_version = "1.4.0"
   implementation("androidx.wear.compose:compose-material:$wear_compose_version")
   implementation("androidx.wear.compose:compose-foundation:$wear_compose_version")
   implementation("androidx.wear.compose:compose-navigation:$wear_compose_version")
@@ -58,11 +58,11 @@ dependencies {
 //  implementation (project (path: ':common'))
   implementation(project(":common"))
 
-  implementation("com.google.accompanist:accompanist-permissions:0.32.0")
+  implementation("com.google.accompanist:accompanist-permissions:0.36.0")
   implementation("androidx.wear:wear-input:1.1.0")
-  implementation("com.google.android.gms:play-services-wearable:18.1.0")
+  implementation("com.google.android.gms:play-services-wearable:18.2.0")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
-  implementation("androidx.work:work-runtime-ktx:2.9.0")
+  implementation("androidx.work:work-runtime-ktx:2.9.1")
   implementation("androidx.wear:wear-ongoing:1.0.0")
 
   implementation("com.google.android.horologist:horologist-compose-layout:0.5.17")
