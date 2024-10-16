@@ -58,7 +58,6 @@ dependencies {
 //  implementation("androidx.lifecycle:lifecycle-service:2.8.6")
   implementation(libs.androidx.lifecycle.service)
 
-  val wear_compose_version = "1.4.0"
 //  implementation("androidx.wear.compose:compose-material:$wear_compose_version")
   implementation(libs.androidx.compose.material)
 //  implementation("androidx.wear.compose:compose-foundation:$wear_compose_version")
