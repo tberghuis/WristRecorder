@@ -1,8 +1,0 @@
-
-play store screenshot + description
-
-comment wearos samples issue, no ChannelClient example, provide a link to my repo
-
-README.md
-  screenshot
-  description

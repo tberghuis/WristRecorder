@@ -1,6 +1,0 @@
-
-post reddit wearosdev wearos androiddev-feedback-thread
-  product hunt, sideproject, indiehackers
-
-https://www.reddit.com/r/WearOS/comments/xse95m/wrist_recorder_open_source_recording_app/?
-https://www.reddit.com/r/androiddev/comments/xsegtt/wrist_recorder_open_source_recording_app_for/
