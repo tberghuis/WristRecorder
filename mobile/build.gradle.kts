@@ -32,19 +32,15 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
   }
   kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "11"
   }
   buildFeatures {
     compose = true
   }
-//  composeOptions {
-//    // https://www.jetpackcomposeversion.com/
-//    kotlinCompilerExtensionVersion = "1.5.5"
-//  }
   packaging {
     resources {
       excludes += "/META-INF/{AL2.0,LGPL2.1}"
