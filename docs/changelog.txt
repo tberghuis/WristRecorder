@@ -1,0 +1,5 @@
+1.8.0   2024-10-17
+  gradle kts and toml
+  update gradle dependencies
+  targetSdk 34
+  

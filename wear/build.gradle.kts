@@ -11,9 +11,9 @@ android {
   defaultConfig {
     applicationId = "dev.tberghuis.wristrecorder"
     minSdk = 28
-    targetSdk = 33
-    versionCode = 19
-    versionName = "1.7.7"
+    targetSdk = 34
+    versionCode = 20
+    versionName = "1.8.0"
   }
 
   buildTypes {
