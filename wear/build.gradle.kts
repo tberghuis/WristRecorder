@@ -32,10 +32,12 @@ android {
     create("default") {
       isDefault = true
       dimension = "flavor"
+//      buildConfigField("boolean", "BACK_OVERRIDE", "false")
     }
     create("backoverride") {
       dimension = "flavor"
       versionNameSuffix = "-backoverride"
+//      buildConfigField("boolean", "BACK_OVERRIDE", "true")
     }
   }
 
@@ -48,6 +50,7 @@ android {
   }
   buildFeatures {
     compose = true
+    buildConfig = true
   }
 }
 
