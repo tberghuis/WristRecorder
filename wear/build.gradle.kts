@@ -12,8 +12,8 @@ android {
     applicationId = "dev.tberghuis.wristrecorder"
     minSdk = 28
     targetSdk = 34
-    versionCode = 20
-    versionName = "1.8.0"
+    versionCode = 21
+    versionName = "1.9.0"
   }
 
   buildTypes {
@@ -32,12 +32,11 @@ android {
     create("default") {
       isDefault = true
       dimension = "flavor"
-//      buildConfigField("boolean", "BACK_OVERRIDE", "false")
     }
     create("backoverride") {
       dimension = "flavor"
       versionNameSuffix = "-backoverride"
-//      buildConfigField("boolean", "BACK_OVERRIDE", "true")
+      applicationIdSuffix = ".backoverride"
     }
   }
 

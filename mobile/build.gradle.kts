@@ -12,8 +12,8 @@ android {
     applicationId = "dev.tberghuis.wristrecorder"
     minSdk = 28
     targetSdk = 34
-    versionCode = 10020
-    versionName = "1.8.0"
+    versionCode = 10021
+    versionName = "1.9.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables {
@@ -31,6 +31,20 @@ android {
       signingConfig = signingConfigs.getByName("debug")
     }
   }
+
+  flavorDimensions += "flavor"
+  productFlavors {
+    create("default") {
+      isDefault = true
+      dimension = "flavor"
+    }
+    create("backoverride") {
+      dimension = "flavor"
+      versionNameSuffix = "-backoverride"
+      applicationIdSuffix = ".backoverride"
+    }
+  }
+
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
@@ -49,7 +63,7 @@ android {
 }
 
 kotlin {
-    jvmToolchain(17)
+  jvmToolchain(17)
 }
 
 dependencies {

@@ -17,3 +17,5 @@ local.properties
 /wear/release/
 /mobile/release/
 .idea/deploymentTargetDropDown.xml
+/wear/default/release/
+/wear/backoverride/release/
