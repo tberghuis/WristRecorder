@@ -17,7 +17,6 @@ import androidx.wear.compose.material.HorizontalPageIndicator
 import androidx.wear.compose.material.PageIndicatorState
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.TimeText
-import dev.tberghuis.voicememos.common.BuildConfig
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.page.RecordingList
 import dev.tberghuis.voicememos.page.RecordingPage
@@ -43,7 +42,7 @@ fun HomeScreen(
   }
 
   @Suppress("KotlinConstantConditions")
-  if (dev.tberghuis.voicememos.BuildConfig.FLAVOR == "backoverride") {
+  if (BuildConfig.FLAVOR == "backoverride") {
     // this also prevents back swipe, but its only for me so I don't care.
     run {
       val activity = (LocalActivity.current ?: return@run) as MainActivity
