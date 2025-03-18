@@ -1,3 +1,7 @@
+v1.9.1  2025-03-19  dev-backoverride  
+  versionCode: wear=22
+  play store fix: texts are cut off when a large font size is selected in your app
+
 1.9.0   2025-03-18  dev-backoverride
   update gradle dependencies
 
