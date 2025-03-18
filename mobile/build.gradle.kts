@@ -6,7 +6,7 @@ plugins {
 
 android {
   namespace = "dev.tberghuis.voicememos"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     applicationId = "dev.tberghuis.wristrecorder"
