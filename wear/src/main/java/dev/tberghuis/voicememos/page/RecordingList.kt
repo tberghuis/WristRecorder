@@ -12,12 +12,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
+import androidx.wear.compose.material.LocalTextStyle
 import androidx.wear.compose.material.Text
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.compose.layout.ScalingLazyColumn
@@ -74,10 +76,12 @@ fun RecordingList(
           Chip(
             label = {
               Text(
-                buttonText, Modifier.padding(horizontal = 5.dp),
+                text = buttonText,
+                modifier = Modifier.padding(horizontal = 5.dp),
                 fontSize = 12.sp,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
+                textAlign = TextAlign.Center,
+                lineHeight = 12.sp,
+                overflow = TextOverflow.Visible,
               )
             },
             onClick = {
