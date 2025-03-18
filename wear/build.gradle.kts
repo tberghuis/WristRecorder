@@ -38,6 +38,10 @@ android {
   }
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 dependencies {
   implementation(project(":common"))
   implementation(platform(libs.androidx.compose.bom))
