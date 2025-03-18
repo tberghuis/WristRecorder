@@ -26,6 +26,19 @@ android {
       signingConfig = signingConfigs.getByName("debug")
     }
   }
+
+  flavorDimensions += "flavor"
+  productFlavors {
+    create("default") {
+      isDefault = true
+      dimension = "flavor"
+    }
+    create("backoverride") {
+      dimension = "flavor"
+      versionNameSuffix = "-backoverride"
+    }
+  }
+
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -39,7 +52,7 @@ android {
 }
 
 kotlin {
-    jvmToolchain(17)
+  jvmToolchain(17)
 }
 
 dependencies {
