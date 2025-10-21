@@ -5,12 +5,10 @@ plugins {
 
 android {
   namespace = "dev.tberghuis.voicememos.common"
-  compileSdk = 35
+  compileSdk = 36
 
   defaultConfig {
-    minSdk = 28
-    // targetSdk deprecated - android library plugin
-//    targetSdk = 33
+//    minSdk = 28
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
   }
@@ -36,7 +34,6 @@ android {
 dependencies {
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.appcompat)
-//  implementation(libs.material)
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
