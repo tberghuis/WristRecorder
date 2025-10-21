@@ -53,6 +53,9 @@ fun FreshMobileTheme(
     darkTheme -> DarkColorScheme
     else -> LightColorScheme
   }
+
+  // this no longer in new project boilerplate
+  // using deprecated methods
 //  val view = LocalView.current
 //  if (!view.isInEditMode) {
 //    SideEffect {
