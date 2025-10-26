@@ -1,3 +1,7 @@
+v1.10.0  2025-10-26  001-start-recording-deeplink  
+  update dependencies
+  targetSdk 35 - edge-to-edge
+
 v1.9.2  2025-03-20  dev-backoverride  
   versionCode: wear=23
   play store fix: texts are cut off when a large font size is selected in your app
