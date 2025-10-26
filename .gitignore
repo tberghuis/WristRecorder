@@ -14,9 +14,11 @@
 .cxx
 local.properties
 
+.idea/deploymentTargetDropDown.xml
+.idea/deploymentTargetSelector.xml
+
 /wear/release/
 /mobile/release/
-.idea/deploymentTargetDropDown.xml
 /wear/default/release/
 /wear/backoverride/release/
 /mobile/default/release/

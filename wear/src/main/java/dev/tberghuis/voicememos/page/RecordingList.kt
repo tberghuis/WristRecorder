@@ -25,6 +25,7 @@ import com.google.android.horologist.compose.layout.ScalingLazyColumn
 import com.google.android.horologist.compose.layout.ScalingLazyColumnDefaults.responsive
 import com.google.android.horologist.compose.layout.ScreenScaffold
 import com.google.android.horologist.compose.layout.rememberColumnState
+import com.google.android.horologist.compose.layout.rememberResponsiveColumnState
 import dev.tberghuis.voicememos.HomeViewModel
 import dev.tberghuis.voicememos.common.calcDuration
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
@@ -49,7 +50,7 @@ fun RecordingList(
     return
   }
 
-  val columnState = rememberColumnState(responsive())
+  val columnState = rememberResponsiveColumnState()
 
   ScreenScaffold(scrollState = columnState) {
     Box(
