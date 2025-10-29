@@ -19,6 +19,7 @@ import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.R
 import dev.tberghuis.voicememos.common.AudioController
 import dev.tberghuis.voicememos.common.logd
+import dev.tberghuis.voicememos.formatSecondsToMinutesAndSeconds
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -114,8 +115,7 @@ class RecordingService : LifecycleService() {
         )
 
     val ongoingActivityStatus = Status.Builder()
-      // todo format recordingDurationSeconds MM:SS
-      .addTemplate("REC ${recordingDurationSeconds}")
+      .addTemplate("REC ${formatSecondsToMinutesAndSeconds(recordingDurationSeconds)}")
       .build()
 
     val ongoingActivity =
