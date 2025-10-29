@@ -120,8 +120,7 @@ class RecordingService : LifecycleService() {
 
     val ongoingActivity =
       OngoingActivity.Builder(applicationContext, NOTIFICATION_ID, notificationBuilder)
-        .setStaticIcon(R.drawable.ic_recording)
-        // todo
+        .setStaticIcon(R.drawable.wear_ongoing_0)
         .setAnimatedIcon(R.drawable.wear_ongoing_animation)
         .setTouchIntent(activityPendingIntent)
         .setStatus(ongoingActivityStatus)
