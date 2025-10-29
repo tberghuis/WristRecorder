@@ -122,7 +122,7 @@ class RecordingService : LifecycleService() {
       OngoingActivity.Builder(applicationContext, NOTIFICATION_ID, notificationBuilder)
         .setStaticIcon(R.drawable.ic_recording)
         // todo
-        .setAnimatedIcon(R.drawable.avd_anim)
+        .setAnimatedIcon(R.drawable.wear_ongoing_animation)
         .setTouchIntent(activityPendingIntent)
         .setStatus(ongoingActivityStatus)
         .build()
