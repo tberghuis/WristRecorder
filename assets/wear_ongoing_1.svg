@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   inkscape:version="1.4.2 (1:1.4.2+202505120737+ebf0e940d0)"
+   sodipodi:docname="wear_ongoing_1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.55657038"
+     inkscape:cx="-115.88831"
+     inkscape:cy="256.93067"
+     inkscape:window-width="1920"
+     inkscape:window-height="1008"
+     inkscape:window-x="0"
+     inkscape:window-y="393"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" /><defs
+     id="defs1" /><g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"><g
+       style="fill:#000000;stroke-width:1.00002;stroke-dasharray:none"
+       id="g1"
+       transform="matrix(7.5872079,0,0,7.5872079,73.402875,73.411669)"><g
+         id="g5"
+         style="stroke-width:1.00002;stroke-dasharray:none">
+	<g
+   id="g4"
+   style="stroke-width:1.00002;stroke-dasharray:none">
+		<path
+   d="M 4.675,4.675 H 18.262 V 0.001 H 2.337 C 1.046,0.001 0,1.048 0,2.338 v 16 h 4.674 z"
+   id="path1-3"
+   style="stroke-width:1.00002;stroke-dasharray:none" />
+		<path
+   d="M 4.675,44.166 V 29.084 H 0.001 v 17.419 c 0,1.291 1.046,2.337 2.337,2.337 h 15.924 v -4.674 z"
+   id="path2"
+   style="stroke-width:1.00002;stroke-dasharray:none" />
+		<path
+   d="m 44.167,44.166 h -15.16 v 4.674 h 17.497 c 1.291,0 2.337,-1.046 2.337,-2.337 V 29.084 h -4.674 z"
+   id="path3"
+   style="stroke-width:1.00002;stroke-dasharray:none" />
+		<path
+   d="m 44.167,4.675 v 13.664 h 4.674 v -16 c 0,-1.291 -1.046,-2.337 -2.337,-2.337 H 29.007 v 4.674 z"
+   id="path4"
+   style="stroke-width:1.00002;stroke-dasharray:none" />
+	</g>
+</g></g></g></svg>
