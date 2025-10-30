@@ -115,6 +115,8 @@ class RecordingService : LifecycleService() {
         .setContentTitle(getString(R.string.recording))
         .setSmallIcon(R.mipmap.ic_launcher)
         .setOngoing(true)
+        .setCategory(NotificationCompat.CATEGORY_SERVICE)
+        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         .addAction(
           R.drawable.ic_recording,
           getString(R.string.open_wrist_recorder),
