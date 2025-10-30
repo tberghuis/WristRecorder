@@ -76,9 +76,16 @@ class RecordingService : LifecycleService() {
       }
       for (i in generateSequence(1) { it + 1 }) {
         delay(1000)
-        val updateNotification = generateNotification(i)
-        logd("generateSequence $i")
-        notificationManager.notify(NOTIFICATION_ID, updateNotification)
+        val ongoingActivityStatus = Status.Builder()
+          .addTemplate("REC ${formatSecondsToMinutesAndSeconds(i)}")
+          .build()
+        OngoingActivity.recoverOngoingActivity(applicationContext)
+          // this will interrupt/reset animated icon
+          ?.update(applicationContext, ongoingActivityStatus)
+
+//        val updateNotification = generateNotification(i)
+//        logd("generateSequence $i")
+//        notificationManager.notify(NOTIFICATION_ID, updateNotification)
       }
     }
   }
