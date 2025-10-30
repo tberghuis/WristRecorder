@@ -1,3 +1,6 @@
+v1.10.1  2025-10-30  002-start-recording-deeplink  
+  ongoing activity animation
+
 v1.10.0  2025-10-26  001-start-recording-deeplink  
   update dependencies
   targetSdk 35 - edge-to-edge
