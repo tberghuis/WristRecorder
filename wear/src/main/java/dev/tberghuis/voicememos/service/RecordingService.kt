@@ -5,7 +5,9 @@ import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
@@ -67,7 +69,11 @@ class RecordingService : LifecycleService() {
 
     val notification = generateNotification(0)
     startService(Intent(applicationContext, RecordingService::class.java))
-    startForeground(NOTIFICATION_ID, notification)
+    if (Build.VERSION.SDK_INT >= 30) {
+      startForeground(NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_MICROPHONE)
+    } else {
+      startForeground(NOTIFICATION_ID, notification)
+    }
 
     recordingJob = lifecycleScope.launch {
       logd("recordingJob launch")
