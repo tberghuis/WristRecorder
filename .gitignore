@@ -14,8 +14,9 @@
 .cxx
 local.properties
 
-.idea/deploymentTargetDropDown.xml
-.idea/deploymentTargetSelector.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/markdown.xml
 
 /wear/release/
 /mobile/release/
