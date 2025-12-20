@@ -1,5 +1,9 @@
 package dev.tberghuis.voicememos
 
+import android.content.Intent
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -24,12 +28,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.common.calcDuration
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
@@ -40,6 +46,28 @@ import java.io.File
 fun MobileScreen(
   vm: MobileViewModel = viewModel()
 ) {
+  val context = LocalContext.current
+
+  val exportLauncher = rememberLauncherForActivityResult(
+    contract = ActivityResultContracts.OpenDocumentTree()
+  ) { uri: Uri? ->
+    uri?.let {
+      vm.exportToFolder(it)
+    }
+  }
+
+  LaunchedEffect(Unit) {
+    vm.exportRecordingsTrigger.collect {
+      exportLauncher.launch(null)
+    }
+  }
+
+  LaunchedEffect(Unit) {
+    vm.snackbarMessage.collect {
+      vm.snackbarHostState.showSnackbar(it)
+    }
+  }
+
   Scaffold(topBar = {
     TopAppBar(title = { Text(stringResource(R.string.app_name)) })
   }, bottomBar = {
@@ -54,6 +82,9 @@ fun MobileScreen(
           vm.confirmDeleteDialog = true
         }) {
           Text("Delete All Watch")
+        }
+        Button(modifier = Modifier.padding(start = 10.dp), onClick = { vm.exportRecordings() }) {
+          Text("Export")
         }
       }
     }
