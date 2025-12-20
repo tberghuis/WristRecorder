@@ -79,6 +79,7 @@ dependencies {
   implementation(libs.kotlinx.coroutines.play.services)
   implementation(libs.androidx.dataStore.preferences)
   implementation(libs.androidx.work.ktx)
+  implementation(libs.androidx.documentfile)
 
   implementation(libs.androidx.compose.material.iconsExtended)
 }
