@@ -24,3 +24,6 @@ local.properties
 /wear/backoverride/release/
 /mobile/default/release/
 /mobile/backoverride/release/
+
+/.idea/appInsightsSettings.xml
+/.idea/misc.xml
