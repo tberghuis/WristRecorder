@@ -6,8 +6,11 @@ import android.content.Context
 import android.media.session.PlaybackState
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
+import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
@@ -15,6 +18,7 @@ import com.google.common.util.concurrent.MoreExecutors
 import dev.tberghuis.voicememos.common.calcDuration
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.service.DeleteFileService
+import java.io.File
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class RecordingDetailViewModel(
@@ -89,7 +93,30 @@ class RecordingDetailViewModel(
   }
 
   fun playRecording() {
-    
+    Log.d("MediaViewModel", "playSomething called. Player is null? ${player == null}")
+
+    val dir = application.filesDir
+    val f = File(dir, file)
+
+    val media = MediaItem.Builder()
+      .setMediaId("sample_audio_1")
+      .setUri(f.toUri())
+      .setMediaMetadata(
+        MediaMetadata.Builder()
+          .setTitle("Sample Audio")
+          .setArtist("Sample Artist")
+          .build()
+      )
+      .build()
+
+    player.value?.let { p ->
+      Log.d("MediaViewModel", "Setting media item and playing...")
+      p.setMediaItem(media)
+      p.prepare()
+      p.play()
+    }
+
+
   }
 
 
