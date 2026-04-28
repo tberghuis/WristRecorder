@@ -97,6 +97,8 @@ class RecordingDetailViewModel(
 
     val dir = application.filesDir
     val f = File(dir, file)
+    
+    logd("playRecording uri ${f.toUri()}")
 
     val media = MediaItem.Builder()
       .setMediaId("sample_audio_1")
