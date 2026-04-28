@@ -116,13 +116,6 @@ class RecordingDetailViewModel(
       )
       .build()
 
-
-//    val mediaSource = ProgressiveMediaSource.Factory(
-//      dataSourceFactory,
-//      ExtractorsFactory { arrayOf(RawAndExtractingMediaSource.createExtractor(audioFormat)) }
-//    ).createMediaSource(media)
-
-
     player.value?.let { p ->
       Log.d("MediaViewModel", "Setting media item and playing...")
       p.setMediaItem(media)
