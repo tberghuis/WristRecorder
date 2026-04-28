@@ -13,16 +13,18 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.dialog.Alert
@@ -30,7 +32,6 @@ import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.tmp.tmp01.RecordingDetailViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
@@ -40,6 +41,9 @@ fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
   val formattedTime = remember { formatTimestampFromFilename(viewModel.file) }
 
   val context = LocalContext.current
+
+  val playerInitialised = viewModel.player.collectAsState().value != null
+
   LaunchedEffect(context) {
     (context as MainActivity).stemKeyUpSharedFlow.collect {
       popHomeRecording()
@@ -54,9 +58,17 @@ fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
     Text(formattedTime)
     Text("${viewModel.duration} seconds")
     Row(Modifier.padding(top = 10.dp)) {
-      PlayButton()
-      Spacer(modifier = Modifier.width(20.dp))
-      DeleteButton()
+      if (playerInitialised) {
+        if (viewModel.isPlaying) {
+          StopButton()
+        } else {
+          PlayButton()
+        }
+        Spacer(modifier = Modifier.width(20.dp))
+        DeleteButton()
+      } else {
+        CircularProgressIndicator()
+      }
     }
   }
   DeleteConfirmAlert(popBackStack)
@@ -98,18 +110,28 @@ fun DeleteConfirmAlert(popBackStack: () -> Unit) {
 @Composable
 fun PlayButton() {
   val viewModel: RecordingDetailViewModel = viewModel()
-  val scope = rememberCoroutineScope()
-
   Button(onClick = {
     logd("play")
-    scope.launch {
-      viewModel.playRecording()
-//      viewModel.audioController.play(viewModel.file)
-    }
+    viewModel.playRecording()
   }) {
     Icon(
       imageVector = Icons.Filled.PlayArrow,
       contentDescription = "play",
+      modifier = Modifier.size(60.dp)
+    )
+  }
+}
+
+@Composable
+fun StopButton() {
+  val viewModel: RecordingDetailViewModel = viewModel()
+  Button(onClick = {
+    logd("stop")
+    viewModel.stopPlayback()
+  }) {
+    Icon(
+      imageVector = Icons.Filled.Stop,
+      contentDescription = "stop",
       modifier = Modifier.size(60.dp)
     )
   }

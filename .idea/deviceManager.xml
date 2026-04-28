@@ -5,7 +5,7 @@
       <list>
         <ColumnSorterState>
           <option name="column" value="Type" />
-          <option name="order" value="ASCENDING" />
+          <option name="order" value="DESCENDING" />
         </ColumnSorterState>
         <ColumnSorterState>
           <option name="column" value="API" />

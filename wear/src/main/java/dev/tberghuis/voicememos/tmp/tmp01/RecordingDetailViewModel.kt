@@ -6,7 +6,9 @@ import android.content.Context
 import android.media.session.PlaybackState
 import android.util.Log
 import androidx.annotation.OptIn
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
@@ -37,9 +39,10 @@ class RecordingDetailViewModel(
   val duration = calcDuration(application, file)
 
 
-  private val player: MutableStateFlow<MediaController?> = MutableStateFlow(null)
+  val player: MutableStateFlow<MediaController?> = MutableStateFlow(null)
 
-
+  var isPlaying by mutableStateOf(false)
+  
   init {
     logd("savedStateHandle $savedStateHandle")
     createMediaSession(application)
@@ -67,11 +70,11 @@ class RecordingDetailViewModel(
                 Log.d("MediaViewModel", "Controller PlaybackState: $state")
                 when (state) {
                   PlaybackState.STATE_PLAYING -> {
-//                    playerState = "playing"
+                    isPlaying = true
                   }
 
                   PlaybackState.STATE_STOPPED -> {
-//                    playerState = "stopped"
+                    isPlaying = false
                   }
 
                   else -> {}
@@ -98,8 +101,6 @@ class RecordingDetailViewModel(
 
   @OptIn(UnstableApi::class)
   fun playRecording() {
-    Log.d("MediaViewModel", "playSomething called. Player is null? ${player == null}")
-
     val dir = application.filesDir
     val f = File(dir, file)
 
@@ -126,5 +127,8 @@ class RecordingDetailViewModel(
 
   }
 
+  fun stopPlayback() {
+    player.value?.stop()
+  }
 
 }
