@@ -12,7 +12,7 @@ import androidx.wear.compose.material.Text
 
 @Composable
 fun Tmp01Screen(
-  vm: Tmp01Vm = viewModel()
+//  vm: Tmp01Vm = viewModel()
 ) {
   MaterialTheme {
     Column(
