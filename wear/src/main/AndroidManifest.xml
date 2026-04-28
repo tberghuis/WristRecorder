@@ -3,39 +3,39 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application
-        android:name=".MainApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.App.Starting">
+            android:name=".MainApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.App.Starting">
         <uses-library
-            android:name="com.google.android.wearable"
-            android:required="true" />
+                android:name="com.google.android.wearable"
+                android:required="true" />
 
         <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
 
         <!--
                does not require the handheld app to run.
         -->
         <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
+                android:name="com.google.android.wearable.standalone"
+                android:value="true" />
 
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:taskAffinity=".main">
+                android:name=".MainActivity"
+                android:exported="true"
+                android:launchMode="singleTop"
+                android:taskAffinity=".main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,27 +44,36 @@
         </activity>
 
         <service
-            android:name=".service.RecordingService"
-            android:enabled="true"
-            android:exported="false"
-            android:foregroundServiceType="microphone" />
+                android:name=".service.RecordingService"
+                android:enabled="true"
+                android:exported="false"
+                android:foregroundServiceType="microphone" />
 
         <service
-            android:name=".service.SyncService"
-            android:exported="true">
+                android:name=".service.SyncService"
+                android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
                 <data
-                    android:host="*"
-                    android:pathPrefix="/upload-recordings"
-                    android:scheme="wear" />
+                        android:host="*"
+                        android:pathPrefix="/upload-recordings"
+                        android:scheme="wear" />
             </intent-filter>
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
                 <data
-                    android:host="*"
-                    android:pathPrefix="/delete-all-watch"
-                    android:scheme="wear" />
+                        android:host="*"
+                        android:pathPrefix="/delete-all-watch"
+                        android:scheme="wear" />
+            </intent-filter>
+        </service>
+
+        <service
+                android:name=".tmp.tmp01.PlaybackService"
+                android:foregroundServiceType="mediaPlayback"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
             </intent-filter>
         </service>
     </application>

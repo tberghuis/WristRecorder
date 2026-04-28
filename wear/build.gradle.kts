@@ -56,6 +56,8 @@ kotlin {
 dependencies {
   implementation(project(":common"))
   implementation(platform(libs.androidx.compose.bom))
+
+
   androidTestImplementation(platform(libs.androidx.compose.bom))
 
   implementation(libs.androidx.core.ktx)
@@ -79,4 +81,12 @@ dependencies {
 
   // whats the deal???
 //    wearApp(project(":wear"))
+
+
+  implementation(libs.androidx.media3.session)
+  implementation(libs.androidx.media3.exoplayer)
+
+  implementation("androidx.media3:media3-ui:1.10.0")
+  implementation("androidx.media3:media3-common:1.10.0")
+
 }
