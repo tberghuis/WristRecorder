@@ -36,8 +36,8 @@ class MainActivity : ComponentActivity() {
     installSplashScreen()
     super.onCreate(savedInstanceState)
     setContent {
-//      WearApp()
-      Tmp01Screen()
+      WearApp()
+//      Tmp01Screen()
     }
   }
 }

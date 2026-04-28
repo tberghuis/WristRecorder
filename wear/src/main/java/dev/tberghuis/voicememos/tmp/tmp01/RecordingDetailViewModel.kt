@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos.screen
+package dev.tberghuis.voicememos.tmp.tmp01
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
@@ -9,7 +9,7 @@ import dev.tberghuis.voicememos.common.calcDuration
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.service.DeleteFileService
 
-class XxxRecordingDetailViewModel(
+class RecordingDetailViewModel(
   private val application: Application,
   savedStateHandle: SavedStateHandle,
 ) : AndroidViewModel(application) {
