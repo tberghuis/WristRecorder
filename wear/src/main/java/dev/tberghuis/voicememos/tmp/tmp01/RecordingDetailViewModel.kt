@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.media.session.PlaybackState
 import android.util.Log
+import androidx.annotation.OptIn
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
@@ -12,6 +13,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
+import androidx.media3.extractor.ExtractorsFactory
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
 import com.google.common.util.concurrent.MoreExecutors
@@ -92,12 +96,13 @@ class RecordingDetailViewModel(
     )
   }
 
+  @OptIn(UnstableApi::class)
   fun playRecording() {
     Log.d("MediaViewModel", "playSomething called. Player is null? ${player == null}")
 
     val dir = application.filesDir
     val f = File(dir, file)
-    
+
     logd("playRecording uri ${f.toUri()}")
 
     val media = MediaItem.Builder()
@@ -110,6 +115,13 @@ class RecordingDetailViewModel(
           .build()
       )
       .build()
+
+
+//    val mediaSource = ProgressiveMediaSource.Factory(
+//      dataSourceFactory,
+//      ExtractorsFactory { arrayOf(RawAndExtractingMediaSource.createExtractor(audioFormat)) }
+//    ).createMediaSource(media)
+
 
     player.value?.let { p ->
       Log.d("MediaViewModel", "Setting media item and playing...")
