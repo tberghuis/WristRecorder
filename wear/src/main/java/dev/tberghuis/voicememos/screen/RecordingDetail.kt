@@ -104,6 +104,7 @@ fun PlayButton() {
     logd("play")
     scope.launch {
       viewModel.playRecording()
+//      viewModel.audioController.play(viewModel.file)
     }
   }) {
     Icon(
