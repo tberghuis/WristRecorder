@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos.tmp.tmp01
+package dev.tberghuis.voicememos.service
 
 import android.net.Uri
 import androidx.core.net.toFile
@@ -16,7 +16,7 @@ import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
 import dev.tberghuis.voicememos.common.AudioController.Companion.RECORDING_RATE
 
 @UnstableApi
-class MyMediaSourceFactory(val defaultFactory: DefaultMediaSourceFactory) : MediaSource.Factory {
+class RawPcmMediaSourceFactory(val defaultFactory: DefaultMediaSourceFactory) : MediaSource.Factory {
 
 
   override fun setDrmSessionManagerProvider(

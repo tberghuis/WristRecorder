@@ -69,7 +69,7 @@
         </service>
 
         <service
-                android:name=".tmp.tmp01.PlaybackService"
+                android:name=".service.PlaybackService"
                 android:foregroundServiceType="mediaPlayback"
                 android:exported="false">
             <intent-filter>

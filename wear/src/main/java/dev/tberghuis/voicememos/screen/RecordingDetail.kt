@@ -31,7 +31,6 @@ import androidx.wear.compose.material.dialog.Alert
 import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
 import dev.tberghuis.voicememos.common.logd
-import dev.tberghuis.voicememos.tmp.tmp01.RecordingDetailViewModel
 
 @Composable
 fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
