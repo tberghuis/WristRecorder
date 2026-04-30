@@ -14,7 +14,6 @@ import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.screen.RecordingDetail
-import dev.tberghuis.voicememos.tmp.tmp01.Tmp01Screen
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
@@ -37,7 +36,6 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     setContent {
       WearApp()
-//      Tmp01Screen()
     }
   }
 }
