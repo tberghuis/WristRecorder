@@ -13,11 +13,8 @@ import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.media3.common.MediaItem
-import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.source.ProgressiveMediaSource
-import androidx.media3.extractor.ExtractorsFactory
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
 import com.google.common.util.concurrent.MoreExecutors
@@ -42,7 +39,7 @@ class RecordingDetailViewModel(
   val player: MutableStateFlow<MediaController?> = MutableStateFlow(null)
 
   var isPlaying by mutableStateOf(false)
-  
+
   init {
     logd("savedStateHandle $savedStateHandle")
     createMediaSession(application)
@@ -106,15 +103,19 @@ class RecordingDetailViewModel(
 
     logd("playRecording uri ${f.toUri()}")
 
+//    val media = MediaItem.Builder()
+//      .setMediaId("sample_audio_1")
+//      .setUri(f.toUri())
+//      .setMediaMetadata(
+//        MediaMetadata.Builder()
+//          .setTitle("Sample Audio")
+//          .setArtist("Sample Artist")
+//          .build()
+//      )
+//      .build()
+
     val media = MediaItem.Builder()
-      .setMediaId("sample_audio_1")
       .setUri(f.toUri())
-      .setMediaMetadata(
-        MediaMetadata.Builder()
-          .setTitle("Sample Audio")
-          .setArtist("Sample Artist")
-          .build()
-      )
       .build()
 
     player.value?.let { p ->
@@ -123,12 +124,9 @@ class RecordingDetailViewModel(
       p.prepare()
       p.play()
     }
-
-
   }
 
   fun stopPlayback() {
     player.value?.stop()
   }
-
 }
