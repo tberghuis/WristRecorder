@@ -15,6 +15,7 @@ import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
 import dev.tberghuis.voicememos.common.AudioController.Companion.RECORDING_RATE
 
+// AI came up with this solution to play raw PCM files with ExoPlayer
 @UnstableApi
 class RawPcmMediaSourceFactory(val defaultFactory: DefaultMediaSourceFactory) : MediaSource.Factory {
 
