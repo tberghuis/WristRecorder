@@ -1,3 +1,6 @@
+v1.11.0  2026-04-30  003-start-recording-deeplink  
+  ongoing activity for recording playback, see if pass play console review
+
 v1.10.1  2025-10-30  002-start-recording-deeplink  
   ongoing activity animation
 
