@@ -86,7 +86,7 @@ dependencies {
   implementation(libs.androidx.media3.session)
   implementation(libs.androidx.media3.exoplayer)
 
-  implementation("androidx.media3:media3-ui:1.10.0")
-  implementation("androidx.media3:media3-common:1.10.0")
+//  implementation("androidx.media3:media3-ui:1.10.0")
+//  implementation("androidx.media3:media3-common:1.10.0")
 
 }
