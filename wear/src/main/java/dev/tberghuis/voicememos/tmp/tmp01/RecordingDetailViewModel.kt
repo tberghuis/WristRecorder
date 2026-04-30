@@ -70,11 +70,13 @@ class RecordingDetailViewModel(
                     isPlaying = true
                   }
 
-                  PlaybackState.STATE_STOPPED -> {
-                    isPlaying = false
-                  }
+//                  PlaybackState.STATE_STOPPED -> {
+//                    isPlaying = false
+//                  }
 
-                  else -> {}
+                  else -> {
+                     isPlaying = false
+                  }
                 }
               }
 
