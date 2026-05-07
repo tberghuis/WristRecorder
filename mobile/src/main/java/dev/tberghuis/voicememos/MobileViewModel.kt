@@ -11,6 +11,7 @@ import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.AudioController
+import dev.tberghuis.voicememos.common.RecordingsEvent
 import dev.tberghuis.voicememos.common.deleteFileCommon
 import dev.tberghuis.voicememos.common.logd
 import java.io.File
@@ -51,6 +52,14 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     logd("MobileViewModel init")
     refreshRecordingFiles()
     messageClient.addListener(messageListener)
+    
+    // Listen for recordings updated from ProcessZipWorker
+    viewModelScope.launch {
+      RecordingsEvent.recordingsUpdated.collect {
+        refreshRecordingFiles()
+        snackbarHostState.showSnackbar("Download complete")
+      }
+    }
   }
 
   override fun onCleared() {
