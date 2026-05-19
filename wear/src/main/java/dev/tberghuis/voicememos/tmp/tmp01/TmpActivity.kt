@@ -5,17 +5,21 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.util.Consumer
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.tberghuis.voicememos.common.logd
+import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 
 class TmpActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,11 +31,14 @@ class TmpActivity : ComponentActivity() {
     logd("onCreate intent data ${data} ")
 
     setContent {
-
+      val vm: RecordingUiViewModel = viewModel(
+        viewModelStoreOwner
+        = this
+      )
       DisposableEffect(Unit) {
         val listener = Consumer<Intent> {
-          // logic here
           logd("DisposableEffect listener intent $it")
+          vm.toggleRecording()
         }
         addOnNewIntentListener(listener)
         onDispose { removeOnNewIntentListener(listener) }

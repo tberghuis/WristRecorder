@@ -1,6 +1,7 @@
 package dev.tberghuis.voicememos.composables
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Icon
 import dev.tberghuis.voicememos.MainActivity
@@ -23,7 +25,10 @@ import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 @Composable
 fun RecordingUi(
   navigateRecordingDetail: (String) -> Unit,
-  vm: RecordingUiViewModel = viewModel(),
+  vm: RecordingUiViewModel = viewModel(
+    viewModelStoreOwner
+    = LocalActivity.current as ViewModelStoreOwner
+  ),
   permissionPrompt: (() -> Unit)? = null
 ) {
   val record = fun() {

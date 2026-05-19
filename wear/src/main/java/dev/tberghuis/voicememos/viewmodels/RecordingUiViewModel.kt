@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.service.RecordingService
 import dev.tberghuis.voicememos.service.RecordingServiceManager
 import kotlinx.coroutines.flow.filterNotNull
@@ -39,6 +40,15 @@ class RecordingUiViewModel(
 
   fun stopRecording(): String? {
     return recordingService?.stopRecording()
+  }
+
+  fun toggleRecording() {
+    logd("toggleRecording isRecording $isRecording")
+    if (isRecording) {
+      stopRecording()
+    } else {
+      startRecording()
+    }
   }
 
   override fun onCleared() {
