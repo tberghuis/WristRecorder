@@ -29,7 +29,7 @@ class TmpActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
 
 //    val action: String? = intent?.action
-    val data: Uri? = intent?.data
+    var data: Uri? = intent?.data
     logd("onCreate intent data ${data} ")
 
     setContent {
@@ -41,7 +41,10 @@ class TmpActivity : ComponentActivity() {
         LaunchedEffect(Unit) {
           // prevent initialisation race condition isRecording
           // doitwrong
-          delay(1000)
+//          delay(1000)
+
+          // only run once even on configuration change?
+          data = null
           vm.toggleRecording()
         }
       }
