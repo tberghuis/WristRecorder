@@ -31,8 +31,20 @@
                 android:name="com.google.android.wearable.standalone"
                 android:value="true" />
 
+<!--        <activity-->
+<!--                android:name=".MainActivity"-->
+<!--                android:exported="true"-->
+<!--                android:launchMode="singleTop"-->
+<!--                android:taskAffinity=".main">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
         <activity
-                android:name=".MainActivity"
+                android:name=".tmp.tmp01.TmpActivity"
                 android:exported="true"
                 android:launchMode="singleTop"
                 android:taskAffinity=".main">
@@ -42,6 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <service
                 android:name=".service.RecordingService"
