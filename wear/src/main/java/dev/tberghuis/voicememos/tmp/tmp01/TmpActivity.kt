@@ -9,6 +9,7 @@ import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.util.Consumer
 import androidx.lifecycle.ViewModelStoreOwner
@@ -20,6 +21,7 @@ import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
+import kotlinx.coroutines.delay
 
 class TmpActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +37,20 @@ class TmpActivity : ComponentActivity() {
         viewModelStoreOwner
         = this
       )
+      if (data.toString() == "wristrecorder://wristrecorder/toggle-recording") {
+        LaunchedEffect(Unit) {
+          // prevent initialisation race condition isRecording
+          // doitwrong
+          delay(1000)
+          vm.toggleRecording()
+        }
+      }
       DisposableEffect(Unit) {
         val listener = Consumer<Intent> {
           logd("DisposableEffect listener intent $it")
-          
+
           // todo if intent = wristrecorder://wristrecorder/toggle-recording
-          
+
           vm.toggleRecording()
         }
         addOnNewIntentListener(listener)
