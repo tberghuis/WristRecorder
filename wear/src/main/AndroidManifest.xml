@@ -31,17 +31,17 @@
                 android:name="com.google.android.wearable.standalone"
                 android:value="true" />
 
-<!--        <activity-->
-<!--                android:name=".MainActivity"-->
-<!--                android:exported="true"-->
-<!--                android:launchMode="singleTop"-->
-<!--                android:taskAffinity=".main">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+        <!--        <activity-->
+        <!--                android:name=".MainActivity"-->
+        <!--                android:exported="true"-->
+        <!--                android:launchMode="singleTop"-->
+        <!--                android:taskAffinity=".main">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
 
         <activity
                 android:name=".tmp.tmp01.TmpActivity"
@@ -53,8 +53,19 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
+            <intent-filter>
+                <!--                do i even need action???-->
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                        android:scheme="wristrecorder"
+                        android:host="wristrecorder" />
+            </intent-filter>
+        </activity>
 
         <service
                 android:name=".service.RecordingService"
