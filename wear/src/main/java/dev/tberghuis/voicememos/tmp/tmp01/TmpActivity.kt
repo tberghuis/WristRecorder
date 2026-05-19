@@ -1,11 +1,15 @@
 package dev.tberghuis.voicememos.tmp.tmp01
 
+import android.app.ComponentCaller
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.util.Consumer
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
@@ -23,8 +27,25 @@ class TmpActivity : ComponentActivity() {
     logd("onCreate intent data ${data} ")
 
     setContent {
+
+      DisposableEffect(Unit) {
+        val listener = Consumer<Intent> {
+          // logic here
+          logd("DisposableEffect listener intent $it")
+        }
+        addOnNewIntentListener(listener)
+        onDispose { removeOnNewIntentListener(listener) }
+      }
+
+
       TmpApp()
     }
+  }
+
+
+  override fun onNewIntent(intent: Intent, caller: ComponentCaller) {
+    super.onNewIntent(intent, caller)
+    logd("onNewIntent intent ${intent}")
   }
 }
 
