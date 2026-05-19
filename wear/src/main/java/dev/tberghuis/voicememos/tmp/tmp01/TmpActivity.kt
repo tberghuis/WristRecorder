@@ -38,6 +38,9 @@ class TmpActivity : ComponentActivity() {
       DisposableEffect(Unit) {
         val listener = Consumer<Intent> {
           logd("DisposableEffect listener intent $it")
+          
+          // todo if intent = wristrecorder://wristrecorder/toggle-recording
+          
           vm.toggleRecording()
         }
         addOnNewIntentListener(listener)
