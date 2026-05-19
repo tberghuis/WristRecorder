@@ -54,20 +54,21 @@ fun RecordingUi(
       when (vm.isRecording) {
         true -> endRecord()
         false -> record()
+        else -> {}
       }
     }
   }
-
+  val isRecording = vm.isRecording ?: return
   Box(
     Modifier
       .clickable {
-        when (vm.isRecording) {
+        when (isRecording) {
           true -> endRecord()
           false -> record()
         }
       }
   ) {
-    when (vm.isRecording) {
+    when (isRecording) {
       true -> {
         Icon(
           imageVector = Icons.Filled.Stop,
