@@ -10,8 +10,6 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
-import dev.tberghuis.voicememos.HomeScreen
-import dev.tberghuis.voicememos.screen.RecordingDetail
 
 class TmpActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
