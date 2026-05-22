@@ -39,11 +39,7 @@ class TmpActivity : ComponentActivity() {
       )
       if (data.toString() == "wristrecorder://wristrecorder/toggle-recording") {
         LaunchedEffect(Unit) {
-          // prevent initialisation race condition isRecording
-          // doitwrong
-//          delay(1000)
-
-          // only run once even on configuration change?
+          // only run once even on configuration change
           data = null
           vm.toggleRecording()
         }
@@ -51,10 +47,9 @@ class TmpActivity : ComponentActivity() {
       DisposableEffect(Unit) {
         val listener = Consumer<Intent> {
           logd("DisposableEffect listener intent $it")
-
-          // todo if intent = wristrecorder://wristrecorder/toggle-recording
-
-          vm.toggleRecording()
+          if (it.data.toString() == "wristrecorder://wristrecorder/toggle-recording") {
+            vm.toggleRecording()
+          }
         }
         addOnNewIntentListener(listener)
         onDispose { removeOnNewIntentListener(listener) }
@@ -66,10 +61,10 @@ class TmpActivity : ComponentActivity() {
   }
 
 
-  override fun onNewIntent(intent: Intent, caller: ComponentCaller) {
-    super.onNewIntent(intent, caller)
-    logd("onNewIntent intent ${intent}")
-  }
+//  override fun onNewIntent(intent: Intent, caller: ComponentCaller) {
+//    super.onNewIntent(intent, caller)
+//    logd("onNewIntent intent ${intent}")
+//  }
 }
 
 @Composable
