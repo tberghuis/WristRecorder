@@ -1,19 +1,26 @@
 package dev.tberghuis.voicememos
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_STEM_1
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.util.Consumer
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.screen.RecordingDetail
+import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
@@ -34,7 +41,30 @@ class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()
     super.onCreate(savedInstanceState)
+    var data: Uri? = intent?.data
+    logd("onCreate intent data $data")
     setContent {
+      val vm: RecordingUiViewModel = viewModel(
+        viewModelStoreOwner
+        = this
+      )
+      if (data.toString() == "wristrecorder://wristrecorder/toggle-recording") {
+        LaunchedEffect(Unit) {
+          // only run once even on configuration change
+          data = null
+          vm.toggleRecording()
+        }
+      }
+      DisposableEffect(Unit) {
+        val listener = Consumer<Intent> {
+          logd("DisposableEffect listener intent $it")
+          if (it.data.toString() == "wristrecorder://wristrecorder/toggle-recording") {
+            vm.toggleRecording()
+          }
+        }
+        addOnNewIntentListener(listener)
+        onDispose { removeOnNewIntentListener(listener) }
+      }
       WearApp()
     }
   }
