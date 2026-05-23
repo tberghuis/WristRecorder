@@ -29,4 +29,6 @@ local.properties
 /.idea/misc.xml
 /.idea/vcs.xml
 /.idea/deviceManager.xml
-.idea/planningMode.xml
+/.idea/planningMode.xml
+
+/.kotlin/
