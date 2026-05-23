@@ -1,3 +1,6 @@
+v1.12.0  2026-05-23  004-deeplink  
+  toggle recording via deeplink wristrecorder://wristrecorder/toggle-recording
+
 v1.11.0  2026-04-30  003-start-recording-deeplink  
   ongoing activity for recording playback, see if pass play console review
 
