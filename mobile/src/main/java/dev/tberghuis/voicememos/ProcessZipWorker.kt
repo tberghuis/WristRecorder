@@ -3,7 +3,9 @@ package dev.tberghuis.voicememos
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.Wearable
+import dev.tberghuis.voicememos.common.RecordingsEvent
 import dev.tberghuis.voicememos.common.logd
 import java.io.File
 import java.util.zip.ZipEntry
@@ -14,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 class ProcessZipWorker(private val context: Context, params: WorkerParameters) :
   CoroutineWorker(context, params) {
-  private val nodeClient by lazy { Wearable.getNodeClient(context) }
+  private val capabilityClient by lazy { Wearable.getCapabilityClient(context) }
   private val messageClient by lazy { Wearable.getMessageClient(context) }
 
   override suspend fun doWork(): Result {
@@ -28,7 +30,7 @@ class ProcessZipWorker(private val context: Context, params: WorkerParameters) :
     val zip = withContext(Dispatchers.IO) {
       ZipFile(zipFile)
     }
-    val nodeId = nodeClient.localNode.await().id
+
     try {
       zip.entries().asSequence().map {
         val outputFile = File("${context.filesDir.absolutePath}/${it.name}")
@@ -41,11 +43,18 @@ class ProcessZipWorker(private val context: Context, params: WorkerParameters) :
         }
       }
       logd("unzip finished")
-      messageClient.sendMessage(nodeId, "/sync-finished", byteArrayOf()).await()
+      RecordingsEvent.notifyRecordingsUpdated()
+      val nodes = capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
+      nodes.forEach { node ->
+        messageClient.sendMessage(node.id, "/sync-finished", byteArrayOf()).await()
+      }
     } catch (e: Exception) {
       logd("error $e")
       val ba = "error $e".toByteArray(Charsets.UTF_8)
-      messageClient.sendMessage(nodeId, "/snackbar", ba).await()
+      val nodes = capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
+      nodes.forEach { node ->
+        messageClient.sendMessage(node.id, "/snackbar", ba).await()
+      }
     }
   }
 }
