@@ -10,7 +10,7 @@ android {
   defaultConfig {
     applicationId = "dev.tberghuis.wristrecorder"
     minSdk = 28
-    targetSdk = 35
+    targetSdk = 36
     versionCode = 27
     versionName = "1.12.0-wear"
   }
