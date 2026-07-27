@@ -23,6 +23,8 @@ import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import dev.tberghuis.voicememos.composables.RecordingUi
 import android.provider.Settings
+import androidx.activity.compose.BackHandler
+import dev.tberghuis.voicememos.common.logd
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -54,6 +56,13 @@ fun RecordingPage(
     it.permission == android.Manifest.permission.RECORD_AUDIO
   }!!
 
+
+//  BackHandler() { 
+//    logd("recording page back handler")
+//  }
+  
+  
+  
   Box(
     modifier = Modifier.fillMaxSize(),
     contentAlignment = Alignment.Center,
