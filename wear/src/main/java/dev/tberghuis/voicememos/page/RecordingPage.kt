@@ -58,14 +58,7 @@ fun RecordingPage(
     it.permission == android.Manifest.permission.RECORD_AUDIO
   }!!
 
-  // backHandlerEnabled = true if physical key stem press && backoverride setting
-  // this is wack but it works i guess
-//  val backHandlerEnabled = (LocalActivity.current as MainActivity).backHandlerEnabled.value
-  val backHandlerEnabled = false
-  BackHandler(enabled = backHandlerEnabled) {
-    logd("recording page back handler")
-    // todo toggle recording
-  }
+  BackButtonOverride()
 
   Box(
     modifier = Modifier.fillMaxSize(),
@@ -117,4 +110,17 @@ fun launchPermissionsSettings(context: Context) {
   val uri = Uri.fromParts("package", context.packageName, null)
   intent.setData(uri)
   context.startActivity(intent)
+}
+
+
+@Composable
+fun BackButtonOverride() {
+  // backHandlerEnabled = true if physical key stem press && backoverride setting
+  // this is wack but it works i guess
+  val backHandlerEnabled = (LocalActivity.current as MainActivity).backHandlerEnabled.value
+//  val backHandlerEnabled = false
+  BackHandler(enabled = backHandlerEnabled) {
+    logd("recording page back handler")
+    // todo toggle recording
+  }
 }
