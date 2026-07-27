@@ -57,9 +57,10 @@ fun RecordingPage(
   }!!
 
 
-//  BackHandler() { 
-//    logd("recording page back handler")
-//  }
+  BackHandler() { 
+    logd("recording page back handler")
+    
+  }
   
   
   
