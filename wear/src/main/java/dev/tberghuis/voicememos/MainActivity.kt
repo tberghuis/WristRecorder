@@ -4,12 +4,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_BACK
 import android.view.KeyEvent.KEYCODE_STEM_1
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.util.Consumer
 import androidx.lifecycle.lifecycleScope
@@ -27,16 +29,38 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
   val stemKeyUpSharedFlow = MutableSharedFlow<Unit>()
 
-  override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-    logd("MainActivity onKeyUp keyCode $keyCode event $event")
-    if (keyCode == KEYCODE_STEM_1) {
-      lifecycleScope.launch {
-        stemKeyUpSharedFlow.emit(Unit)
-      }
-      return true
+  val backHandlerEnabled = mutableStateOf(false)
+
+  override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+    logd("MainActivity onKeyDown keyCode $keyCode event $event")
+    
+    
+    
+    // todo check if backoverride enabled in settings
+    if (keyCode == KEYCODE_BACK) {
+      backHandlerEnabled.value = true
     }
     return super.onKeyUp(keyCode, event)
   }
+
+
+  override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+    logd("MainActivity onKeyUp keyCode $keyCode event $event")
+
+
+    if (keyCode == KEYCODE_BACK) {
+      backHandlerEnabled.value = false
+    }
+
+//    if (keyCode == KEYCODE_STEM_1) {
+//      lifecycleScope.launch {
+//        stemKeyUpSharedFlow.emit(Unit)
+//      }
+//      return true
+//    }
+    return super.onKeyUp(keyCode, event)
+  }
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()

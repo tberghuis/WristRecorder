@@ -24,6 +24,8 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import dev.tberghuis.voicememos.composables.RecordingUi
 import android.provider.Settings
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
+import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.logd
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -56,14 +58,15 @@ fun RecordingPage(
     it.permission == android.Manifest.permission.RECORD_AUDIO
   }!!
 
-
-  BackHandler() { 
+  // backHandlerEnabled = true if physical key stem press && backoverride setting
+  // this is wack but it works i guess
+//  val backHandlerEnabled = (LocalActivity.current as MainActivity).backHandlerEnabled.value
+  val backHandlerEnabled = false
+  BackHandler(enabled = backHandlerEnabled) {
     logd("recording page back handler")
-    
+    // todo toggle recording
   }
-  
-  
-  
+
   Box(
     modifier = Modifier.fillMaxSize(),
     contentAlignment = Alignment.Center,
