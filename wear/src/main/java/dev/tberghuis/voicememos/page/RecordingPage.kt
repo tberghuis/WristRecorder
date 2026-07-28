@@ -25,10 +25,12 @@ import dev.tberghuis.voicememos.composables.RecordingUi
 import android.provider.Settings
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.logd
+import dev.tberghuis.voicememos.data.settingsRepository
 import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -127,7 +129,12 @@ fun BackButtonOverride(
   // this is wack but it works i guess
   val backButtonPressed = (LocalActivity.current as MainActivity).backButtonPressed.value
 //  val backHandlerEnabled = false
-  BackHandler(enabled = backButtonPressed) {
+
+  val backOverrideSetting =
+    LocalContext.current.settingsRepository.backOverrideFlow().collectAsState(false).value
+
+
+  BackHandler(enabled = backButtonPressed && backOverrideSetting) {
     logd("recording page back handler")
     vm.toggleRecording()
   }
