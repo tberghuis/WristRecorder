@@ -125,9 +125,9 @@ fun BackButtonOverride(
 ) {
   // backHandlerEnabled = true if physical key stem press && backoverride setting
   // this is wack but it works i guess
-  val backHandlerEnabled = (LocalActivity.current as MainActivity).backHandlerEnabled.value
+  val backButtonPressed = (LocalActivity.current as MainActivity).backButtonPressed.value
 //  val backHandlerEnabled = false
-  BackHandler(enabled = backHandlerEnabled) {
+  BackHandler(enabled = backButtonPressed) {
     logd("recording page back handler")
     vm.toggleRecording()
   }

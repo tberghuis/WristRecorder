@@ -29,16 +29,12 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
   val stemKeyUpSharedFlow = MutableSharedFlow<Unit>()
 
-  val backHandlerEnabled = mutableStateOf(false)
+  val backButtonPressed = mutableStateOf(false)
 
   override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
     logd("MainActivity onKeyDown keyCode $keyCode event $event")
-    
-    
-    
-    // todo check if backoverride enabled in settings
     if (keyCode == KEYCODE_BACK) {
-      backHandlerEnabled.value = true
+      backButtonPressed.value = true
     }
     return super.onKeyUp(keyCode, event)
   }
@@ -46,12 +42,9 @@ class MainActivity : ComponentActivity() {
 
   override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
     logd("MainActivity onKeyUp keyCode $keyCode event $event")
-
-
     if (keyCode == KEYCODE_BACK) {
-      backHandlerEnabled.value = false
+      backButtonPressed.value = false
     }
-
 //    if (keyCode == KEYCODE_STEM_1) {
 //      lifecycleScope.launch {
 //        stemKeyUpSharedFlow.emit(Unit)
