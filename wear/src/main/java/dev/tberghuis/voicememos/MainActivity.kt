@@ -29,28 +29,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-  var backButtonPressed = false
-  var resetBackButtonPressedJob: Job? = null
-
-  override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-    logd("MainActivity onKeyDown keyCode $keyCode event $event")
-    if (keyCode == KEYCODE_BACK) {
-      resetBackButtonPressedJob?.cancel()
-      backButtonPressed = true
-    }
-    return super.onKeyUp(keyCode, event)
-  }
-
-  override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-    logd("MainActivity onKeyUp keyCode $keyCode event $event")
-    if (keyCode == KEYCODE_BACK) {
-      resetBackButtonPressedJob = lifecycleScope.launch {
-        delay(1000.milliseconds)
-        backButtonPressed = false
-      }
-    }
-    return super.onKeyUp(keyCode, event)
-  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()
