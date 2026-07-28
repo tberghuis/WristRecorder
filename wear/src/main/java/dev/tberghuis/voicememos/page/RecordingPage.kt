@@ -23,8 +23,10 @@ import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import dev.tberghuis.voicememos.composables.RecordingUi
 import android.provider.Settings
+import androidx.activity.BackEventCompat
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
+import androidx.activity.compose.PredictiveBackHandler
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -33,6 +35,8 @@ import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.data.settingsRepository
 import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
+import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -131,24 +135,47 @@ fun BackButtonOverride(
   val activity = LocalActivity.current as MainActivity
   val backOverrideSetting =
     LocalContext.current.settingsRepository.backOverrideFlow().collectAsState(false).value
-  val navController = LocalNavController.current
+//  val navController = LocalNavController.current
 
-//  BackHandler(enabled = backButtonPressed && backOverrideSetting) {
+//  BackHandler {
 //    logd("recording page back handler")
-//    if (backButtonPressed && backOverrideSetting) {
+//    if (activity.backButtonPressed && backOverrideSetting) {
 //      vm.toggleRecording()
 //    } else {
-//      navController.popBackStack()
+//      activity.finish()
 //    }
 //  }
 
-  BackHandler {
-    logd("recording page back handler")
-    if (activity.backButtonPressed && backOverrideSetting) {
-      vm.toggleRecording()
-    } else {
-//      navController.popBackStack()
-      activity.finish()
+
+  PredictiveBackHandler { progress: Flow<BackEventCompat> ->
+    // This block is executed when the back gesture begins.
+
+    var isGesture = false
+
+    try {
+      progress.collect { backEvent ->
+        // Handle gesture progress updates here.
+        logd("PredictiveBackHandler backEvent")
+        isGesture = true
+      }
+      // This block is executed if the gesture completes successfully.
+      logd("PredictiveBackHandler complete")
+
+      if (isGesture || !backOverrideSetting) {
+        activity.finish()
+      } else {
+        vm.toggleRecording()
+      }
+
+    } catch (e: CancellationException) {
+      // This block is executed if the gesture is cancelled.
+      logd("PredictiveBackHandler cancelled")
+      throw e
+    } finally {
+      // This block is executed either the gesture is completed or cancelled.
+      logd("PredictiveBackHandler finally")
     }
   }
+
+
 }
