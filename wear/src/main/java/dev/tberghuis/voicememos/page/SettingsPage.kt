@@ -5,13 +5,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material3.SwitchButton
+import dev.tberghuis.voicememos.viewmodels.SettingsVm
 
 @Composable
-fun SettingsPage() {
+fun SettingsPage(
+  vm: SettingsVm = viewModel()
+) {
+
+  val backOverride by vm.backOverride.collectAsState()
+
   // doitwrong
   // look at google samples for settings screen
   Column(
@@ -22,8 +31,8 @@ fun SettingsPage() {
     // todo settings cog icon as heading
     Text("Settings")
     SwitchButton(
-      checked = false,
-      onCheckedChange = {},
+      checked = backOverride,
+      onCheckedChange = { vm.toggleBackOverride() },
       modifier = Modifier,
       enabled = true,
     ) {

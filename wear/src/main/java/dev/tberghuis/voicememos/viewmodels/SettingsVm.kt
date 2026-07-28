@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.skip
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SettingsVm(
@@ -37,4 +38,12 @@ class SettingsVm(
 
     }
   }
+
+
+  fun toggleBackOverride() {
+    backOverride.update { 
+      !it
+    }
+  }
+
 }
