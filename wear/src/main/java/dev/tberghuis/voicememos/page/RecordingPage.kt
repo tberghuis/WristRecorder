@@ -127,17 +127,28 @@ fun BackButtonOverride(
 ) {
   // backHandlerEnabled = true if physical key stem press && backoverride setting
   // this is wack but it works i guess
-  val backButtonPressed = (LocalActivity.current as MainActivity).backButtonPressed.value
+//  val backButtonPressed = (LocalActivity.current as MainActivity).backButtonPressed.value
+  val activity = LocalActivity.current as MainActivity
   val backOverrideSetting =
     LocalContext.current.settingsRepository.backOverrideFlow().collectAsState(false).value
   val navController = LocalNavController.current
 
-  BackHandler(enabled = backButtonPressed && backOverrideSetting) {
+//  BackHandler(enabled = backButtonPressed && backOverrideSetting) {
+//    logd("recording page back handler")
+//    if (backButtonPressed && backOverrideSetting) {
+//      vm.toggleRecording()
+//    } else {
+//      navController.popBackStack()
+//    }
+//  }
+
+  BackHandler {
     logd("recording page back handler")
-    if (backButtonPressed && backOverrideSetting) {
+    if (activity.backButtonPressed && backOverrideSetting) {
       vm.toggleRecording()
     } else {
-      navController.popBackStack()
+//      navController.popBackStack()
+      activity.finish()
     }
   }
 }
