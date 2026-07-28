@@ -53,6 +53,7 @@ kotlin {
 dependencies {
   implementation(project(":common"))
   implementation(platform(libs.androidx.compose.bom))
+  implementation(libs.compose.material3)
 
 
   androidTestImplementation(platform(libs.androidx.compose.bom))

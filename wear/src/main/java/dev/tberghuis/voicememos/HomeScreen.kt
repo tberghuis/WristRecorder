@@ -20,6 +20,7 @@ import androidx.wear.compose.material.TimeText
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.page.RecordingList
 import dev.tberghuis.voicememos.page.RecordingPage
+import dev.tberghuis.voicememos.page.SettingsPage
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -28,8 +29,9 @@ fun HomeScreen(
   navigateRecordingDetail: (String) -> Unit
 ) {
   val viewModel: HomeViewModel = viewModel()
-  // todo hoist this viewmodel, home?pagerIndex=n
-  val pagerState = rememberPagerState(pageCount = { 2 })
+
+  val pageCount = 3
+  val pagerState = rememberPagerState(pageCount = { pageCount })
   val pageIndicatorState: PageIndicatorState = remember {
     object : PageIndicatorState {
       override val pageOffset: Float
@@ -37,7 +39,7 @@ fun HomeScreen(
       override val selectedPage: Int
         get() = pagerState.currentPage
       override val pageCount: Int
-        get() = 2
+        get() = pageCount
     }
   }
 
@@ -78,6 +80,10 @@ fun HomeScreen(
 
         1 -> {
           RecordingList(navigateRecordingDetail)
+        }
+
+        2 -> {
+          SettingsPage()
         }
       }
     }
