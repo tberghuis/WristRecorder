@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
       resetBackButtonPressedJob?.cancel()
       backButtonPressed.value = true
 
-      return true
+//      return true
     }
     return super.onKeyUp(keyCode, event)
   }
@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
         delay(1000.milliseconds)
         backButtonPressed.value = false
       }
-      return true
+//      return true
     }
 //    if (keyCode == KEYCODE_STEM_1) {
 //      lifecycleScope.launch {
