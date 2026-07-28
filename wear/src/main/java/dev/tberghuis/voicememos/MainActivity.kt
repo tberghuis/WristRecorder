@@ -29,7 +29,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-//  val backButtonPressed = mutableStateOf(false)
   var backButtonPressed = false
   var resetBackButtonPressedJob: Job? = null
 
@@ -37,7 +36,6 @@ class MainActivity : ComponentActivity() {
     logd("MainActivity onKeyDown keyCode $keyCode event $event")
     if (keyCode == KEYCODE_BACK) {
       resetBackButtonPressedJob?.cancel()
-//      backButtonPressed.value = true
       backButtonPressed = true
     }
     return super.onKeyUp(keyCode, event)
@@ -48,7 +46,6 @@ class MainActivity : ComponentActivity() {
     if (keyCode == KEYCODE_BACK) {
       resetBackButtonPressedJob = lifecycleScope.launch {
         delay(1000.milliseconds)
-//        backButtonPressed.value = false
         backButtonPressed = false
       }
     }
