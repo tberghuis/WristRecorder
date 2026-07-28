@@ -12,9 +12,9 @@ import kotlinx.coroutines.flow.map
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class SettingsRepository private constructor(
-  val dataStore: DataStore<Preferences>
+  private val dataStore: DataStore<Preferences>
 ) {
-  val BACK_OVERRIDE = booleanPreferencesKey("BACK_OVERRIDE")
+  private val BACK_OVERRIDE = booleanPreferencesKey("BACK_OVERRIDE")
 
   fun backOverrideFlow(): Flow<Boolean> = dataStore.data.map { preferences ->
     preferences[BACK_OVERRIDE] ?: false
