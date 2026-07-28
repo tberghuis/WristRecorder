@@ -23,6 +23,9 @@ import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.screen.RecordingDetail
 import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
+import kotlin.time.Duration.Companion.milliseconds
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
@@ -30,11 +33,15 @@ class MainActivity : ComponentActivity() {
   val stemKeyUpSharedFlow = MutableSharedFlow<Unit>()
 
   val backButtonPressed = mutableStateOf(false)
+  var resetBackButtonPressedJob: Job? = null
 
   override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
     logd("MainActivity onKeyDown keyCode $keyCode event $event")
     if (keyCode == KEYCODE_BACK) {
+      resetBackButtonPressedJob?.cancel()
       backButtonPressed.value = true
+
+      return true
     }
     return super.onKeyUp(keyCode, event)
   }
@@ -43,7 +50,12 @@ class MainActivity : ComponentActivity() {
   override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
     logd("MainActivity onKeyUp keyCode $keyCode event $event")
     if (keyCode == KEYCODE_BACK) {
-      backButtonPressed.value = false
+//      backButtonPressed.value = false
+      resetBackButtonPressedJob = lifecycleScope.launch {
+        delay(1000.milliseconds)
+        backButtonPressed.value = false
+      }
+      return true
     }
 //    if (keyCode == KEYCODE_STEM_1) {
 //      lifecycleScope.launch {

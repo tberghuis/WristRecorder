@@ -131,7 +131,7 @@ fun BackButtonOverride(
 //  val backHandlerEnabled = false
 
   val backOverrideSetting =
-    LocalContext.current.settingsRepository.backOverrideFlow().collectAsState(false).value
+    LocalContext.current.settingsRepository.backOverrideFlow().collectAsState(true).value
 
 
   BackHandler(enabled = backButtonPressed && backOverrideSetting) {
