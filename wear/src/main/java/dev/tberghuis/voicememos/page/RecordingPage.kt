@@ -25,8 +25,11 @@ import dev.tberghuis.voicememos.composables.RecordingUi
 import android.provider.Settings
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.logd
+import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -114,13 +117,18 @@ fun launchPermissionsSettings(context: Context) {
 
 
 @Composable
-fun BackButtonOverride() {
+fun BackButtonOverride(
+  vm: RecordingUiViewModel = viewModel(
+    viewModelStoreOwner
+    = LocalActivity.current as ViewModelStoreOwner
+  )
+) {
   // backHandlerEnabled = true if physical key stem press && backoverride setting
   // this is wack but it works i guess
   val backHandlerEnabled = (LocalActivity.current as MainActivity).backHandlerEnabled.value
 //  val backHandlerEnabled = false
   BackHandler(enabled = backHandlerEnabled) {
     logd("recording page back handler")
-    // todo toggle recording
+    vm.toggleRecording()
   }
 }
