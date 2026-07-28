@@ -129,53 +129,29 @@ fun BackButtonOverride(
     = LocalActivity.current as ViewModelStoreOwner
   )
 ) {
-  // backHandlerEnabled = true if physical key stem press && backoverride setting
-  // this is wack but it works i guess
-//  val backButtonPressed = (LocalActivity.current as MainActivity).backButtonPressed.value
-  val activity = LocalActivity.current as MainActivity
+  val activity = LocalActivity.current
   val backOverrideSetting =
     LocalContext.current.settingsRepository.backOverrideFlow().collectAsState(false).value
-//  val navController = LocalNavController.current
-
-//  BackHandler {
-//    logd("recording page back handler")
-//    if (activity.backButtonPressed && backOverrideSetting) {
-//      vm.toggleRecording()
-//    } else {
-//      activity.finish()
-//    }
-//  }
-
 
   PredictiveBackHandler { progress: Flow<BackEventCompat> ->
-    // This block is executed when the back gesture begins.
-
     var isGesture = false
-
     try {
       progress.collect { backEvent ->
-        // Handle gesture progress updates here.
         logd("PredictiveBackHandler backEvent")
         isGesture = true
       }
-      // This block is executed if the gesture completes successfully.
       logd("PredictiveBackHandler complete")
-
       if (isGesture || !backOverrideSetting) {
-        activity.finish()
+        activity?.finish()
       } else {
+        // this should only happen if physical back key pressed and backOverrideSetting=true
         vm.toggleRecording()
       }
-
     } catch (e: CancellationException) {
-      // This block is executed if the gesture is cancelled.
       logd("PredictiveBackHandler cancelled")
       throw e
     } finally {
-      // This block is executed either the gesture is completed or cancelled.
       logd("PredictiveBackHandler finally")
     }
   }
-
-
 }
