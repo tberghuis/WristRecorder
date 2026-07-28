@@ -80,18 +80,12 @@ dependencies {
   // whats the deal???
 //    wearApp(project(":wear"))
 
-
   implementation(libs.androidx.media3.session)
   implementation(libs.androidx.media3.exoplayer)
 
 //  implementation("androidx.media3:media3-ui:1.10.0")
 //  implementation("androidx.media3:media3-common:1.10.0")
 
-
   implementation(libs.androidx.dataStore.preferences)
-
-  // Alternatively - without an Android dependency.
   implementation(libs.androidx.datastore.preferences.core)
-
-
 }
