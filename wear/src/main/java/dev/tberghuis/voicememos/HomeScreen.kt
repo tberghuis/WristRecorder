@@ -43,21 +43,6 @@ fun HomeScreen(
     }
   }
 
-  @Suppress("KotlinConstantConditions")
-  if (BuildConfig.FLAVOR == "backoverride") {
-    // this also prevents back swipe, but its only for me so I don't care.
-    run {
-      val activity = (LocalActivity.current ?: return@run) as MainActivity
-      val scope = rememberCoroutineScope()
-      BackHandler {
-        logd("HomeScreen BackHandler")
-        scope.launch {
-          activity.stemKeyUpSharedFlow.emit(Unit)
-        }
-      }
-    }
-  }
-
   Scaffold(
     modifier = Modifier.fillMaxSize(),
     pageIndicator = {

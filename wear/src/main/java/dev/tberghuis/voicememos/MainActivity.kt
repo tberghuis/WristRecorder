@@ -30,8 +30,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-  val stemKeyUpSharedFlow = MutableSharedFlow<Unit>()
-
   val backButtonPressed = mutableStateOf(false)
   var resetBackButtonPressedJob: Job? = null
 

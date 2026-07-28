@@ -46,18 +46,6 @@ fun RecordingUi(
     }
   }
 
-  val context = LocalContext.current
-  LaunchedEffect(context) {
-    logd("RecordingUi LaunchedEffect")
-    (context as MainActivity).stemKeyUpSharedFlow.collect {
-      logd("stemKeyUpSharedFlow collect")
-      when (vm.isRecording) {
-        true -> endRecord()
-        false -> record()
-        else -> {}
-      }
-    }
-  }
   val isRecording = vm.isRecording ?: return
   Box(
     Modifier

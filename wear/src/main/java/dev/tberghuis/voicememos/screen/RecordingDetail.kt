@@ -39,15 +39,7 @@ fun RecordingDetail(popBackStack: () -> Unit, popHomeRecording: () -> Unit) {
   // do i need key??? probably, should write a test???
   val formattedTime = remember { formatTimestampFromFilename(viewModel.file) }
 
-  val context = LocalContext.current
-
   val playerInitialised = viewModel.player.collectAsState().value != null
-
-  LaunchedEffect(context) {
-    (context as MainActivity).stemKeyUpSharedFlow.collect {
-      popHomeRecording()
-    }
-  }
 
   Column(
     Modifier.fillMaxSize(),
