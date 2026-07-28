@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_BACK
-import android.view.KeyEvent.KEYCODE_STEM_1
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
@@ -27,7 +26,6 @@ import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -39,32 +37,20 @@ class MainActivity : ComponentActivity() {
     if (keyCode == KEYCODE_BACK) {
       resetBackButtonPressedJob?.cancel()
       backButtonPressed.value = true
-
-//      return true
     }
     return super.onKeyUp(keyCode, event)
   }
-
 
   override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
     logd("MainActivity onKeyUp keyCode $keyCode event $event")
     if (keyCode == KEYCODE_BACK) {
-//      backButtonPressed.value = false
       resetBackButtonPressedJob = lifecycleScope.launch {
         delay(1000.milliseconds)
         backButtonPressed.value = false
       }
-//      return true
     }
-//    if (keyCode == KEYCODE_STEM_1) {
-//      lifecycleScope.launch {
-//        stemKeyUpSharedFlow.emit(Unit)
-//      }
-//      return true
-//    }
     return super.onKeyUp(keyCode, event)
   }
-
 
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()
