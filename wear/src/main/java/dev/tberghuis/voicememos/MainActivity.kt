@@ -9,6 +9,7 @@ import android.view.KeyEvent.KEYCODE_STEM_1
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -100,26 +101,29 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WearApp() {
   val navController = rememberSwipeDismissableNavController()
-  MaterialTheme {
-    SwipeDismissableNavHost(
-      navController = navController, startDestination = "home"
-    ) {
-      composable("home") {
-        HomeScreen(navigateRecordingDetail = { file ->
-          navController.navigate("recording_detail/$file")
-        })
-      }
-      composable("recording_detail/{file}") {
-        RecordingDetail(popBackStack = {
-          navController.popBackStack()
-        }, popHomeRecording = {
-          // https://stackoverflow.com/questions/75131781/how-to-refresh-the-content-of-the-fragments-with-the-navigation-component-when-r
-          navController.popBackStack(
-            route = "home",
-            inclusive = true,
-          )
-          navController.navigate("home")
-        })
+
+  CompositionLocalProvider(LocalNavController provides navController) {
+    MaterialTheme {
+      SwipeDismissableNavHost(
+        navController = navController, startDestination = "home"
+      ) {
+        composable("home") {
+          HomeScreen(navigateRecordingDetail = { file ->
+            navController.navigate("recording_detail/$file")
+          })
+        }
+        composable("recording_detail/{file}") {
+          RecordingDetail(popBackStack = {
+            navController.popBackStack()
+          }, popHomeRecording = {
+            // https://stackoverflow.com/questions/75131781/how-to-refresh-the-content-of-the-fragments-with-the-navigation-component-when-r
+            navController.popBackStack(
+              route = "home",
+              inclusive = true,
+            )
+            navController.navigate("home")
+          })
+        }
       }
     }
   }

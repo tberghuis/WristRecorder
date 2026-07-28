@@ -28,6 +28,7 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.voicememos.LocalNavController
 import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.data.settingsRepository
@@ -117,7 +118,6 @@ fun launchPermissionsSettings(context: Context) {
   context.startActivity(intent)
 }
 
-
 @Composable
 fun BackButtonOverride(
   vm: RecordingUiViewModel = viewModel(
@@ -128,14 +128,16 @@ fun BackButtonOverride(
   // backHandlerEnabled = true if physical key stem press && backoverride setting
   // this is wack but it works i guess
   val backButtonPressed = (LocalActivity.current as MainActivity).backButtonPressed.value
-//  val backHandlerEnabled = false
-
   val backOverrideSetting =
-    LocalContext.current.settingsRepository.backOverrideFlow().collectAsState(true).value
-
+    LocalContext.current.settingsRepository.backOverrideFlow().collectAsState(false).value
+  val navController = LocalNavController.current
 
   BackHandler(enabled = backButtonPressed && backOverrideSetting) {
     logd("recording page back handler")
-    vm.toggleRecording()
+    if (backButtonPressed && backOverrideSetting) {
+      vm.toggleRecording()
+    } else {
+      navController.popBackStack()
+    }
   }
 }
