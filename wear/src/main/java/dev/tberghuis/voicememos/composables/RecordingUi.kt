@@ -28,9 +28,15 @@ fun RecordingUi(
   ),
   permissionPrompt: (() -> Unit)? = null
 ) {
-  
-  BackButtonOverride()
-  
+
+  BackButtonOverride {
+    permissionPrompt?.let {
+      it()
+      return@BackButtonOverride
+    }
+    vm.toggleRecording()
+  }
+
   val record = fun() {
     logd("record")
     permissionPrompt?.let {

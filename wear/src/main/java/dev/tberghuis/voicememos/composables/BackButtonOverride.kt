@@ -16,10 +16,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun BackButtonOverride(
-  vm: RecordingUiViewModel = viewModel(
-    viewModelStoreOwner
-    = LocalActivity.current as ViewModelStoreOwner
-  )
+//  vm: RecordingUiViewModel = viewModel(
+//    viewModelStoreOwner
+//    = LocalActivity.current as ViewModelStoreOwner
+//  )
+  onBack: () -> Unit
 ) {
   val activity = LocalActivity.current
   val backOverrideSetting =
@@ -37,7 +38,8 @@ fun BackButtonOverride(
         activity?.finish()
       } else {
         // this should only happen if physical back key pressed and backOverrideSetting=true
-        vm.toggleRecording()
+//        vm.toggleRecording()
+        onBack()
       }
     } catch (e: CancellationException) {
       logd("PredictiveBackHandler cancelled")
