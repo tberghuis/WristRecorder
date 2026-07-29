@@ -37,6 +37,8 @@ class RecordingUiViewModel(
 
   fun startRecording() {
     // doitwrong
+    // todo only call if have microphone permission
+    // or do the permission check in the service?
     recordingService?.startRecording()
   }
 
