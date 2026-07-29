@@ -28,18 +28,13 @@ android {
     }
   }
 
-  flavorDimensions += "flavor"
-  productFlavors {
-    create("default") {
-      isDefault = true
-      dimension = "flavor"
-    }
-    create("backoverride") {
-      dimension = "flavor"
-      versionNameSuffix = "-backoverride"
-      applicationIdSuffix = ".backoverride"
-    }
-  }
+//  flavorDimensions += "flavor"
+//  productFlavors {
+//    create("default") {
+//      isDefault = true
+//      dimension = "flavor"
+//    }
+//  }
 
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
