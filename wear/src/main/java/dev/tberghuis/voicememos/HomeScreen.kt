@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.wear.compose.foundation.pager.HorizontalPager
 import androidx.wear.compose.material.HorizontalPageIndicator
 import androidx.wear.compose.material.PageIndicatorState
 import androidx.wear.compose.material.Scaffold
@@ -25,16 +26,16 @@ fun HomeScreen(
 ) {
   val viewModel: HomeViewModel = viewModel()
 
-  val pageCount = 3
-  val pagerState = rememberPagerState(pageCount = { pageCount })
+//  val pageCount = 3
+//  val pagerState = rememberPagerState(pageCount = { pageCount })
   val pageIndicatorState: PageIndicatorState = remember {
     object : PageIndicatorState {
       override val pageOffset: Float
-        get() = pagerState.currentPageOffsetFraction
+        get() = viewModel.pagerState.currentPageOffsetFraction
       override val selectedPage: Int
-        get() = pagerState.currentPage
+        get() = viewModel.pagerState.currentPage
       override val pageCount: Int
-        get() = pageCount
+        get() = viewModel.pageCount
     }
   }
 
@@ -51,17 +52,17 @@ fun HomeScreen(
 
     ) {
     HorizontalPager(
-      state = pagerState
+      state = viewModel.pagerState
     ) { page ->
       when (page) {
         0 -> {
           RecordingPage(navigateRecordingDetail)
-          
+
 //          if(pagerState.currentPage == 0){
 //            BackButtonOverride()
 //          }
           
-          
+
         }
 
         1 -> {
@@ -75,8 +76,8 @@ fun HomeScreen(
     }
   }
 
-  LaunchedEffect(pagerState) {
-    snapshotFlow { pagerState.currentPage }.collect { page ->
+  LaunchedEffect(viewModel.pagerState) {
+    snapshotFlow { viewModel.pagerState.currentPage }.collect { page ->
       if (page == 1) {
         viewModel.getRecordings()
       }
