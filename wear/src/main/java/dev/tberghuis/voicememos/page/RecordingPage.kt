@@ -68,7 +68,7 @@ fun RecordingPage(
     it.permission == android.Manifest.permission.RECORD_AUDIO
   }!!
 
-  BackButtonOverride()
+//  BackButtonOverride()
 
   Box(
     modifier = Modifier.fillMaxSize(),

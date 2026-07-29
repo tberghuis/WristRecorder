@@ -19,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Icon
 import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.logd
+import dev.tberghuis.voicememos.page.BackButtonOverride
 import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 
 @SuppressLint("MissingPermission")
@@ -31,6 +32,9 @@ fun RecordingUi(
   ),
   permissionPrompt: (() -> Unit)? = null
 ) {
+  
+  BackButtonOverride()
+  
   val record = fun() {
     logd("record")
     permissionPrompt?.let {

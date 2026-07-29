@@ -18,6 +18,7 @@ import androidx.wear.compose.material.PageIndicatorState
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.TimeText
 import dev.tberghuis.voicememos.common.logd
+import dev.tberghuis.voicememos.page.BackButtonOverride
 import dev.tberghuis.voicememos.page.RecordingList
 import dev.tberghuis.voicememos.page.RecordingPage
 import dev.tberghuis.voicememos.page.SettingsPage
@@ -61,6 +62,12 @@ fun HomeScreen(
       when (page) {
         0 -> {
           RecordingPage(navigateRecordingDetail)
+          
+//          if(pagerState.currentPage == 0){
+//            BackButtonOverride()
+//          }
+          
+          
         }
 
         1 -> {
