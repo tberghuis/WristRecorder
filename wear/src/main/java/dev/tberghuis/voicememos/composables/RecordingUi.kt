@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Icon
+import dev.tberghuis.voicememos.HomeViewModel
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 
@@ -28,13 +29,16 @@ fun RecordingUi(
   ),
   permissionPrompt: (() -> Unit)? = null
 ) {
-
-  BackButtonOverride {
-    permissionPrompt?.let {
-      it()
-      return@BackButtonOverride
+  
+  val homeVm: HomeViewModel = viewModel()
+  if (homeVm.pagerState.currentPage == 0) {
+    BackButtonOverride {
+      permissionPrompt?.let {
+        it()
+        return@BackButtonOverride
+      }
+      vm.toggleRecording()
     }
-    vm.toggleRecording()
   }
 
   val record = fun() {
