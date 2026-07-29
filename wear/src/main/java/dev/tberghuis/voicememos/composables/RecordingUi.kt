@@ -9,17 +9,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Circle
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Icon
-import dev.tberghuis.voicememos.MainActivity
 import dev.tberghuis.voicememos.common.logd
-import dev.tberghuis.voicememos.page.BackButtonOverride
 import dev.tberghuis.voicememos.viewmodels.RecordingUiViewModel
 
 @SuppressLint("MissingPermission")
