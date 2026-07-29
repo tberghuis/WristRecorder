@@ -28,14 +28,6 @@ android {
     }
   }
 
-//  flavorDimensions += "flavor"
-//  productFlavors {
-//    create("default") {
-//      isDefault = true
-//      dimension = "flavor"
-//    }
-//  }
-
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
