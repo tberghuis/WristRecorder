@@ -11,8 +11,8 @@ android {
     applicationId = "dev.tberghuis.wristrecorder"
     minSdk = 28
     targetSdk = 36
-    versionCode = 28
-    versionName = "1.13.0-wear"
+    versionCode = 29
+    versionName = "1.13.1-wear"
   }
 
   buildTypes {

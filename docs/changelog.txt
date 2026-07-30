@@ -1,3 +1,6 @@
+v1.13.1  2026-07-31  master  
+  fix settings page
+
 v1.13.0  2026-07-29  005-backoverride  
   back button toggle recording, targetSdk 36
 
