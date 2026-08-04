@@ -1,3 +1,6 @@
+v1.13.2  2026-08-04  006-launchericon  
+  mobile launcher icon
+
 v1.13.1  2026-07-31  master  
   fix settings page
 
