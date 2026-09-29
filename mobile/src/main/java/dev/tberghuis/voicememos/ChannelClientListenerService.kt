@@ -1,35 +1,24 @@
 package dev.tberghuis.voicememos
 
-import android.content.Intent
 import android.net.Uri
-import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.google.android.gms.wearable.ChannelClient
 import com.google.android.gms.wearable.Wearable
 import com.google.android.gms.wearable.WearableListenerService
 import dev.tberghuis.voicememos.common.logd
 import java.io.File
-import java.lang.Exception
-import java.util.zip.ZipEntry
-import java.util.zip.ZipFile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 class ChannelClientListenerService : WearableListenerService() {
   // wearos samples uses Dispatchers.Main.immediate ???
   private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
   private val channelClient by lazy { Wearable.getChannelClient(applicationContext) }
-  private val messageClient by lazy { Wearable.getMessageClient(application) }
-  private val nodeClient by lazy { Wearable.getNodeClient(application) }
 
   override fun onDestroy() {
     super.onDestroy()
@@ -76,38 +65,6 @@ class ChannelClientListenerService : WearableListenerService() {
     val worker = OneTimeWorkRequestBuilder<ProcessZipWorker>()
       .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
       .build()
-
-//    GlobalScope.launch {
-//      WorkManager.getInstance(application).getWorkInfoByIdFlow(worker.id).collect { workInfo ->
-//        println("workInfo $workInfo")
-//        println("isFinished ${workInfo?.state?.isFinished}")
-//
-//        if (workInfo != null && workInfo.state.isFinished) {
-//
-//          val intent = Intent("ProcessZipResult").apply {
-//            setPackage(packageName)
-//          }
-//
-//          when (workInfo.state) {
-//            WorkInfo.State.SUCCEEDED -> {
-//              intent.putExtra("result", "success")
-//            }
-//
-//            WorkInfo.State.FAILED -> {
-//              intent.putExtra("result", "error")
-//              intent.putExtra("message", "todo error message")
-//            }
-//
-//            else -> {}
-//          }
-//          sendBroadcast(intent)
-//        }
-//      }
-//    }
-
-
-
-
 
     WorkManager.getInstance(application).enqueueUniqueWork(
       "PROCESS_ZIP",
