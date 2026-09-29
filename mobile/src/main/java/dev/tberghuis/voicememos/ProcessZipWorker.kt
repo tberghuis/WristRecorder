@@ -33,7 +33,9 @@ class ProcessZipWorker(private val context: Context, params: WorkerParameters) :
     }
 //    val nodeId = nodeClient.localNode.await().id
 
-//    val intent = Intent("ProcessZipResult")
+    val intent = Intent("ProcessZipResult").apply {
+      setPackage(context.packageName)
+    }
 
 
     try {
@@ -49,15 +51,15 @@ class ProcessZipWorker(private val context: Context, params: WorkerParameters) :
       }
       logd("unzip finished")
 //      messageClient.sendMessage(nodeId, "/sync-finished", byteArrayOf()).await()
-//      intent.putExtra("result", "success")
+      intent.putExtra("result", "success")
     } catch (e: Exception) {
       logd("error $e")
 //      val ba = "error $e".toByteArray(Charsets.UTF_8)
 //      messageClient.sendMessage(nodeId, "/snackbar", ba).await()
-//      intent.putExtra("result", "error")
-//      intent.putExtra("message", "$e")
+      intent.putExtra("result", "error")
+      intent.putExtra("message", "$e")
     } finally {
-//      context.sendBroadcast(intent)
+      context.sendBroadcast(intent)
     }
   }
 }

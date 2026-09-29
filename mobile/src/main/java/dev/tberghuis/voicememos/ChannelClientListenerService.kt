@@ -77,33 +77,33 @@ class ChannelClientListenerService : WearableListenerService() {
       .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
       .build()
 
-    GlobalScope.launch {
-      WorkManager.getInstance(application).getWorkInfoByIdFlow(worker.id).collect { workInfo ->
-        println("workInfo $workInfo")
-        println("isFinished ${workInfo?.state?.isFinished}")
-
-        if (workInfo != null && workInfo.state.isFinished) {
-
-          val intent = Intent("ProcessZipResult").apply {
-            setPackage(packageName)
-          }
-
-          when (workInfo.state) {
-            WorkInfo.State.SUCCEEDED -> {
-              intent.putExtra("result", "success")
-            }
-
-            WorkInfo.State.FAILED -> {
-              intent.putExtra("result", "error")
-              intent.putExtra("message", "todo error message")
-            }
-
-            else -> {}
-          }
-          sendBroadcast(intent)
-        }
-      }
-    }
+//    GlobalScope.launch {
+//      WorkManager.getInstance(application).getWorkInfoByIdFlow(worker.id).collect { workInfo ->
+//        println("workInfo $workInfo")
+//        println("isFinished ${workInfo?.state?.isFinished}")
+//
+//        if (workInfo != null && workInfo.state.isFinished) {
+//
+//          val intent = Intent("ProcessZipResult").apply {
+//            setPackage(packageName)
+//          }
+//
+//          when (workInfo.state) {
+//            WorkInfo.State.SUCCEEDED -> {
+//              intent.putExtra("result", "success")
+//            }
+//
+//            WorkInfo.State.FAILED -> {
+//              intent.putExtra("result", "error")
+//              intent.putExtra("message", "todo error message")
+//            }
+//
+//            else -> {}
+//          }
+//          sendBroadcast(intent)
+//        }
+//      }
+//    }
 
 
 
