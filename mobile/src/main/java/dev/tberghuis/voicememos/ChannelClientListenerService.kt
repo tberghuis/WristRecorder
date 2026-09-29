@@ -53,15 +53,15 @@ class ChannelClientListenerService : WearableListenerService() {
       override fun onInputClosed(
         channel: ChannelClient.Channel, closeReason: Int, appSpecificErrorCode: Int
       ) {
-//        super.onInputClosed(channel, closeReason, appSpecificErrorCode)
+        super.onInputClosed(channel, closeReason, appSpecificErrorCode)
         logd("onInputClosed closeReason $closeReason appSpecificErrorCode $appSpecificErrorCode")
 
-//        channelClient.unregisterChannelCallback(channel, this)
+        channelClient.unregisterChannelCallback(channel, this)
 
         // could the problem be that i was trying to close channel from the sending side
         // but closing too early???
 
-//        channelClient.close(channel)
+        channelClient.close(channel)
         processZipWorker()
       }
     })
