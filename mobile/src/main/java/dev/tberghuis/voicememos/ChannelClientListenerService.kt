@@ -84,7 +84,9 @@ class ChannelClientListenerService : WearableListenerService() {
 
         if (workInfo != null && workInfo.state.isFinished) {
 
-          val intent = Intent("ProcessZipResult")
+          val intent = Intent("ProcessZipResult").apply {
+            setPackage(packageName)
+          }
 
           when (workInfo.state) {
             WorkInfo.State.SUCCEEDED -> {
@@ -98,7 +100,7 @@ class ChannelClientListenerService : WearableListenerService() {
 
             else -> {}
           }
-          sendBroadcast(intent,RECEIVER_NOT_EXPORTED)
+          sendBroadcast(intent)
         }
       }
     }
