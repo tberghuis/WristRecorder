@@ -1,10 +1,15 @@
 package dev.tberghuis.voicememos
 
 import android.app.Application
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.wearable.CapabilityClient
@@ -30,32 +35,67 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   private val messageClient = Wearable.getMessageClient(application)
   private val nodeClient = Wearable.getNodeClient(application)
 
-  private val messageListener = MessageClient.OnMessageReceivedListener { messageEvent ->
-    when (messageEvent.path) {
-      "/snackbar" -> {
-        viewModelScope.launch {
-          snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
+//  private val messageListener = MessageClient.OnMessageReceivedListener { messageEvent ->
+//    when (messageEvent.path) {
+//      "/snackbar" -> {
+//        viewModelScope.launch {
+//          snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
+//        }
+//      }
+//
+//      "/sync-finished" -> {
+//        viewModelScope.launch {
+//          refreshRecordingFiles()
+//          snackbarHostState.showSnackbar("Download complete")
+//        }
+//      }
+//    }
+//  }
+
+
+  val processZipResultReceiver = object : BroadcastReceiver() {
+    override fun onReceive(context: Context?, intent: Intent?) {
+      println("onReceive ProcessZipResult")
+      println("intent $intent")
+
+      intent?.let {
+        if (it.getStringExtra("result") == "success") {
+          viewModelScope.launch {
+            refreshRecordingFiles()
+            snackbarHostState.showSnackbar("Download complete")
+          }
+        } else {
+          viewModelScope.launch {
+//            refreshRecordingFiles()
+            snackbarHostState.showSnackbar(it.getStringExtra("message") ?: return@launch)
+          }
         }
       }
 
-      "/sync-finished" -> {
-        viewModelScope.launch {
-          refreshRecordingFiles()
-          snackbarHostState.showSnackbar("Download complete")
-        }
-      }
     }
   }
+
 
   init {
     logd("MobileViewModel init")
     refreshRecordingFiles()
-    messageClient.addListener(messageListener)
+//    messageClient.addListener(messageListener)
+
+
+    ContextCompat.registerReceiver(
+      application, processZipResultReceiver,
+      IntentFilter("ProcessZipResult"),
+      ContextCompat.RECEIVER_NOT_EXPORTED
+    )
+
+
   }
 
   override fun onCleared() {
-    messageClient.removeListener(messageListener)
-    super.onCleared()
+//    messageClient.removeListener(messageListener)
+
+    application.unregisterReceiver(processZipResultReceiver)
+
   }
 
   private fun refreshRecordingFiles() {
