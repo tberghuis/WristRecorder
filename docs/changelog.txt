@@ -1,3 +1,6 @@
+v1.14.0  2026-09-30  007-syncservice  
+  fix bug download recordings
+
 v1.13.2  2026-08-04  006-launchericon  
   mobile launcher icon
 
