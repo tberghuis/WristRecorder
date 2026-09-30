@@ -35,22 +35,22 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   private val messageClient = Wearable.getMessageClient(application)
   private val nodeClient = Wearable.getNodeClient(application)
 
-//  private val messageListener = MessageClient.OnMessageReceivedListener { messageEvent ->
-//    when (messageEvent.path) {
-//      "/snackbar" -> {
-//        viewModelScope.launch {
-//          snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
-//        }
-//      }
-//
+  private val messageListener = MessageClient.OnMessageReceivedListener { messageEvent ->
+    when (messageEvent.path) {
+      "/snackbar" -> {
+        viewModelScope.launch {
+          snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
+        }
+      }
+
 //      "/sync-finished" -> {
 //        viewModelScope.launch {
 //          refreshRecordingFiles()
 //          snackbarHostState.showSnackbar("Download complete")
 //        }
 //      }
-//    }
-//  }
+    }
+  }
 
 
   val processZipResultReceiver = object : BroadcastReceiver() {
@@ -79,7 +79,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   init {
     logd("MobileViewModel init")
     refreshRecordingFiles()
-//    messageClient.addListener(messageListener)
+    messageClient.addListener(messageListener)
 
 
     ContextCompat.registerReceiver(
@@ -92,7 +92,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   }
 
   override fun onCleared() {
-//    messageClient.removeListener(messageListener)
+    messageClient.removeListener(messageListener)
 
     application.unregisterReceiver(processZipResultReceiver)
 
