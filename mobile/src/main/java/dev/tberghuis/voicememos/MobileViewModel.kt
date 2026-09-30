@@ -50,14 +50,12 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
       println("onReceive ProcessZipResult")
       println("intent $intent")
 
-      intent?.let {
-        if (it.getStringExtra("result") == "success") {
-          viewModelScope.launch {
+      viewModelScope.launch {
+        intent?.let {
+          if (it.getStringExtra("result") == "success") {
             refreshRecordingFiles()
             snackbarHostState.showSnackbar("Download complete")
-          }
-        } else {
-          viewModelScope.launch {
+          } else {
             refreshRecordingFiles()
             snackbarHostState.showSnackbar(it.getStringExtra("message") ?: return@launch)
           }
