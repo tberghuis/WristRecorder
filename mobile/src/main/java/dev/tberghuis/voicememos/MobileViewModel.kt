@@ -47,8 +47,8 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   val processZipResultReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-      println("onReceive ProcessZipResult")
-      println("intent $intent")
+      logd("onReceive ProcessZipResult")
+      logd("intent $intent")
 
       viewModelScope.launch {
         intent?.let {
