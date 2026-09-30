@@ -42,16 +42,8 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
           snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
         }
       }
-
-//      "/sync-finished" -> {
-//        viewModelScope.launch {
-//          refreshRecordingFiles()
-//          snackbarHostState.showSnackbar("Download complete")
-//        }
-//      }
     }
   }
-
 
   val processZipResultReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -66,36 +58,29 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
           }
         } else {
           viewModelScope.launch {
-//            refreshRecordingFiles()
+            refreshRecordingFiles()
             snackbarHostState.showSnackbar(it.getStringExtra("message") ?: return@launch)
           }
         }
       }
-
     }
   }
-
 
   init {
     logd("MobileViewModel init")
     refreshRecordingFiles()
     messageClient.addListener(messageListener)
 
-
     ContextCompat.registerReceiver(
       application, processZipResultReceiver,
       IntentFilter("ProcessZipResult"),
       ContextCompat.RECEIVER_NOT_EXPORTED
     )
-
-
   }
 
   override fun onCleared() {
     messageClient.removeListener(messageListener)
-
     application.unregisterReceiver(processZipResultReceiver)
-
   }
 
   private fun refreshRecordingFiles() {
