@@ -11,14 +11,18 @@ android {
     applicationId = "dev.tberghuis.wristrecorder"
     minSdk = 28
     targetSdk = 36
-    versionCode = 30
-    versionName = "1.14.0-wear"
+    versionCode = 31
+    versionName = "1.14.1-wear"
   }
 
   buildTypes {
     release {
       isMinifyEnabled = true
-      isShrinkResources = true
+      // if isShrinkResources = true, 
+      // capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
+      // is empty when invoked on mobile
+      // some sort of bug but isShrinkResources = false makes things work
+      isShrinkResources = false
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
   }

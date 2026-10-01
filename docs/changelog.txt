@@ -1,3 +1,6 @@
+v1.14.0  2026-10-01  master  
+  wear app isShrinkResources = false, fix bug "no watch connected" when download from mobile app.
+
 v1.14.0  2026-09-30  007-syncservice  
   fix bug download recordings
 
