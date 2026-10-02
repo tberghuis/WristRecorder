@@ -1,4 +1,8 @@
-v1.14.0  2026-10-01  master  
+v1.14.2  2026-10-02  master  
+  fix WorkManagerInitializer
+  fix "no watch connected" ?
+
+v1.14.1  2026-10-01  master  
   wear app isShrinkResources = false, fix bug "no watch connected" when download from mobile app.
 
 v1.14.0  2026-09-30  007-syncservice  
