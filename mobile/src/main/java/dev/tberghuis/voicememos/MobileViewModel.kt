@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
+class XxxMobileViewModel(private val application: Application) : AndroidViewModel(application) {
   private val audioController = AudioController(application)
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 

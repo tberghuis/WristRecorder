@@ -14,7 +14,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.tberghuis.voicememos.MobileViewModel
 import dev.tberghuis.voicememos.RecordingCard
 import dev.tberghuis.voicememos.common.logd
 
@@ -39,6 +38,9 @@ fun TmpScreenContent(
         Text("Private storage:")
         Button(onClick = {
           logd("move to shared")
+          
+          vm.moveRecordingsVmc.moveToSharedStorage()
+          
         }) {
           Text("move to shared")
         }
