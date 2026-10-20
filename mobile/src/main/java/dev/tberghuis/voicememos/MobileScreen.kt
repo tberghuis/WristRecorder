@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.common.calcDuration
 import dev.tberghuis.voicememos.common.formatTimestampFromFilename
+import dev.tberghuis.voicememos.tmp.tmp01.TmpScreenContent
 import java.io.File
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,7 +65,7 @@ fun MobileScreen(
       }
     }
   }) { paddingValues ->
-    ScreenContent(paddingValues)
+    TmpScreenContent(paddingValues)
   }
 
   if (vm.confirmDeleteDialog) {
