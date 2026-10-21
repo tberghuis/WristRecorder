@@ -30,7 +30,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   val moveRecordingsVmc =
     MoveRecordingsVmc(application, viewModelScope, refreshUi = { refreshRecordingFiles() })
-  val sharedRecordingsVmc = SharedRecordingsVmc()
+  val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope)
 
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
