@@ -14,6 +14,10 @@ class SharedRecordingsVmc(
   private val context: Context,
   private val scope: CoroutineScope,
 ) {
+  
+  val player = SimplePlayer(context)
+  
+  
 
   val sharedRecordingsList = MutableStateFlow(listOf<SharedRecording>())
 
@@ -30,6 +34,9 @@ class SharedRecordingsVmc(
 
   fun playSharedRecording(sharedRecording: SharedRecording) {
     logd("playSharedRecording $sharedRecording")
+    
+    player.play(sharedRecording.uri)
+    
   }
 }
 

@@ -65,4 +65,8 @@ dependencies {
   implementation(libs.androidx.work.ktx)
 
   implementation(libs.androidx.compose.material.iconsExtended)
+
+
+  implementation(libs.androidx.media3.exoplayer)
+
 }
