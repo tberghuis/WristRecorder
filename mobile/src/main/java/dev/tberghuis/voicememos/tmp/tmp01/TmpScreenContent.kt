@@ -38,9 +38,9 @@ fun TmpScreenContent(
         Text("Private storage:")
         Button(onClick = {
           logd("move to shared")
-          
+
           vm.moveRecordingsVmc.moveToSharedStorage()
-          
+
         }) {
           Text("move to shared")
         }
@@ -50,5 +50,29 @@ fun TmpScreenContent(
     items(files.value.size) { i ->
       RecordingCard(files.value[i])
     }
+
+
+
+
+    item {
+      Row(
+        modifier = Modifier.fillMaxWidth(),
+//        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+      ) {
+        Text("Shared Storage: /$WR_RELATIVE_PATH")
+      }
+    }
+
+    // todo remove
+    item {
+      Button(onClick = {
+        vm.sharedRecordingsVmc.refreshSharedList()
+      }) {
+        Text("refresh shared")
+      }
+    }
+
+
   }
 }
