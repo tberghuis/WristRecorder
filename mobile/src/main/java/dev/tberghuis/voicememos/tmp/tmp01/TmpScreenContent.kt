@@ -11,6 +11,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -22,6 +23,10 @@ fun TmpScreenContent(
   padding: PaddingValues, vm: MobileViewModel = viewModel()
 ) {
   val files = vm.recordingFilesStateFlow.collectAsState()
+  
+  val sharedRecordingsList by vm.sharedRecordingsVmc.sharedRecordingsList.collectAsState()
+  
+  
   LazyColumn(
     modifier = Modifier
       .padding(padding)
@@ -73,6 +78,8 @@ fun TmpScreenContent(
       }
     }
 
-
+    items(sharedRecordingsList.size) { i ->
+      SharedRecordingCard(sharedRecordingsList[i])
+    }
   }
 }
