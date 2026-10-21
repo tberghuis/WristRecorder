@@ -28,7 +28,9 @@ class SharedRecordingsVmc(
 
   }
 
-
+  fun playSharedRecording(sharedRecording: SharedRecording) {
+    logd("playSharedRecording $sharedRecording")
+  }
 }
 
 data class SharedRecording(

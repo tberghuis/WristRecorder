@@ -17,15 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.tberghuis.voicememos.common.calcDuration
-import dev.tberghuis.voicememos.common.formatTimestampFromFilename
-import java.io.File
 
 // todo refactor so reusable with private recordings
 
 @Composable
 fun SharedRecordingCard(
-  sharedRecording: SharedRecording
+  sharedRecording: SharedRecording,
+  vm: MobileViewModel = viewModel()
 ) {
   val context = LocalContext.current
 
@@ -50,6 +48,7 @@ fun SharedRecordingCard(
       Row {
         IconButton(onClick = {
 //          vm.playRecording(recordingFile)
+          vm.sharedRecordingsVmc.playSharedRecording(sharedRecording)
         }) {
           Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "")
         }
