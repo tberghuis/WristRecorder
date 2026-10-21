@@ -28,7 +28,8 @@ import kotlinx.coroutines.tasks.await
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
   private val audioController = AudioController(application)
 
-  val moveRecordingsVmc = MoveRecordingsVmc(application, viewModelScope)
+  val moveRecordingsVmc =
+    MoveRecordingsVmc(application, viewModelScope, refreshUi = { refreshRecordingFiles() })
 
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
