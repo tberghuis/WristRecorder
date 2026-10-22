@@ -28,6 +28,7 @@ fun SharedRecordingCard(
   val context = LocalContext.current
 
 //  val formattedTime = formatTimestampFromFilename(recordingFile.name)
+  val formattedTime = sharedRecording.displayName.toRecordingEntryTitle()
 //  val durationSeconds = calcDuration(context, recordingFile.name)
 
   Card(
@@ -42,9 +43,9 @@ fun SharedRecordingCard(
       horizontalArrangement = Arrangement.SpaceBetween,
       verticalAlignment = Alignment.CenterVertically,
     ) {
-//      Text(formattedTime)
+      Text(formattedTime)
 //      Text("${durationSeconds}s")
-      Text(sharedRecording.displayName)
+//      Text(sharedRecording.displayName)
       Row {
         IconButton(onClick = {
 //          vm.playRecording(recordingFile)
