@@ -3,8 +3,10 @@ package dev.tberghuis.voicememos.tmp.tmp01
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -14,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.RecordingCard
 import dev.tberghuis.voicememos.common.logd
@@ -31,17 +34,19 @@ fun TmpScreenContent(
       .fillMaxSize(),
   ) {
     item {
-      Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-      ) {
-        Text("Private storage:")
-        Button(onClick = {
-          logd("move to shared")
-          vm.moveRecordingsVmc.moveToSharedStorage()
-        }) {
-          Text("move to shared")
+      if (files.value.isNotEmpty()) {
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+          verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Text("Private storage:")
+          Button(onClick = {
+            logd("move to shared")
+            vm.moveRecordingsVmc.moveToSharedStorage()
+          }) {
+            Text("move to shared")
+          }
         }
       }
     }
@@ -53,7 +58,15 @@ fun TmpScreenContent(
     ) { i ->
       RecordingCard(files.value[i])
     }
+
+
+
     item {
+
+      if (files.value.isNotEmpty()) {
+        Spacer(Modifier.height(10.dp))
+      }
+
       Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
