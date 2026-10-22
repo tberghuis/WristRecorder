@@ -23,18 +23,14 @@ fun TmpScreenContent(
   padding: PaddingValues, vm: MobileViewModel = viewModel()
 ) {
   val files = vm.recordingFilesStateFlow.collectAsState()
-  
   val sharedRecordingsList by vm.sharedRecordingsVmc.sharedRecordingsList.collectAsState()
-  
-  
+
   LazyColumn(
     modifier = Modifier
       .padding(padding)
       .fillMaxSize(),
   ) {
     item {
-
-
       Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -43,42 +39,34 @@ fun TmpScreenContent(
         Text("Private storage:")
         Button(onClick = {
           logd("move to shared")
-
           vm.moveRecordingsVmc.moveToSharedStorage()
-
         }) {
           Text("move to shared")
         }
       }
-
     }
-    items(files.value.size) { i ->
+    items(
+      files.value.size,
+      key = {
+        files.value[it].name
+      }
+    ) { i ->
       RecordingCard(files.value[i])
     }
-
-
-
-
     item {
       Row(
         modifier = Modifier.fillMaxWidth(),
-//        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
       ) {
         Text("Shared Storage: /$WR_RELATIVE_PATH")
       }
     }
-
-    // todo remove
-    item {
-      Button(onClick = {
-        vm.sharedRecordingsVmc.refreshSharedList()
-      }) {
-        Text("refresh shared")
+    items(
+      sharedRecordingsList.size,
+      key = {
+        sharedRecordingsList[it].id
       }
-    }
-
-    items(sharedRecordingsList.size) { i ->
+    ) { i ->
       SharedRecordingCard(sharedRecordingsList[i])
     }
   }
