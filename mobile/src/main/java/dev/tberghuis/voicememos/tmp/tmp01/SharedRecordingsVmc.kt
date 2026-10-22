@@ -14,10 +14,9 @@ class SharedRecordingsVmc(
   private val context: Context,
   private val scope: CoroutineScope,
 ) {
-  
+
   val player = SimplePlayer(context)
-  
-  
+
 
   val sharedRecordingsList = MutableStateFlow(listOf<SharedRecording>())
 
@@ -34,9 +33,9 @@ class SharedRecordingsVmc(
 
   fun playSharedRecording(sharedRecording: SharedRecording) {
     logd("playSharedRecording $sharedRecording")
-    
+
     player.play(sharedRecording.uri)
-    
+
   }
 }
 
@@ -44,7 +43,8 @@ data class SharedRecording(
   val id: Long,
   val displayName: String,
   val relativePath: String,
-  val uri: android.net.Uri
+  val uri: android.net.Uri,
+  val duration: Int
 )
 
 
@@ -61,7 +61,8 @@ suspend fun getListSharedRecordings(context: Context): List<SharedRecording> {
       MediaStore.Audio.Media.DISPLAY_NAME,
       MediaStore.Audio.Media.RELATIVE_PATH,
       MediaStore.Audio.Media.MIME_TYPE,
-      MediaStore.Audio.Media.DATE_ADDED
+      MediaStore.Audio.Media.DATE_ADDED,
+      MediaStore.Audio.Media.DURATION,
     )
 
     val selection = "${MediaStore.Audio.Media.RELATIVE_PATH} = ?"
@@ -79,18 +80,24 @@ suspend fun getListSharedRecordings(context: Context): List<SharedRecording> {
       val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
       val relativePathColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.RELATIVE_PATH)
 
+      val durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
+
+
       while (cursor.moveToNext()) {
         val id = cursor.getLong(idColumn)
         val displayName = cursor.getString(nameColumn)
         val relativePath = cursor.getString(relativePathColumn)
         val itemUri = ContentUris.withAppendedId(collectionUri, id)
 
+        val duration = cursor.getInt(durationColumn)
+
         recordings.add(
           SharedRecording(
             id = id,
             displayName = displayName,
             relativePath = relativePath,
-            uri = itemUri
+            uri = itemUri,
+            duration = duration
           )
         )
       }

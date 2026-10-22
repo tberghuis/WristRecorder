@@ -44,7 +44,7 @@ fun SharedRecordingCard(
       verticalAlignment = Alignment.CenterVertically,
     ) {
       Text(formattedTime)
-//      Text("${durationSeconds}s")
+      Text("${sharedRecording.duration}s")
 //      Text(sharedRecording.displayName)
       Row {
         IconButton(onClick = {
