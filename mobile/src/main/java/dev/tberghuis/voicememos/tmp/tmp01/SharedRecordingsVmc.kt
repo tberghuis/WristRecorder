@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import android.content.Context
 import android.provider.MediaStore
 import android.content.ContentUris
+import kotlin.math.roundToInt
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -89,7 +90,7 @@ suspend fun getListSharedRecordings(context: Context): List<SharedRecording> {
         val relativePath = cursor.getString(relativePathColumn)
         val itemUri = ContentUris.withAppendedId(collectionUri, id)
 
-        val duration = cursor.getInt(durationColumn)
+        val duration = (cursor.getInt(durationColumn)/1000f).roundToInt()
 
         recordings.add(
           SharedRecording(
