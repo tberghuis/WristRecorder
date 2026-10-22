@@ -58,15 +58,10 @@ fun TmpScreenContent(
     ) { i ->
       RecordingCard(files.value[i])
     }
-
-
-
     item {
-
       if (files.value.isNotEmpty()) {
         Spacer(Modifier.height(10.dp))
       }
-
       Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
