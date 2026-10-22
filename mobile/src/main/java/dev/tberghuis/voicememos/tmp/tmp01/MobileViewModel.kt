@@ -87,6 +87,11 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   }
 
   private fun refreshRecordingFiles() {
+    refreshPrivateRecordingFiles()
+    sharedRecordingsVmc.refreshSharedList()
+  }
+
+  private fun refreshPrivateRecordingFiles() {
     val path = application.filesDir
     val files = path.listFiles() ?: return
     val recordingFiles = mutableListOf<File>()
@@ -98,6 +103,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     recordingFilesStateFlow.value = recordingFiles
   }
 
+
   fun playRecording(file: File) {
     viewModelScope.launch {
       audioController.play(file.name)
@@ -106,7 +112,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   fun deleteRecording(file: File) {
     deleteFileCommon(application, file.name)
-    refreshRecordingFiles()
+    refreshPrivateRecordingFiles()
   }
 
   fun downloadRecordings() {
