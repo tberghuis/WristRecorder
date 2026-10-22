@@ -15,37 +15,29 @@ class SharedRecordingsVmc(
   private val context: Context,
   private val scope: CoroutineScope,
 ) {
-
   val player = SimplePlayer(context)
-
 
   val sharedRecordingsList = MutableStateFlow(listOf<SharedRecording>())
 
   fun refreshSharedList() {
     logd("refreshSharedList")
-
     scope.launch(IO) {
       sharedRecordingsList.value = getListSharedRecordings(context)
-
       logd("sharedRecordingsList ${sharedRecordingsList.value}")
     }
-
   }
 
   fun playSharedRecording(sharedRecording: SharedRecording) {
     logd("playSharedRecording $sharedRecording")
-
     player.play(sharedRecording.uri)
-
   }
 
   fun deleteSharedRecording(sharedRecording: SharedRecording) {
     scope.launch {
-      deleteSharedRecording(context, sharedRecording)
+      context.contentResolver.delete(sharedRecording.uri, null, null)
+      refreshSharedList()
     }
   }
-
-
 }
 
 data class SharedRecording(
@@ -56,12 +48,6 @@ data class SharedRecording(
   val duration: Int
 )
 
-
-suspend fun deleteSharedRecording(context: Context, sharedRecording: SharedRecording) {
-  context.contentResolver.delete(sharedRecording.uri, null, null)
-}
-
-
 suspend fun getListSharedRecordings(context: Context): List<SharedRecording> {
   return withContext(IO) {
     val recordings = mutableListOf<SharedRecording>()
@@ -69,7 +55,6 @@ suspend fun getListSharedRecordings(context: Context): List<SharedRecording> {
     val collectionUri = MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
 
     // https://developer.android.com/reference/android/provider/MediaStore.MediaColumns
-    // do I need DURATION
     val projection = arrayOf(
       MediaStore.Audio.Media._ID,
       MediaStore.Audio.Media.DISPLAY_NAME,
