@@ -84,6 +84,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   override fun onCleared() {
     messageClient.removeListener(messageListener)
     application.unregisterReceiver(processZipResultReceiver)
+    sharedRecordingsVmc.player.release()
   }
 
   private fun refreshRecordingFiles() {
