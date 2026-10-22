@@ -25,11 +25,7 @@ fun SharedRecordingCard(
   sharedRecording: SharedRecording,
   vm: MobileViewModel = viewModel()
 ) {
-  val context = LocalContext.current
-
-//  val formattedTime = formatTimestampFromFilename(recordingFile.name)
   val formattedTime = sharedRecording.displayName.toRecordingEntryTitle()
-//  val durationSeconds = calcDuration(context, recordingFile.name)
 
   Card(
     modifier = Modifier
@@ -45,16 +41,14 @@ fun SharedRecordingCard(
     ) {
       Text(formattedTime)
       Text("${sharedRecording.duration}s")
-//      Text(sharedRecording.displayName)
       Row {
         IconButton(onClick = {
-//          vm.playRecording(recordingFile)
           vm.sharedRecordingsVmc.playSharedRecording(sharedRecording)
         }) {
           Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "")
         }
         IconButton(onClick = {
-//          vm.deleteRecording(recordingFile)
+          vm.sharedRecordingsVmc.deleteSharedRecording(sharedRecording)
         }) {
           Icon(imageVector = Icons.Default.Delete, contentDescription = "")
         }

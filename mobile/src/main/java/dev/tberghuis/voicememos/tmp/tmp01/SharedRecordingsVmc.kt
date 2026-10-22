@@ -38,6 +38,14 @@ class SharedRecordingsVmc(
     player.play(sharedRecording.uri)
 
   }
+
+  fun deleteSharedRecording(sharedRecording: SharedRecording) {
+    scope.launch {
+      deleteSharedRecording(context, sharedRecording)
+    }
+  }
+
+
 }
 
 data class SharedRecording(
@@ -47,6 +55,11 @@ data class SharedRecording(
   val uri: android.net.Uri,
   val duration: Int
 )
+
+
+suspend fun deleteSharedRecording(context: Context, sharedRecording: SharedRecording) {
+  context.contentResolver.delete(sharedRecording.uri, null, null)
+}
 
 
 suspend fun getListSharedRecordings(context: Context): List<SharedRecording> {
@@ -90,7 +103,7 @@ suspend fun getListSharedRecordings(context: Context): List<SharedRecording> {
         val relativePath = cursor.getString(relativePathColumn)
         val itemUri = ContentUris.withAppendedId(collectionUri, id)
 
-        val duration = (cursor.getInt(durationColumn)/1000f).roundToInt()
+        val duration = (cursor.getInt(durationColumn) / 1000f).roundToInt()
 
         recordings.add(
           SharedRecording(
