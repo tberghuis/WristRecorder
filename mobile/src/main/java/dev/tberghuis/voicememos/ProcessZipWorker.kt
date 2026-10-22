@@ -43,6 +43,10 @@ class ProcessZipWorker(private val context: Context, params: WorkerParameters) :
         }
       }
       logd("unzip finished")
+      // todo future.txt move to shared storage
+      // users may not want recordings in shared storage?
+      // so won't be shown in music player
+
       intent.putExtra("result", "success")
     } catch (e: Exception) {
       logd("error $e")
