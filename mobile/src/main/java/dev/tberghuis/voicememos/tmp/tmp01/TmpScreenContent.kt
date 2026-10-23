@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Card
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -36,35 +38,58 @@ fun TmpScreenContent(
       .fillMaxSize(),
   ) {
     item {
-      if (files.value.isNotEmpty()) {
-        Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.Start,
-          verticalAlignment = Alignment.CenterVertically,
+      Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Start,
+        verticalAlignment = Alignment.CenterVertically,
+      ) {
+        Text("Private storage: ")
+        Text(
+          text = "move to shared",
+          style = LocalTextStyle.current.copy(
+            color = Color(0xFF1A73E8), // Standard hyperlink blue
+            textDecoration = TextDecoration.Underline
+          ),
+          modifier = Modifier
+            .clickable {
+              vm.moveRecordingsVmc.moveToSharedStorage()
+            }
+        )
+      }
+    }
+
+    if (files.value.isEmpty()) {
+      item {
+        Card(
+          modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp),
         ) {
-          Text("Private storage: ")
-          Text(
-            text = "move to shared",
-            style = LocalTextStyle.current.copy(
-              color = Color(0xFF1A73E8), // Standard hyperlink blue
-              textDecoration = TextDecoration.Underline
-            ),
+          Row(
             modifier = Modifier
-              .clickable {
-                vm.moveRecordingsVmc.moveToSharedStorage()
-              }
-          )
+              .fillMaxWidth()
+              .padding(10.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.Top,
+          ) {
+            Text(
+              "no recordings",
+              fontStyle = FontStyle.Italic
+            )
+          }
         }
       }
-    }
-    items(
-      files.value.size,
-      key = {
-        files.value[it].name
+    } else {
+      items(
+        files.value.size,
+        key = {
+          files.value[it].name
+        }
+      ) { i ->
+        RecordingCard(files.value[i])
       }
-    ) { i ->
-      RecordingCard(files.value[i])
     }
+
     item {
       if (files.value.isNotEmpty()) {
         Spacer(Modifier.height(10.dp))
