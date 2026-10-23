@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos
+package dev.tberghuis.voicememos.vm
 
 import android.app.Application
 import android.content.BroadcastReceiver
@@ -18,7 +18,6 @@ import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.AudioController
 import dev.tberghuis.voicememos.common.deleteFileCommon
 import dev.tberghuis.voicememos.common.logd
-import dev.tberghuis.voicememos.tmp.tmp01.MoveRecordingsVmc
 import dev.tberghuis.voicememos.tmp.tmp01.SharedRecordingsVmc
 import java.io.File
 import kotlinx.coroutines.async

@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos.tmp.tmp01
+package dev.tberghuis.voicememos.vm
 
 import android.app.Application
 import android.content.Context
