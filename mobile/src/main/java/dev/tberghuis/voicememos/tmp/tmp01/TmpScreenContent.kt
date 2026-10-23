@@ -60,24 +60,7 @@ fun TmpScreenContent(
 
     if (files.value.isEmpty()) {
       item {
-        Card(
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(5.dp),
-        ) {
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .padding(10.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Top,
-          ) {
-            Text(
-              "no recordings",
-              fontStyle = FontStyle.Italic
-            )
-          }
-        }
+        NoRecordingsCard()
       }
     } else {
       items(
@@ -91,9 +74,9 @@ fun TmpScreenContent(
     }
 
     item {
-      if (files.value.isNotEmpty()) {
-        Spacer(Modifier.height(10.dp))
-      }
+  
+      Spacer(Modifier.height(10.dp))
+
       Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -110,4 +93,28 @@ fun TmpScreenContent(
       SharedRecordingCard(sharedRecordingsList[i])
     }
   }
+}
+
+
+@Composable
+fun NoRecordingsCard() {
+  Card(
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(5.dp),
+  ) {
+    Row(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(10.dp),
+      horizontalArrangement = Arrangement.Center,
+      verticalAlignment = Alignment.Top,
+    ) {
+      Text(
+        "no recordings",
+        fontStyle = FontStyle.Italic
+      )
+    }
+  }
+
 }
