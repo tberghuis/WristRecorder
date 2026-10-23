@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.voicememos.MobileViewModel
 
 @Composable
 fun RefreshOnResume(vm: MobileViewModel = viewModel()) {

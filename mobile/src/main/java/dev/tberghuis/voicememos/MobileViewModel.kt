@@ -18,6 +18,8 @@ import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.AudioController
 import dev.tberghuis.voicememos.common.deleteFileCommon
 import dev.tberghuis.voicememos.common.logd
+import dev.tberghuis.voicememos.tmp.tmp01.MoveRecordingsVmc
+import dev.tberghuis.voicememos.tmp.tmp01.SharedRecordingsVmc
 import java.io.File
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -25,8 +27,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class XxxMobileViewModel(private val application: Application) : AndroidViewModel(application) {
+class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
   private val audioController = AudioController(application)
+
+  val moveRecordingsVmc =
+    MoveRecordingsVmc(application, viewModelScope, refreshUi = { refreshRecordingFiles() })
+  val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope)
+
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
   var confirmDeleteDialog by mutableStateOf(false)
@@ -66,7 +73,7 @@ class XxxMobileViewModel(private val application: Application) : AndroidViewMode
 
   init {
     logd("MobileViewModel init")
-    refreshRecordingFiles()
+//    refreshRecordingFiles()
     messageClient.addListener(messageListener)
 
     ContextCompat.registerReceiver(
@@ -79,9 +86,15 @@ class XxxMobileViewModel(private val application: Application) : AndroidViewMode
   override fun onCleared() {
     messageClient.removeListener(messageListener)
     application.unregisterReceiver(processZipResultReceiver)
+    sharedRecordingsVmc.player.release()
   }
 
-  private fun refreshRecordingFiles() {
+  fun refreshRecordingFiles() {
+    refreshPrivateRecordingFiles()
+    sharedRecordingsVmc.refreshSharedList()
+  }
+
+  private fun refreshPrivateRecordingFiles() {
     val path = application.filesDir
     val files = path.listFiles() ?: return
     val recordingFiles = mutableListOf<File>()
@@ -93,6 +106,7 @@ class XxxMobileViewModel(private val application: Application) : AndroidViewMode
     recordingFilesStateFlow.value = recordingFiles
   }
 
+
   fun playRecording(file: File) {
     viewModelScope.launch {
       audioController.play(file.name)
@@ -101,7 +115,7 @@ class XxxMobileViewModel(private val application: Application) : AndroidViewMode
 
   fun deleteRecording(file: File) {
     deleteFileCommon(application, file.name)
-    refreshRecordingFiles()
+    refreshPrivateRecordingFiles()
   }
 
   fun downloadRecordings() {
