@@ -23,7 +23,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.tberghuis.voicememos.RecordingCard
 
 @Composable
 fun TmpScreenContent(
@@ -69,7 +68,7 @@ fun TmpScreenContent(
           files.value[it].name
         }
       ) { i ->
-        RecordingCard(files.value[i])
+        PrivateRecordingCard(files.value[i])
       }
     }
 
@@ -102,7 +101,6 @@ fun TmpScreenContent(
   }
 }
 
-
 @Composable
 fun NoRecordingsCard() {
   Card(
@@ -123,5 +121,4 @@ fun NoRecordingsCard() {
       )
     }
   }
-
 }

@@ -107,13 +107,13 @@ fun ScreenContent(
       .fillMaxSize(),
   ) {
     items(files.value.size) { i ->
-      RecordingCard(files.value[i])
+      XxxRecordingCard(files.value[i])
     }
   }
 }
 
 @Composable
-fun RecordingCard(
+fun XxxRecordingCard(
   recordingFile: File, vm: MobileViewModel = viewModel()
 ) {
   val context = LocalContext.current
