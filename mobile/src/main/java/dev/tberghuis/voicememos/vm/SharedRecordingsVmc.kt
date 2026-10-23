@@ -1,11 +1,13 @@
-package dev.tberghuis.voicememos.tmp.tmp01
+package dev.tberghuis.voicememos.vm
 
 import dev.tberghuis.voicememos.common.logd
 import kotlinx.coroutines.flow.MutableStateFlow
 import android.content.Context
 import android.provider.MediaStore
 import android.content.ContentUris
+import android.net.Uri
 import dev.tberghuis.voicememos.WR_RELATIVE_PATH
+import dev.tberghuis.voicememos.tmp.tmp01.SimplePlayer
 import kotlin.math.roundToInt
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -45,7 +47,7 @@ data class SharedRecording(
   val id: Long,
   val displayName: String,
   val relativePath: String,
-  val uri: android.net.Uri,
+  val uri: Uri,
   val duration: Int
 )
 
