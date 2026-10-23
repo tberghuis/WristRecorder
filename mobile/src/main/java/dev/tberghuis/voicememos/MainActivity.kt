@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import dev.tberghuis.voicememos.screen.MobileScreen
 import dev.tberghuis.voicememos.ui.theme.FreshMobileTheme
 
 class MainActivity : ComponentActivity() {
