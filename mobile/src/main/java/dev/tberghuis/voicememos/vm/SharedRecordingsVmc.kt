@@ -7,7 +7,7 @@ import android.provider.MediaStore
 import android.content.ContentUris
 import android.net.Uri
 import dev.tberghuis.voicememos.WR_RELATIVE_PATH
-import dev.tberghuis.voicememos.tmp.tmp01.SimplePlayer
+import dev.tberghuis.voicememos.SimplePlayer
 import kotlin.math.roundToInt
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
