@@ -8,6 +8,7 @@ import android.content.ContentValues
 import android.provider.MediaStore
 import dev.tberghuis.voicememos.WR_RELATIVE_PATH
 import dev.tberghuis.voicememos.common.AudioController.Companion.RECORDING_RATE
+import dev.tberghuis.voicememos.tmp.tmp02.writeWaveHeader
 import java.io.File
 import java.io.FileInputStream
 import java.io.OutputStream
@@ -93,7 +94,7 @@ suspend fun copyToSharedStorage(
   return CopyResult.Success
 }
 
-fun writeWaveHeader(
+fun xxxWriteWaveHeader(
   out: OutputStream,
   totalAudioLen: Long,
   longSampleRate: Long,
