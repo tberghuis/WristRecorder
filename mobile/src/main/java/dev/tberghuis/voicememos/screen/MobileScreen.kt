@@ -20,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.R
-import dev.tberghuis.voicememos.tmp.tmp01.TmpScreenContent
 import dev.tberghuis.voicememos.vm.MobileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,7 +51,7 @@ fun MobileScreen(
       }
     }
   }) { paddingValues ->
-    TmpScreenContent(paddingValues)
+    ScreenContent(paddingValues)
   }
 
   if (vm.confirmDeleteDialog) {
