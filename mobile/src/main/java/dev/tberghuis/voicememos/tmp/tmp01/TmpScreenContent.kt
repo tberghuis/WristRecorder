@@ -74,7 +74,7 @@ fun TmpScreenContent(
     }
 
     item {
-  
+
       Spacer(Modifier.height(10.dp))
 
       Row(
@@ -84,13 +84,20 @@ fun TmpScreenContent(
         Text("Shared Storage: /$WR_RELATIVE_PATH")
       }
     }
-    items(
-      sharedRecordingsList.size,
-      key = {
-        sharedRecordingsList[it].id
+
+    if (sharedRecordingsList.isEmpty()) {
+      item {
+        NoRecordingsCard()
       }
-    ) { i ->
-      SharedRecordingCard(sharedRecordingsList[i])
+    } else {
+      items(
+        sharedRecordingsList.size,
+        key = {
+          sharedRecordingsList[it].id
+        }
+      ) { i ->
+        SharedRecordingCard(sharedRecordingsList[i])
+      }
     }
   }
 }
