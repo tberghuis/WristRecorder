@@ -7,8 +7,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import android.content.ContentValues
 import android.provider.MediaStore
 import dev.tberghuis.voicememos.WR_RELATIVE_PATH
-import dev.tberghuis.voicememos.common.AudioController.Companion.RECORDING_RATE
-import dev.tberghuis.voicememos.tmp.tmp02.writeWaveHeader
+import dev.tberghuis.voicememos.common.createWavHeader
 import java.io.File
 import java.io.FileInputStream
 import java.io.OutputStream
@@ -76,12 +75,9 @@ suspend fun copyToSharedStorage(
     return CopyResult.Error("itemUri is null")
   }
   application.contentResolver.openOutputStream(itemUri)?.use { outputStream ->
-
-//    val longSampleRate = RECORDING_RATE.toLong()
-//    val channels = 1
-//    val byteRate = longSampleRate * channels * 16 / 8
     val totalAudioLen = pcmFile.length()
-    writeWaveHeader(outputStream, totalAudioLen)
+    val header = createWavHeader(totalAudioLen)
+    outputStream.write(header, 0, 44)
 
     FileInputStream(pcmFile).use { inputStream ->
       inputStream.copyTo(outputStream)
