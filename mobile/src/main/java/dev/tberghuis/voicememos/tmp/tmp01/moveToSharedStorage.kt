@@ -22,7 +22,8 @@ sealed interface CopyResult {
 class MoveRecordingsVmc(
   private val application: Application,
   private val scope: CoroutineScope,
-  private val refreshUi: () -> Unit
+  private val refreshUi: () -> Unit,
+  private val errorSnackbar: (String) -> Unit
 ) {
   fun moveToSharedStorage() {
     println("moveToSharedStorage")
@@ -31,7 +32,11 @@ class MoveRecordingsVmc(
       files.forEach {
         val result = copyToSharedStorage(application, it)
         when (result) {
-          is CopyResult.Error -> TODO()
+          is CopyResult.Error -> {
+            // how to test?
+            errorSnackbar(result.message)
+          }
+
           CopyResult.Success -> {
             deleteFileCommon(application, it)
           }

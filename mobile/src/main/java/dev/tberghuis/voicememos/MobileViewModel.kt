@@ -31,7 +31,14 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   private val audioController = AudioController(application)
 
   val moveRecordingsVmc =
-    MoveRecordingsVmc(application, viewModelScope, refreshUi = { refreshRecordingFiles() })
+    MoveRecordingsVmc(
+      application, viewModelScope,
+      refreshUi = { refreshRecordingFiles() },
+      errorSnackbar = { message ->
+        viewModelScope.launch {
+          snackbarHostState.showSnackbar("error: $message")
+        }
+      })
   val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope)
 
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
