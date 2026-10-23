@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos.tmp.tmp02
+package dev.tberghuis.voicememos.common
 
 import dev.tberghuis.voicememos.common.AudioController.Companion.RECORDING_RATE
 

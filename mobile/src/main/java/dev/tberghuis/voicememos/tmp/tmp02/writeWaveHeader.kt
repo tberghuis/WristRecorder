@@ -1,5 +1,6 @@
 package dev.tberghuis.voicememos.tmp.tmp02
 
+import dev.tberghuis.voicememos.common.createWavHeader
 import java.io.OutputStream
 
 fun writeWaveHeader(
