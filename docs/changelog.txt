@@ -1,3 +1,6 @@
+v1.15.1-mobile  2026-10-24  master  
+  prevent crash getFormattedTimestamp
+
 v1.15.0  2026-10-23  008-export  
   allow companion app to save recordings to shared storage as .wav file
   /Recordings/WristRecorder/
