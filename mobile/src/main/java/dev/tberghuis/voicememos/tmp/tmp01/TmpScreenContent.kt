@@ -31,7 +31,7 @@ fun TmpScreenContent(
 ) {
   val files = vm.recordingFilesStateFlow.collectAsState()
   val sharedRecordingsList by vm.sharedRecordingsVmc.sharedRecordingsList.collectAsState()
-
+  RefreshOnResume()
   LazyColumn(
     modifier = Modifier
       .padding(padding)

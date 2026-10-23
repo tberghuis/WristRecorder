@@ -71,7 +71,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
 
   init {
     logd("MobileViewModel init")
-    refreshRecordingFiles()
+//    refreshRecordingFiles()
     messageClient.addListener(messageListener)
 
     ContextCompat.registerReceiver(
@@ -87,7 +87,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     sharedRecordingsVmc.player.release()
   }
 
-  private fun refreshRecordingFiles() {
+  fun refreshRecordingFiles() {
     refreshPrivateRecordingFiles()
     sharedRecordingsVmc.refreshSharedList()
   }
