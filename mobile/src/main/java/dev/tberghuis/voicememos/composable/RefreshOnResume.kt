@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos.tmp.tmp01
+package dev.tberghuis.voicememos.composable
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

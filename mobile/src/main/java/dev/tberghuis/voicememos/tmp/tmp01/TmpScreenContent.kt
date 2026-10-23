@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.WR_RELATIVE_PATH
 import dev.tberghuis.voicememos.composable.PrivateRecordingCard
+import dev.tberghuis.voicememos.composable.RefreshOnResume
 import dev.tberghuis.voicememos.vm.MobileViewModel
 
 @Composable
