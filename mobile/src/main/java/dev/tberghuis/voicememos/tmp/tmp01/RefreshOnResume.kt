@@ -14,14 +14,8 @@ fun RefreshOnResume(vm: MobileViewModel = viewModel()) {
   val lifecycleState by lifecycleOwner.lifecycle.currentStateFlow.collectAsState()
 
   LaunchedEffect(lifecycleState) {
-    when (lifecycleState) {
-      Lifecycle.State.DESTROYED -> {}
-      Lifecycle.State.INITIALIZED -> {}
-      Lifecycle.State.CREATED -> {}
-      Lifecycle.State.STARTED -> {}
-      Lifecycle.State.RESUMED -> {
-        vm.refreshRecordingFiles()
-      }
+    if (lifecycleState == Lifecycle.State.RESUMED) {
+      vm.refreshRecordingFiles()
     }
   }
 }
