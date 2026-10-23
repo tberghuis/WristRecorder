@@ -1,9 +1,10 @@
-package dev.tberghuis.voicememos.tmp.tmp01
+package dev.tberghuis.voicememos.composable
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.common.calcDuration
+import dev.tberghuis.voicememos.tmp.tmp01.RecordingCard
 import dev.tberghuis.voicememos.vm.MobileViewModel
 import java.io.File
 
