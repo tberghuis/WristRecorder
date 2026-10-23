@@ -2,7 +2,7 @@ package dev.tberghuis.voicememos.tmp.tmp02
 
 import dev.tberghuis.voicememos.common.AudioController.Companion.RECORDING_RATE
 
-private fun createWavHeader(pcmAudioSize: Long): ByteArray {
+fun createWavHeader(pcmAudioSize: Long): ByteArray {
   val header = ByteArray(44)
   val totalAudioLen = pcmAudioSize + 36
   val sampleRate = RECORDING_RATE.toLong()

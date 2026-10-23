@@ -77,11 +77,11 @@ suspend fun copyToSharedStorage(
   }
   application.contentResolver.openOutputStream(itemUri)?.use { outputStream ->
 
-    val longSampleRate = RECORDING_RATE.toLong()
-    val channels = 1
-    val byteRate = longSampleRate * channels * 16 / 8
+//    val longSampleRate = RECORDING_RATE.toLong()
+//    val channels = 1
+//    val byteRate = longSampleRate * channels * 16 / 8
     val totalAudioLen = pcmFile.length()
-    writeWaveHeader(outputStream, totalAudioLen, longSampleRate, channels, byteRate)
+    writeWaveHeader(outputStream, totalAudioLen)
 
     FileInputStream(pcmFile).use { inputStream ->
       inputStream.copyTo(outputStream)
