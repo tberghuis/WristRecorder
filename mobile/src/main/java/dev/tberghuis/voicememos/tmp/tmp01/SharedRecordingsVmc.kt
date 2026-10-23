@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import android.content.Context
 import android.provider.MediaStore
 import android.content.ContentUris
+import dev.tberghuis.voicememos.WR_RELATIVE_PATH
 import kotlin.math.roundToInt
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -65,7 +66,7 @@ suspend fun getListSharedRecordings(context: Context): List<SharedRecording> {
     )
 
     val selection = "${MediaStore.Audio.Media.RELATIVE_PATH} = ?"
-    val selectionArgs = arrayOf("$WR_RELATIVE_PATH/")
+    val selectionArgs = arrayOf("${WR_RELATIVE_PATH}/")
     val sortOrder = "${MediaStore.Audio.Media.DATE_ADDED} ASC"
 
     context.contentResolver.query(

@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.voicememos.WR_RELATIVE_PATH
 
 @Composable
 fun TmpScreenContent(
@@ -80,7 +81,7 @@ fun TmpScreenContent(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
       ) {
-        Text("Shared Storage: /$WR_RELATIVE_PATH")
+        Text("Shared Storage: /${WR_RELATIVE_PATH}")
       }
     }
 
