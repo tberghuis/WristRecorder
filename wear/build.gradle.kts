@@ -13,9 +13,21 @@ android {
     targetSdk = 36
     versionCode = 33
     versionName = "1.15.0-wear"
+
+    manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
+
   }
 
   buildTypes {
+
+
+    debug {
+      applicationIdSuffix = ".debug"
+      manifestPlaceholders["appIcon"] = "@mipmap/debug_ic_launcher"
+    }
+
+
+
     release {
       isMinifyEnabled = true
       // if isShrinkResources = true, 
@@ -23,7 +35,10 @@ android {
       // is empty when invoked on mobile
       // some sort of bug but isShrinkResources = false makes things work
       isShrinkResources = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro"
+      )
     }
   }
 
