@@ -14,6 +14,8 @@ android {
     versionCode = 10034
     versionName = "1.15.1-mobile"
 
+    manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
+
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables {
       useSupportLibrary = true
@@ -21,6 +23,10 @@ android {
   }
 
   buildTypes {
+    debug {
+      applicationIdSuffix = ".debug"
+      manifestPlaceholders["appIcon"] = "@mipmap/debug_ic_launcher"
+    }
     release {
       isMinifyEnabled = true
       isShrinkResources = true
@@ -68,11 +74,10 @@ dependencies {
 
 
   implementation(libs.androidx.media3.exoplayer)
-  
-  
-  
+
+
+
   implementation(libs.androidx.lifecycle.runtime.compose)
-  
-  
+
 
 }
