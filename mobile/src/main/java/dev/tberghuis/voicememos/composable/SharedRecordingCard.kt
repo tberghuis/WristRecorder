@@ -15,5 +15,7 @@ fun SharedRecordingCard(
     duration = sharedRecording.duration,
     play = { vm.sharedRecordingsVmc.playSharedRecording(sharedRecording) },
     delete = { vm.sharedRecordingsVmc.deleteSharedRecording(sharedRecording) },
+    stop = {},
+    isPlaying = false
   )
 }

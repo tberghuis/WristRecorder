@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -24,6 +25,8 @@ fun RecordingCard(
   duration: Int,
   play: () -> Unit,
   delete: () -> Unit,
+  stop: () -> Unit,
+  isPlaying: Boolean
 ) {
   val formattedTime = getFormattedTimestamp(filename)
   Card(
@@ -50,15 +53,25 @@ fun RecordingCard(
         )
       }
       Row {
-        IconButton(onClick = {
-          play()
-        }) {
-          Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "")
+
+        if (isPlaying) {
+          IconButton(onClick = {
+            stop()
+          }) {
+            Icon(imageVector = Icons.Default.Stop, contentDescription = "stop")
+          }
+        } else {
+          IconButton(onClick = {
+            play()
+          }) {
+            Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "play")
+          }
         }
+
         IconButton(onClick = {
           delete()
         }) {
-          Icon(imageVector = Icons.Default.Delete, contentDescription = "")
+          Icon(imageVector = Icons.Default.Delete, contentDescription = "delete")
         }
       }
     }
