@@ -16,7 +16,7 @@ fun PrivateRecordingCard(
   RecordingCard(
     filename = recordingFile.name,
     duration = durationSeconds,
-    play = { vm.playRecording(recordingFile) },
+    play = { vm.privateRecordingsVmc.playRecording(recordingFile) },
     delete = { vm.privateRecordingsVmc.deleteRecording(recordingFile) },
   )
 }

@@ -1,14 +1,18 @@
 package dev.tberghuis.voicememos.tmp.tmp01
 
 import android.content.Context
+import dev.tberghuis.voicememos.common.AudioController
 import dev.tberghuis.voicememos.common.deleteFileCommon
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import java.io.File
 
 class PrivateRecordingsVmc(
   private val context: Context,
+  private val scope: CoroutineScope,
 ) {
-
+  private val audioController = AudioController(context)
 
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
@@ -29,4 +33,11 @@ class PrivateRecordingsVmc(
     deleteFileCommon(context, file.name)
     refreshPrivateRecordingFiles()
   }
+
+  fun playRecording(file: File) {
+    scope.launch {
+      audioController.play(file.name)
+    }
+  }
+
 }

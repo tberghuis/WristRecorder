@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
-  private val audioController = AudioController(application)
+
 
   val moveRecordingsVmc =
     MoveRecordingsVmc(
@@ -41,7 +41,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
       })
   val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope)
 
-  val privateRecordingsVmc = PrivateRecordingsVmc(application)
+  val privateRecordingsVmc = PrivateRecordingsVmc(application, viewModelScope)
 
 
   var confirmDeleteDialog by mutableStateOf(false)
@@ -103,11 +103,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   }
 
 
-  fun playRecording(file: File) {
-    viewModelScope.launch {
-      audioController.play(file.name)
-    }
-  }
+
 
 
 
