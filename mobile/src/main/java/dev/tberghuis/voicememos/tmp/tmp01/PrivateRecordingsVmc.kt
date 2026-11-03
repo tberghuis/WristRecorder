@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.io.File
 
-class PrivateRecordingsVmc(
+class XxxPrivateRecordingsVmc(
   private val context: Context,
   private val scope: CoroutineScope,
 ) {
