@@ -1,18 +1,22 @@
 package dev.tberghuis.voicememos.tmp.tmp02
 
 import android.content.Context
-import dev.tberghuis.voicememos.common.AudioController
+import androidx.core.net.toUri
+import androidx.media3.common.util.UnstableApi
 import dev.tberghuis.voicememos.common.deleteFileCommon
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.io.File
 
+@UnstableApi
 class PrivateRecordingsVmc(
   private val context: Context,
   private val scope: CoroutineScope,
 ) {
-  private val audioController = AudioController(context)
+
+  val player = RawPcmPlayer(context)
+
 
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 
@@ -36,7 +40,7 @@ class PrivateRecordingsVmc(
 
   fun playRecording(file: File) {
     scope.launch {
-      audioController.play(file.name)
+      player.play(file.toUri())
     }
   }
 
