@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos.tmp.tmp02
+package dev.tberghuis.voicememos.media
 
 import android.content.Context
 import android.net.Uri
@@ -12,10 +12,8 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import dev.tberghuis.voicememos.common.RawPcmMediaSourceFactory
 
-// todo refactor to SimplePlayer
-
 @UnstableApi
-class RawPcmPlayer(context: Context) {
+class WrSimplePlayer(context: Context) {
   private val player: ExoPlayer = ExoPlayer.Builder(context)
     .setMediaSourceFactory(RawPcmMediaSourceFactory(DefaultMediaSourceFactory(context)))
     .build()

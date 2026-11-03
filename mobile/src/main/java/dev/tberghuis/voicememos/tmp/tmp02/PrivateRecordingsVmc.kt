@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.core.net.toUri
 import androidx.media3.common.util.UnstableApi
 import dev.tberghuis.voicememos.common.deleteFileCommon
+import dev.tberghuis.voicememos.media.WrSimplePlayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -13,7 +14,7 @@ import java.io.File
 class PrivateRecordingsVmc(
   private val context: Context,
   private val scope: CoroutineScope,
-  private val player: RawPcmPlayer,
+  private val player: WrSimplePlayer,
 ) {
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
 

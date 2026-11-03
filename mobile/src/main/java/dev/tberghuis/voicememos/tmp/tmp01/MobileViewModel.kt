@@ -17,8 +17,8 @@ import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.logd
+import dev.tberghuis.voicememos.media.WrSimplePlayer
 import dev.tberghuis.voicememos.tmp.tmp02.PrivateRecordingsVmc
-import dev.tberghuis.voicememos.tmp.tmp02.RawPcmPlayer
 import dev.tberghuis.voicememos.vm.MoveRecordingsVmc
 import dev.tberghuis.voicememos.vm.SharedRecordingsVmc
 import kotlinx.coroutines.async
@@ -28,7 +28,7 @@ import kotlinx.coroutines.tasks.await
 
 @UnstableApi
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
-  val player = RawPcmPlayer(application)
+  val player = WrSimplePlayer(application)
 
   val moveRecordingsVmc =
     MoveRecordingsVmc(
