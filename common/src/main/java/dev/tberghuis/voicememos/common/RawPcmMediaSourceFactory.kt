@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos.tmp.tmp02
+package dev.tberghuis.voicememos.common
 
 import android.net.Uri
 import androidx.core.net.toFile
@@ -13,8 +13,6 @@ import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
-import dev.tberghuis.voicememos.common.AudioController.Companion.RECORDING_RATE
-import dev.tberghuis.voicememos.common.createWavHeader
 
 // AI came up with this solution to play raw PCM files with ExoPlayer
 @UnstableApi
