@@ -15,21 +15,15 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.Wearable
-import dev.tberghuis.voicememos.common.AudioController
-import dev.tberghuis.voicememos.common.deleteFileCommon
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.vm.MoveRecordingsVmc
 import dev.tberghuis.voicememos.vm.SharedRecordingsVmc
-import java.io.File
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
-
-
   val moveRecordingsVmc =
     MoveRecordingsVmc(
       application, viewModelScope,
@@ -42,7 +36,6 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope)
 
   val privateRecordingsVmc = PrivateRecordingsVmc(application, viewModelScope)
-
 
   var confirmDeleteDialog by mutableStateOf(false)
 
@@ -102,11 +95,6 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     sharedRecordingsVmc.refreshSharedList()
   }
 
-
-
-
-
-
   fun downloadRecordings() {
     viewModelScope.launch {
       try {
@@ -152,7 +140,6 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
         logd("error $e")
         snackbarHostState.showSnackbar("Error: $e")
       }
-
     }
   }
 }
