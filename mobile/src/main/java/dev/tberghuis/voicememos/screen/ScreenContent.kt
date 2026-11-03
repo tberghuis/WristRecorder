@@ -26,7 +26,7 @@ import dev.tberghuis.voicememos.composable.NoRecordingsCard
 import dev.tberghuis.voicememos.composable.PrivateRecordingCard
 import dev.tberghuis.voicememos.composable.RefreshOnResume
 import dev.tberghuis.voicememos.composable.SharedRecordingCard
-import dev.tberghuis.voicememos.vm.MobileViewModel
+import dev.tberghuis.voicememos.tmp.tmp01.MobileViewModel
 
 @Composable
 fun ScreenContent(

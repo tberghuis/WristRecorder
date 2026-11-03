@@ -2,8 +2,8 @@ package dev.tberghuis.voicememos.composable
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.voicememos.tmp.tmp01.MobileViewModel
 import dev.tberghuis.voicememos.vm.SharedRecording
-import dev.tberghuis.voicememos.vm.MobileViewModel
 
 @Composable
 fun SharedRecordingCard(

@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.voicememos.R
-import dev.tberghuis.voicememos.vm.MobileViewModel
+import dev.tberghuis.voicememos.tmp.tmp01.MobileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
