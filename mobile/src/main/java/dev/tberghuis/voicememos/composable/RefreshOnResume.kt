@@ -1,5 +1,6 @@
 package dev.tberghuis.voicememos.composable
 
+import androidx.annotation.OptIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -7,8 +8,10 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.tberghuis.voicememos.tmp.tmp01.MobileViewModel
+import androidx.media3.common.util.UnstableApi
+import dev.tberghuis.voicememos.vm.MobileViewModel
 
+@OptIn(UnstableApi::class)
 @Composable
 fun RefreshOnResume(vm: MobileViewModel = viewModel()) {
   val lifecycleOwner = LocalLifecycleOwner.current

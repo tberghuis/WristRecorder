@@ -1,5 +1,6 @@
 package dev.tberghuis.voicememos.screen
 
+import androidx.annotation.OptIn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,13 +22,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.media3.common.util.UnstableApi
 import dev.tberghuis.voicememos.WR_RELATIVE_PATH
 import dev.tberghuis.voicememos.composable.NoRecordingsCard
 import dev.tberghuis.voicememos.composable.PrivateRecordingCard
 import dev.tberghuis.voicememos.composable.RefreshOnResume
 import dev.tberghuis.voicememos.composable.SharedRecordingCard
-import dev.tberghuis.voicememos.tmp.tmp01.MobileViewModel
+import dev.tberghuis.voicememos.vm.MobileViewModel
 
+@OptIn(UnstableApi::class)
 @Composable
 fun ScreenContent(
   padding: PaddingValues, vm: MobileViewModel = viewModel()

@@ -7,7 +7,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.media3.common.util.UnstableApi
 import dev.tberghuis.voicememos.common.calcDuration
-import dev.tberghuis.voicememos.tmp.tmp01.MobileViewModel
+import dev.tberghuis.voicememos.vm.MobileViewModel
 import java.io.File
 
 @OptIn(UnstableApi::class)
