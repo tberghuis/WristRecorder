@@ -12,11 +12,13 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.media3.common.util.UnstableApi
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.tmp.tmp02.PrivateRecordingsVmc
+import dev.tberghuis.voicememos.tmp.tmp02.RawPcmPlayer
 import dev.tberghuis.voicememos.vm.MoveRecordingsVmc
 import dev.tberghuis.voicememos.vm.SharedRecordingsVmc
 import kotlinx.coroutines.async
@@ -24,7 +26,10 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
+@UnstableApi
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
+  private val player = RawPcmPlayer(application)
+
   val moveRecordingsVmc =
     MoveRecordingsVmc(
       application, viewModelScope,
@@ -34,9 +39,9 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
           snackbarHostState.showSnackbar("error: $message")
         }
       })
-  val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope)
+  val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope, player)
 
-  val privateRecordingsVmc = PrivateRecordingsVmc(application, viewModelScope)
+  val privateRecordingsVmc = PrivateRecordingsVmc(application, viewModelScope, player)
 
   var confirmDeleteDialog by mutableStateOf(false)
 
@@ -88,7 +93,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   override fun onCleared() {
     messageClient.removeListener(messageListener)
     application.unregisterReceiver(processZipResultReceiver)
-    sharedRecordingsVmc.player.release()
+    player.release()
   }
 
   fun refreshRecordingFiles() {

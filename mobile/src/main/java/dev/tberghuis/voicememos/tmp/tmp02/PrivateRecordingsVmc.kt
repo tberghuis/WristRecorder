@@ -13,13 +13,9 @@ import java.io.File
 class PrivateRecordingsVmc(
   private val context: Context,
   private val scope: CoroutineScope,
+  private val player: RawPcmPlayer,
 ) {
-
-  val player = RawPcmPlayer(context)
-
-
   val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
-
 
   fun refreshPrivateRecordingFiles() {
     val path = context.filesDir
@@ -43,5 +39,4 @@ class PrivateRecordingsVmc(
       player.play(file.toUri())
     }
   }
-
 }

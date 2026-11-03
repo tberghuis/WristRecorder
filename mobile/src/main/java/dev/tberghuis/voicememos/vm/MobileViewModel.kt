@@ -25,150 +25,150 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class XxxMobileViewModel(private val application: Application) : AndroidViewModel(application) {
-  private val audioController = AudioController(application)
-
-  val moveRecordingsVmc =
-    MoveRecordingsVmc(
-      application, viewModelScope,
-      refreshUi = { refreshRecordingFiles() },
-      errorSnackbar = { message ->
-        viewModelScope.launch {
-          snackbarHostState.showSnackbar("error: $message")
-        }
-      })
-  val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope)
-
-  val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
-
-  var confirmDeleteDialog by mutableStateOf(false)
-
-  val snackbarHostState = SnackbarHostState()
-  private val messageClient = Wearable.getMessageClient(application)
-  private val nodeClient = Wearable.getNodeClient(application)
-
-  private val messageListener = MessageClient.OnMessageReceivedListener { messageEvent ->
-    when (messageEvent.path) {
-      "/snackbar" -> {
-        viewModelScope.launch {
-          snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
-        }
-      }
-    }
-  }
-
-  val processZipResultReceiver = object : BroadcastReceiver() {
-    override fun onReceive(context: Context?, intent: Intent?) {
-      logd("onReceive ProcessZipResult")
-      logd("intent $intent")
-
-      viewModelScope.launch {
-        intent?.let {
-          if (it.getStringExtra("result") == "success") {
-            refreshRecordingFiles()
-            snackbarHostState.showSnackbar("Download complete")
-          } else {
-            refreshRecordingFiles()
-            snackbarHostState.showSnackbar(it.getStringExtra("message") ?: return@launch)
-          }
-        }
-      }
-    }
-  }
-
-  init {
-    logd("MobileViewModel init")
-//    refreshRecordingFiles()
-    messageClient.addListener(messageListener)
-
-    ContextCompat.registerReceiver(
-      application, processZipResultReceiver,
-      IntentFilter("ProcessZipResult"),
-      ContextCompat.RECEIVER_NOT_EXPORTED
-    )
-  }
-
-  override fun onCleared() {
-    messageClient.removeListener(messageListener)
-    application.unregisterReceiver(processZipResultReceiver)
-    sharedRecordingsVmc.player.release()
-  }
-
-  fun refreshRecordingFiles() {
-    refreshPrivateRecordingFiles()
-    sharedRecordingsVmc.refreshSharedList()
-  }
-
-  private fun refreshPrivateRecordingFiles() {
-    val path = application.filesDir
-    val files = path.listFiles() ?: return
-    val recordingFiles = mutableListOf<File>()
-    files.forEach {
-      if (it.isFile && it.name.startsWith("wristrecorder_")) {
-        recordingFiles.add(it)
-      }
-    }
-    recordingFilesStateFlow.value = recordingFiles
-  }
-
-
-  fun playRecording(file: File) {
-    viewModelScope.launch {
-      audioController.play(file.name)
-    }
-  }
-
-  fun deleteRecording(file: File) {
-    deleteFileCommon(application, file.name)
-    refreshPrivateRecordingFiles()
-  }
-
-  fun downloadRecordings() {
-    viewModelScope.launch {
-      try {
-        val nodeId = nodeClient.localNode.await().id
-        sendMessageWatch("/upload-recordings", nodeId.toByteArray(Charsets.UTF_8))
-      } catch (e: Exception) {
-        logd("error $e")
-        snackbarHostState.showSnackbar("Error: $e")
-      }
-    }
-  }
-
-  private fun sendMessageWatch(messagePath: String, byteArray: ByteArray) {
-    val capabilityClient = Wearable.getCapabilityClient(application)
-    viewModelScope.launch {
-      try {
-        val nodes =
-          capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
-        // no watches found
-        if (nodes.isEmpty()) {
-          snackbarHostState.showSnackbar("No watch connected")
-          return@launch
-        }
-        nodes.map { node ->
-          async {
-            messageClient.sendMessage(node.id, messagePath, byteArray).await()
-          }
-        }.awaitAll()
-        logd("message sent success")
-      } catch (e: Exception) {
-        logd("error: $e")
-        snackbarHostState.showSnackbar("error: $e")
-      }
-    }
-  }
-
-  fun deleteAllWatch() {
-    viewModelScope.launch {
-      try {
-        val nodeId = nodeClient.localNode.await().id
-        sendMessageWatch("/delete-all-watch", nodeId.toByteArray(Charsets.UTF_8))
-      } catch (e: Exception) {
-        logd("error $e")
-        snackbarHostState.showSnackbar("Error: $e")
-      }
-
-    }
-  }
-}
+//class XxxMobileViewModel(private val application: Application) : AndroidViewModel(application) {
+//  private val audioController = AudioController(application)
+//
+//  val moveRecordingsVmc =
+//    MoveRecordingsVmc(
+//      application, viewModelScope,
+//      refreshUi = { refreshRecordingFiles() },
+//      errorSnackbar = { message ->
+//        viewModelScope.launch {
+//          snackbarHostState.showSnackbar("error: $message")
+//        }
+//      })
+//  val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope)
+//
+//  val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
+//
+//  var confirmDeleteDialog by mutableStateOf(false)
+//
+//  val snackbarHostState = SnackbarHostState()
+//  private val messageClient = Wearable.getMessageClient(application)
+//  private val nodeClient = Wearable.getNodeClient(application)
+//
+//  private val messageListener = MessageClient.OnMessageReceivedListener { messageEvent ->
+//    when (messageEvent.path) {
+//      "/snackbar" -> {
+//        viewModelScope.launch {
+//          snackbarHostState.showSnackbar(messageEvent.data.toString(Charsets.UTF_8))
+//        }
+//      }
+//    }
+//  }
+//
+//  val processZipResultReceiver = object : BroadcastReceiver() {
+//    override fun onReceive(context: Context?, intent: Intent?) {
+//      logd("onReceive ProcessZipResult")
+//      logd("intent $intent")
+//
+//      viewModelScope.launch {
+//        intent?.let {
+//          if (it.getStringExtra("result") == "success") {
+//            refreshRecordingFiles()
+//            snackbarHostState.showSnackbar("Download complete")
+//          } else {
+//            refreshRecordingFiles()
+//            snackbarHostState.showSnackbar(it.getStringExtra("message") ?: return@launch)
+//          }
+//        }
+//      }
+//    }
+//  }
+//
+//  init {
+//    logd("MobileViewModel init")
+////    refreshRecordingFiles()
+//    messageClient.addListener(messageListener)
+//
+//    ContextCompat.registerReceiver(
+//      application, processZipResultReceiver,
+//      IntentFilter("ProcessZipResult"),
+//      ContextCompat.RECEIVER_NOT_EXPORTED
+//    )
+//  }
+//
+//  override fun onCleared() {
+//    messageClient.removeListener(messageListener)
+//    application.unregisterReceiver(processZipResultReceiver)
+//    sharedRecordingsVmc.player.release()
+//  }
+//
+//  fun refreshRecordingFiles() {
+//    refreshPrivateRecordingFiles()
+//    sharedRecordingsVmc.refreshSharedList()
+//  }
+//
+//  private fun refreshPrivateRecordingFiles() {
+//    val path = application.filesDir
+//    val files = path.listFiles() ?: return
+//    val recordingFiles = mutableListOf<File>()
+//    files.forEach {
+//      if (it.isFile && it.name.startsWith("wristrecorder_")) {
+//        recordingFiles.add(it)
+//      }
+//    }
+//    recordingFilesStateFlow.value = recordingFiles
+//  }
+//
+//
+//  fun playRecording(file: File) {
+//    viewModelScope.launch {
+//      audioController.play(file.name)
+//    }
+//  }
+//
+//  fun deleteRecording(file: File) {
+//    deleteFileCommon(application, file.name)
+//    refreshPrivateRecordingFiles()
+//  }
+//
+//  fun downloadRecordings() {
+//    viewModelScope.launch {
+//      try {
+//        val nodeId = nodeClient.localNode.await().id
+//        sendMessageWatch("/upload-recordings", nodeId.toByteArray(Charsets.UTF_8))
+//      } catch (e: Exception) {
+//        logd("error $e")
+//        snackbarHostState.showSnackbar("Error: $e")
+//      }
+//    }
+//  }
+//
+//  private fun sendMessageWatch(messagePath: String, byteArray: ByteArray) {
+//    val capabilityClient = Wearable.getCapabilityClient(application)
+//    viewModelScope.launch {
+//      try {
+//        val nodes =
+//          capabilityClient.getCapability("wear", CapabilityClient.FILTER_REACHABLE).await().nodes
+//        // no watches found
+//        if (nodes.isEmpty()) {
+//          snackbarHostState.showSnackbar("No watch connected")
+//          return@launch
+//        }
+//        nodes.map { node ->
+//          async {
+//            messageClient.sendMessage(node.id, messagePath, byteArray).await()
+//          }
+//        }.awaitAll()
+//        logd("message sent success")
+//      } catch (e: Exception) {
+//        logd("error: $e")
+//        snackbarHostState.showSnackbar("error: $e")
+//      }
+//    }
+//  }
+//
+//  fun deleteAllWatch() {
+//    viewModelScope.launch {
+//      try {
+//        val nodeId = nodeClient.localNode.await().id
+//        sendMessageWatch("/delete-all-watch", nodeId.toByteArray(Charsets.UTF_8))
+//      } catch (e: Exception) {
+//        logd("error $e")
+//        snackbarHostState.showSnackbar("Error: $e")
+//      }
+//
+//    }
+//  }
+//}

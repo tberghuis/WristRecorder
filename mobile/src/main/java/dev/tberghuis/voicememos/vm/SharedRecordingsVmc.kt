@@ -20,9 +20,8 @@ import kotlinx.coroutines.withContext
 class SharedRecordingsVmc(
   private val context: Context,
   private val scope: CoroutineScope,
+  private val player: RawPcmPlayer,
 ) {
-//  val player = SimplePlayer(context)
-  val player = RawPcmPlayer(context)
 
   val sharedRecordingsList = MutableStateFlow(listOf<SharedRecording>())
 
