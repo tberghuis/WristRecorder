@@ -41,7 +41,8 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
       })
   val sharedRecordingsVmc = SharedRecordingsVmc(application, viewModelScope)
 
-  val recordingFilesStateFlow = MutableStateFlow(listOf<File>())
+  val privateRecordingsVmc = PrivateRecordingsVmc(application)
+
 
   var confirmDeleteDialog by mutableStateOf(false)
 
@@ -97,20 +98,8 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
   }
 
   fun refreshRecordingFiles() {
-    refreshPrivateRecordingFiles()
+    privateRecordingsVmc.refreshPrivateRecordingFiles()
     sharedRecordingsVmc.refreshSharedList()
-  }
-
-  private fun refreshPrivateRecordingFiles() {
-    val path = application.filesDir
-    val files = path.listFiles() ?: return
-    val recordingFiles = mutableListOf<File>()
-    files.forEach {
-      if (it.isFile && it.name.startsWith("wristrecorder_")) {
-        recordingFiles.add(it)
-      }
-    }
-    recordingFilesStateFlow.value = recordingFiles
   }
 
 
@@ -120,10 +109,7 @@ class MobileViewModel(private val application: Application) : AndroidViewModel(a
     }
   }
 
-  fun deleteRecording(file: File) {
-    deleteFileCommon(application, file.name)
-    refreshPrivateRecordingFiles()
-  }
+
 
   fun downloadRecordings() {
     viewModelScope.launch {

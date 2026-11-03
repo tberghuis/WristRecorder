@@ -32,7 +32,7 @@ import dev.tberghuis.voicememos.tmp.tmp01.MobileViewModel
 fun ScreenContent(
   padding: PaddingValues, vm: MobileViewModel = viewModel()
 ) {
-  val files = vm.recordingFilesStateFlow.collectAsState()
+  val files = vm.privateRecordingsVmc.recordingFilesStateFlow.collectAsState()
   val sharedRecordingsList by vm.sharedRecordingsVmc.sharedRecordingsList.collectAsState()
   RefreshOnResume()
   LazyColumn(
