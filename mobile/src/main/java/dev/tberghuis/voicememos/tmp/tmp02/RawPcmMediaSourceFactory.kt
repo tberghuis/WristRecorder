@@ -18,7 +18,8 @@ import dev.tberghuis.voicememos.common.createWavHeader
 
 // AI came up with this solution to play raw PCM files with ExoPlayer
 @UnstableApi
-class RawPcmMediaSourceFactory(val defaultFactory: DefaultMediaSourceFactory) : MediaSource.Factory {
+class RawPcmMediaSourceFactory(val defaultFactory: DefaultMediaSourceFactory) :
+  MediaSource.Factory {
 
 
   override fun setDrmSessionManagerProvider(
@@ -40,6 +41,12 @@ class RawPcmMediaSourceFactory(val defaultFactory: DefaultMediaSourceFactory) : 
   }
 
   override fun createMediaSource(mediaItem: MediaItem): MediaSource {
+    if (mediaItem.localConfiguration?.uri?.scheme != "file") {
+      return defaultFactory.createMediaSource(
+        mediaItem
+      )
+    }
+
     // read from raw PCM file
     val file =
       mediaItem.localConfiguration?.uri?.toFile() ?: return defaultFactory.createMediaSource(

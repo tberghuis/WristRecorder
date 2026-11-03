@@ -6,19 +6,23 @@ import android.content.Context
 import android.provider.MediaStore
 import android.content.ContentUris
 import android.net.Uri
+import androidx.media3.common.util.UnstableApi
 import dev.tberghuis.voicememos.WR_RELATIVE_PATH
 import dev.tberghuis.voicememos.SimplePlayer
+import dev.tberghuis.voicememos.tmp.tmp02.RawPcmPlayer
 import kotlin.math.roundToInt
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@UnstableApi
 class SharedRecordingsVmc(
   private val context: Context,
   private val scope: CoroutineScope,
 ) {
-  val player = SimplePlayer(context)
+//  val player = SimplePlayer(context)
+  val player = RawPcmPlayer(context)
 
   val sharedRecordingsList = MutableStateFlow(listOf<SharedRecording>())
 
