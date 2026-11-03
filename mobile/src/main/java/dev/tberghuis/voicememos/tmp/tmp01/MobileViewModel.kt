@@ -28,7 +28,7 @@ import kotlinx.coroutines.tasks.await
 
 @UnstableApi
 class MobileViewModel(private val application: Application) : AndroidViewModel(application) {
-  private val player = RawPcmPlayer(application)
+  val player = RawPcmPlayer(application)
 
   val moveRecordingsVmc =
     MoveRecordingsVmc(
