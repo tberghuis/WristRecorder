@@ -11,8 +11,8 @@ android {
     applicationId = "dev.tberghuis.wristrecorder"
     minSdk = 31
     targetSdk = 36
-    versionCode = 10034
-    versionName = "1.15.1-mobile"
+    versionCode = 10035
+    versionName = "1.16.0-mobile"
 
     manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
 
