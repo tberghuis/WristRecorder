@@ -18,7 +18,7 @@ import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.Wearable
 import dev.tberghuis.voicememos.common.logd
 import dev.tberghuis.voicememos.media.WrSimplePlayer
-import dev.tberghuis.voicememos.tmp.tmp02.PrivateRecordingsVmc
+import dev.tberghuis.voicememos.vm.PrivateRecordingsVmc
 import dev.tberghuis.voicememos.vm.MoveRecordingsVmc
 import dev.tberghuis.voicememos.vm.SharedRecordingsVmc
 import kotlinx.coroutines.async

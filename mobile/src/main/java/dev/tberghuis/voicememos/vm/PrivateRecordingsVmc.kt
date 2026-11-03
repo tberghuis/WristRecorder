@@ -1,4 +1,4 @@
-package dev.tberghuis.voicememos.tmp.tmp02
+package dev.tberghuis.voicememos.vm
 
 import android.content.Context
 import androidx.core.net.toUri
