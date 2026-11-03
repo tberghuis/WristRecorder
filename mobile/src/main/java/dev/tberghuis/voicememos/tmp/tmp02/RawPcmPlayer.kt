@@ -39,8 +39,8 @@ class RawPcmPlayer(context: Context) {
     val mediaItem = MediaItem.fromUri(uri)
     player.setMediaItem(mediaItem)
     player.prepare()
-    player.play()
     isPlayingUri = uri
+    player.play()
   }
 
   fun stop() {
